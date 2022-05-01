@@ -1,0 +1,47 @@
+ <!-- Google fonts-->
+ <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+ <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+<div class="container-fluid">
+  <div class="row">
+      <div class="col-4 col-sm-3 col-md-3 col-lg-3 col-xl-3 px-1 bg-dark position-fixed" id="sticky-sidebar">
+          <div class="nav flex-column flex-nowrap vh-100 overflow-auto text-white p-2">
+            <h1 [routerLink]="['/principal']" >SINESTESIA</h1>
+ 
+          <mat-nav-list>
+            <a mat-list-item href="#" class="link">
+            <h2>Inicio</h2> 
+              </a>
+            <a mat-list-item href="#" class="link">
+              <h2>Lista de reproducción</h2>
+              </a>
+            <a mat-list-item href="#" class="link">
+              <h2>Tus canciones</h2>
+              </a>
+            <hr>
+      
+            <a mat-list-item routerLink="ajustes" class="link">
+              <h2>Ajustes</h2>
+              </a>
+      
+              <a mat-list-item class="link">
+                <h2>Crear una playlist</h2>
+                </a>
+            <hr>
+          </mat-nav-list>
+          </div>
+      </div>
+      <div class="col-8 col-sm-9 col-md-9 col-lg-9 col-xl-9  offset-4  offset-sm-3   " id="main">
+        <router-outlet></router-outlet>
+      </div>
+  </div>
+</div>
