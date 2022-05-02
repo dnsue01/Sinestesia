@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 
-
+import { UsuariosService } from '../usuarios.service';
 
 
 @Component({
@@ -11,26 +11,26 @@ import Swal from 'sweetalert2';
 })
 export class PaginaRegistroComponent implements OnInit {
 
-  constructor() { }
+  constructor(private usuariosServicio: UsuariosService) { }
 
-  ngOnInit(): void {
+  ngOnInit() {
 
   }
 
   usuario = {
-    email: "",
+    correo: "",
     nombre: "",
     contrasenna: "",
     contrasennaConfirmacion: "",
-    tipo: 0
+    tipo: ""
   }
 
-
+  tipo: string = ""
 
   Registrarse() {
-    //comprobar el email
+    //comprobar el correo
 
-    if (this.validarEmail(this.usuario.email)) {
+    if (this.validarcorreo(this.usuario.correo)) {
 
       if (this.validarNombre(this.usuario.nombre)) {
 
@@ -52,16 +52,26 @@ export class PaginaRegistroComponent implements OnInit {
             // no esta registrido ya si no lo esta el registro es exitoso
             if (this.usuario.contrasenna == this.usuario.contrasennaConfirmacion) {
 
-              //comprobar que el que esta seleccionada una
-              var tipoUsuario = document.getElementsByName('tipoUsuario');
+              //comprobar que el radio button este seleccionado
+              if (this.tipo != "") {
 
-              //   for (let i = 0; i < tipoUsuario.length; i++) {
-              //  if (tipoUsuario[i].checked) {
-              //    var memory = tipoUsuario[i].checked;
-              //       alert(tipoUsuario);
-              //   }
+                
+                
+                this.comprobacion();
 
-              console.log("entraste");
+
+              } else {
+
+                Swal.fire({
+                  icon: 'error',
+                  title: 'Oops...',
+                  text: "Debes de seleccionar un tipo de usuario",
+                })
+              }
+
+
+
+
             }
             else {
               if (this.usuario.contrasennaConfirmacion == "") {
@@ -118,7 +128,7 @@ export class PaginaRegistroComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'El email tiene que tener por lo menos un @ y . Un ejemplo:  sinestesia@gmail.es',
+        text: 'El correo tiene que tener por lo menos un @ y . Un ejemplo:  sinestesia@gmail.es',
       })
 
     }
@@ -134,10 +144,10 @@ export class PaginaRegistroComponent implements OnInit {
     return re.test(nombre);
   }
 
-  validarEmail(email: any) {
+  validarcorreo(correo: any) {
     //Cualquier string un @ cualquier string un . y finalmente cualquier string
     var re = /\S+@\S+\.\S+/;
-    return re.test(email);
+    return re.test(correo);
   }
 
   comprobarContrasenna(contrasenna: any) {
@@ -146,8 +156,44 @@ export class PaginaRegistroComponent implements OnInit {
     return re.test(contrasenna);
   }
 
+  radio(event: any) {
+
+    this.tipo = event.target.value;
+    this.usuario.tipo = this.tipo
+
+  }
 
 
 
+  registro() {
+    this.usuariosServicio.registro(this.usuario).subscribe((datos: any) => {
+      if (datos['resultado'] == 'OK') {
+
+        Swal.fire({
+
+          icon: 'success',
+          title: 'Registrado correctamente',
+          showConfirmButton: false,
+          timer: 1500
+        })
+
+      }
+    });
+  }
+
+  comprobacion() {
+    this.usuariosServicio.comprobarUsuario(this.usuario).subscribe((datos: any) => {
+      if (datos) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'El correo o el usuario ya esta en uso por favor utiliza otro',
+        })
+      }else{
+        this.registro();
+      }
+
+    });
+  }
 
 }

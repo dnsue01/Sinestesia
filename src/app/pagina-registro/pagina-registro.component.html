@@ -14,7 +14,7 @@
             <br>
             <h4>¿Cuál es tu correo electrónico?</h4>
 
-            <input type="email" class="form-control" id="exampleInputEmail1" [(ngModel)]="usuario.email"
+            <input type="email" class="form-control" id="exampleInputEmail1" [(ngModel)]="usuario.correo"
                 placeholder="Escribe tu email">
 
             <br>
@@ -39,19 +39,19 @@
 
 
             <div class="radio-item">
-                <input type="radio" id="ritema" name="tipoUsuario" value="1">
+                <input type="radio" id="ritema" name="tipoUsuario" value="1" (change)="radio($event)">
                 <label for="ritema">Artista</label>
             </div>
 
             <div class="radio-item">
-                <input type="radio" id="ritemb" name="tipoUsuario" value="2">
+                <input type="radio" id="ritemb" name="tipoUsuario" value="2" (change)="radio($event)">
                 <label for="ritemb">Estandar</label>
             </div>
 
             <br>
 
             <button (click)="Registrarse()" class="btn btn-xxl rounded-pill mt-5">
-                <h2>Registrate</h2>
+                <h1>Registrate</h1>
             </button>
             <br>
             
