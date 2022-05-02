@@ -56,7 +56,7 @@ export class PaginaInicioSesionComponent implements OnInit {
   comprobacion() {
     this.usuariosServicio.comprobarUsuarioInicio(this.usuario).subscribe((datos: any) => {
       if (datos) {
-        console.log("existes");
+       this.inicioSesion();
 
       } else {
         Swal.fire({
@@ -68,5 +68,24 @@ export class PaginaInicioSesionComponent implements OnInit {
 
     });
   }
+
+  inicioSesion() {
+    this.usuariosServicio.iniciarSesion(this.usuario).subscribe((datos: any) => {
+      if (datos) {
+        console.log("dentro");
+
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Parece que la contraseña esta mal ,intentalo otra vez...',
+        })
+      }
+
+    });
+  }
+
+
+
 
 }

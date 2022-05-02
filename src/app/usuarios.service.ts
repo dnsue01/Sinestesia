@@ -13,6 +13,11 @@ export class UsuariosService {
   registro(usuario:any) {
     return this.http.post(`${this.url}registro.php`, JSON.stringify(usuario));    
   }
+  
+  iniciarSesion(usuario:any) {
+    return this.http.post(`${this.url}iniciarSesion.php`, JSON.stringify(usuario));    
+  }
+
   comprobarUsuario(usuario:any) {
     return this.http.post(`${this.url}comprobarUsuario.php`, JSON.stringify(usuario));    
   }
@@ -20,6 +25,7 @@ export class UsuariosService {
   comprobarUsuarioInicio(usuario:any) {
     return this.http.post(`${this.url}comprobarUsuarioInicio.php`, JSON.stringify(usuario));    
   }
+  
 
 
 
