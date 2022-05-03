@@ -26,6 +26,10 @@ export class UsuariosService {
     return this.http.post(`${this.url}comprobarUsuarioInicio.php`, JSON.stringify(usuario));    
   }
   
+  recuperarNombre(usuario:any) {
+    return this.http.post(`${this.url}recuperarNombre.php`, JSON.stringify(usuario));    
+  }
+  
 
 
 

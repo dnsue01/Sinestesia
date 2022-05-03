@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-
+import {Router} from '@angular/router';
 import { UsuariosService } from '../usuarios.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { UsuariosService } from '../usuarios.service';
 })
 export class PaginaInicioSesionComponent implements OnInit {
 
-  constructor(private usuariosServicio: UsuariosService) { }
+  constructor(private usuariosServicio: UsuariosService,private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -62,7 +62,7 @@ export class PaginaInicioSesionComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'No hay una cuenta con este nombre o correo porfavor prueba otra vez',
+          text: 'No hay ninguna cuenta con este nombre o correo porfavor prueba otra vez',
         })
       }
 
@@ -72,7 +72,16 @@ export class PaginaInicioSesionComponent implements OnInit {
   inicioSesion() {
     this.usuariosServicio.iniciarSesion(this.usuario).subscribe((datos: any) => {
       if (datos) {
-        console.log("dentro");
+     
+        Swal.fire({
+
+          icon: 'success',
+          title: 'Inicio correcto',
+          showConfirmButton: false,
+          timer: 700
+        })
+        
+        this.recuperarNombre();
 
       } else {
         Swal.fire({
@@ -85,7 +94,20 @@ export class PaginaInicioSesionComponent implements OnInit {
     });
   }
 
+  recuperarNombre(){
+    this.usuariosServicio.recuperarNombre(this.usuario).subscribe((datos: any) => {
+      if (datos['resultado'] == 'OK') {
+        this.entrar(datos['mensaje']);
+      }
+     
+     
+    });
+  }
+  
 
 
+  entrar(nombre:any){
+    this.router.navigate(["/principal",nombre]); 
+  }
 
 }

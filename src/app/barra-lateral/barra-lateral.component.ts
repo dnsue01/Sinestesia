@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-barra-lateral',
@@ -16,8 +17,14 @@ export class BarraLateralComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver) {}
+  constructor(private breakpointObserver: BreakpointObserver, private route: ActivatedRoute) { }
 
 
-  
+  ngOnInit(): void {
+    console.log(this.route.snapshot.params["nombre"])
+
+
+  }
+
+
 }

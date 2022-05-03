@@ -18,6 +18,7 @@ import { AjustesComponent } from './ajustes/ajustes.component';
 
 import { FormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { PaginaPrincipalUsuarioComponent } from './pagina-principal-usuario/pagina-principal-usuario.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import {HttpClientModule} from '@angular/common/http';
     PaginaRegistroComponent,
     PaginaInicioSesionComponent,
     BarraLateralComponent,
-    AjustesComponent
+    AjustesComponent,
+    PaginaPrincipalUsuarioComponent
   ],
   imports: [
     BrowserModule,
