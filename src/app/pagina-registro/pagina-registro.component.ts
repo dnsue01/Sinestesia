@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
+import {Router} from '@angular/router';
 
 import { UsuariosService } from '../usuarios.service';
 
@@ -11,7 +12,7 @@ import { UsuariosService } from '../usuarios.service';
 })
 export class PaginaRegistroComponent implements OnInit {
 
-  constructor(private usuariosServicio: UsuariosService) { }
+  constructor(private usuariosServicio: UsuariosService,private router: Router) { }
 
   ngOnInit() {
 
@@ -55,11 +56,7 @@ export class PaginaRegistroComponent implements OnInit {
               //comprobar que el radio button este seleccionado
               if (this.tipo != "") {
 
-                
-                
                 this.comprobacion();
-
-
               } else {
 
                 Swal.fire({
@@ -68,9 +65,6 @@ export class PaginaRegistroComponent implements OnInit {
                   text: "Debes de seleccionar un tipo de usuario",
                 })
               }
-
-
-
 
             }
             else {
@@ -170,12 +164,13 @@ export class PaginaRegistroComponent implements OnInit {
       if (datos['resultado'] == 'OK') {
 
         Swal.fire({
-
           icon: 'success',
           title: 'Registrado correctamente',
           showConfirmButton: false,
           timer: 1500
         })
+
+        this.entrar();
 
       }
     });
@@ -195,5 +190,10 @@ export class PaginaRegistroComponent implements OnInit {
 
     });
   }
+
+  entrar(){
+    this.router.navigate(["/principal",this.usuario.nombre]); 
+  }
+
 
 }
