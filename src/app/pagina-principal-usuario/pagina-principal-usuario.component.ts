@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 @Component({
   selector: 'app-pagina-principal-usuario',
   templateUrl: './pagina-principal-usuario.component.html',
@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaginaPrincipalUsuarioComponent implements OnInit {
 
+  @Input() nombre="";
   constructor() { }
 
   ngOnInit(): void {
