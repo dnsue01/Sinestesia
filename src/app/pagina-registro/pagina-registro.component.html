@@ -20,7 +20,7 @@
             <br>
             <h4>¿Cuál es tu nombre de usuario?</h4>
 
-            <input type="text" class="form-control"  [(ngModel)]="usuario.nombre"
+            <input type="text" class="form-control" [(ngModel)]="usuario.nombre"
                 placeholder="Escribe tu nombre de usuario">
 
             <br>
@@ -47,6 +47,29 @@
                 <input type="radio" id="ritemb" name="tipoUsuario" value="2" (change)="radio($event)">
                 <label for="ritemb">Estandar</label>
             </div>
+            <div *ngIf="tipo!=''">
+                <div *ngIf="tipo=='1'">
+               <br>
+               <div class="row">
+                <div class="col">
+                    <h1>Selecciona tu pais</h1>
+                    <select (change)="update($event)"   class="form-select" aria-label="Default select example">
+                       <option value="">Elije tu pais</option>
+                        <option *ngFor="let pais of paises" value="{{pais.id}}" >{{pais.name}} </option>
+                      </select>
+                </div>
+                <div class="col"  *ngIf="paisImg!=''">
+                   
+                    <img src="assets\banderas\{{paisImg}}.png" alt="" class="center rounded" >
+              
+                   
+                </div>
+              </div>
+          
+
+                </div>
+            </div>
+
 
             <br>
 
@@ -54,7 +77,7 @@
                 <h1>Registrate</h1>
             </button>
             <br>
-            
+
             <h2>¿Ya tienes cuenta? <a [routerLink]="['/inicioSesion']">Inicia sesión</a></h2>
         </div>
     </div>

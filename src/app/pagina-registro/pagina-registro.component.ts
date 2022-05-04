@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild,Renderer2} from '@angular/core';
 import Swal from 'sweetalert2';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
+
+import listadePaises from 'src/assets/json/flags.json';
 
 import { UsuariosService } from '../usuarios.service';
 
@@ -12,10 +14,10 @@ import { UsuariosService } from '../usuarios.service';
 })
 export class PaginaRegistroComponent implements OnInit {
 
-  constructor(private usuariosServicio: UsuariosService,private router: Router) { }
+  constructor(private usuariosServicio: UsuariosService, private router: Router,private render2:Renderer2) { }
 
   ngOnInit() {
-
+    
   }
 
   usuario = {
@@ -23,10 +25,15 @@ export class PaginaRegistroComponent implements OnInit {
     nombre: "",
     contrasenna: "",
     contrasennaConfirmacion: "",
-    tipo: ""
+    tipo: "",
+    pais:""
   }
 
-  tipo: string = ""
+  paises: any = listadePaises;
+  pais:any;
+  paisImg:string ="";
+  tipo: string = "";
+  @ViewChild("seleccionado") seleccionado:ElementRef | undefined;
 
   Registrarse() {
     //comprobar el correo
@@ -34,12 +41,6 @@ export class PaginaRegistroComponent implements OnInit {
     if (this.validarcorreo(this.usuario.correo)) {
 
       if (this.validarNombre(this.usuario.nombre)) {
-
-
-
-
-
-
 
         //comprobar las contaseñas
 
@@ -55,6 +56,24 @@ export class PaginaRegistroComponent implements OnInit {
 
               //comprobar que el radio button este seleccionado
               if (this.tipo != "") {
+
+                //ha seleccionado artista
+                if(this.tipo=="1"){
+                  //ha seleccionado un pais
+            if(this.paisImg!=""){
+              
+              this.comprobacion();
+            }else{
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "Debes de seleccionar un pais",
+              })
+            }
+            //ha selccionado estandar
+                }else{
+
+                }
 
                 this.comprobacion();
               } else {
@@ -127,10 +146,9 @@ export class PaginaRegistroComponent implements OnInit {
 
     }
 
-
-
-
   }
+
+  //funciones
 
   validarNombre(nombre: any) {
     //Cualquier string de entre 4 y 16
@@ -150,11 +168,13 @@ export class PaginaRegistroComponent implements OnInit {
     return re.test(contrasenna);
   }
 
+  //opcion selecionada del radio entre artista y estandar
   radio(event: any) {
 
     this.tipo = event.target.value;
     this.usuario.tipo = this.tipo
 
+ 
   }
 
 
@@ -184,16 +204,23 @@ export class PaginaRegistroComponent implements OnInit {
           title: 'Oops...',
           text: 'El correo o el usuario ya esta en uso por favor utiliza otro',
         })
-      }else{
+      } else {
         this.registro();
       }
 
     });
   }
 
-  entrar(){
-    this.router.navigate(["/principal",this.usuario.nombre]); 
+  entrar() {
+    this.router.navigate(["/principal", this.usuario.nombre]);
   }
+
+  update(e:any){
+    this.paisImg = e.target.value
+    console.log(this.paisImg);
+    this.usuario.pais= this.paisImg
+  }
+
 
 
 }
