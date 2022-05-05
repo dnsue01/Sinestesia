@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild,Renderer2} from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
 
@@ -14,10 +14,10 @@ import { UsuariosService } from '../usuarios.service';
 })
 export class PaginaRegistroComponent implements OnInit {
 
-  constructor(private usuariosServicio: UsuariosService, private router: Router,private render2:Renderer2) { }
+  constructor(private usuariosServicio: UsuariosService, private router: Router) { }
 
   ngOnInit() {
-    
+
   }
 
   usuario = {
@@ -26,14 +26,15 @@ export class PaginaRegistroComponent implements OnInit {
     contrasenna: "",
     contrasennaConfirmacion: "",
     tipo: "",
-    pais:""
+    pais: "",
+    mayorEdad:""
   }
 
   paises: any = listadePaises;
-  pais:any;
-  paisImg:string ="";
+  pais: any;
+  paisImg: string = "";
   tipo: string = "";
-  @ViewChild("seleccionado") seleccionado:ElementRef | undefined;
+  mayorEdad: string = "";
 
   Registrarse() {
     //comprobar el correo
@@ -58,24 +59,34 @@ export class PaginaRegistroComponent implements OnInit {
               if (this.tipo != "") {
 
                 //ha seleccionado artista
-                if(this.tipo=="1"){
+                if (this.tipo == "1") {
                   //ha seleccionado un pais
-            if(this.paisImg!=""){
-              
-              this.comprobacion();
-            }else{
-              Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: "Debes de seleccionar un pais",
-              })
-            }
-            //ha selccionado estandar
-                }else{
+                  if (this.paisImg != "") {
 
+                    this.comprobacion();
+                  } else {
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Oops...',
+                      text: "Debes de seleccionar un pais",
+                    })
+                  }
+                  //ha selccionado estandar
+                } else {
+                  //tiene que seleccionar si es menor de edad o no
+                  if(this.mayorEdad!=""){
+                      this.comprobacion();
+                  }else{
+                    Swal.fire({
+                      icon: 'error',
+                      title: 'Oops...',
+                      text: "Debes de seleccionar si eres menor o mayor de edad",
+                    })
+                  }
+                  
                 }
 
-                this.comprobacion();
+                
               } else {
 
                 Swal.fire({
@@ -174,11 +185,11 @@ export class PaginaRegistroComponent implements OnInit {
     this.tipo = event.target.value;
     this.usuario.tipo = this.tipo
 
- 
   }
+  
 
 
-
+//funcion de registro
   registro() {
     this.usuariosServicio.registro(this.usuario).subscribe((datos: any) => {
       if (datos['resultado'] == 'OK') {
@@ -189,9 +200,7 @@ export class PaginaRegistroComponent implements OnInit {
           showConfirmButton: false,
           timer: 1500
         })
-
         this.entrar();
-
       }
     });
   }
@@ -215,10 +224,13 @@ export class PaginaRegistroComponent implements OnInit {
     this.router.navigate(["/principal", this.usuario.nombre]);
   }
 
-  update(e:any){
+  seleccionarPais(e: any) {
     this.paisImg = e.target.value
-    console.log(this.paisImg);
-    this.usuario.pais= this.paisImg
+    this.usuario.pais = this.paisImg
+  }
+  mayor(e: any){
+    this.mayorEdad = e.target.value
+    this.usuario.mayorEdad = this.mayorEdad
   }
 
 

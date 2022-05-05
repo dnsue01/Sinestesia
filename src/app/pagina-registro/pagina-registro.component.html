@@ -37,7 +37,6 @@
             <br>
 
 
-
             <div class="radio-item">
                 <input type="radio" id="ritema" name="tipoUsuario" value="1" (change)="radio($event)">
                 <label for="ritema">Artista</label>
@@ -47,37 +46,63 @@
                 <input type="radio" id="ritemb" name="tipoUsuario" value="2" (change)="radio($event)">
                 <label for="ritemb">Estandar</label>
             </div>
-            <div *ngIf="tipo!=''">
-                <div *ngIf="tipo=='1'">
-               <br>
-               <div class="row">
-                <div class="col">
-                    <h1>Selecciona tu pais</h1>
-                    <select (change)="update($event)"   class="form-select" aria-label="Default select example">
-                       <option value="">Elije tu pais</option>
-                        <option *ngFor="let pais of paises" value="{{pais.id}}" >{{pais.name}} </option>
-                      </select>
-                </div>
-                <div class="col"  *ngIf="paisImg!=''">
-                   
-                    <img src="assets\banderas\{{paisImg}}.png" alt="" class="center rounded" >
-              
-                   
-                </div>
-              </div>
-          
+            <!--Selecciona un tipo de usuario-->
+            <div *ngIf="tipo!='' ; else sinSeleccionarTipo">
 
+                <!--Selecciona artista-->
+                <div *ngIf="tipo=='1' ; else tipo2 ">
+                    <br>
+                    <div class="row">
+                        <div class="col ">
+                            <br>
+                            <h1>Selecciona tu pais</h1>
+                            <select (change)="seleccionarPais($event)" class="form-select selector"
+                                aria-label="Default select example">
+                                <option value="">Elije tu país</option>
+                                <option *ngFor="let pais of paises" value="{{pais.id}}">{{pais.name}} </option>
+                            </select>
+                        </div>
+                        <div class="col selector" *ngIf="paisImg!=''">
+                            <img src="assets\banderas\{{paisImg}}.png" alt="" class="center rounded">
+                        </div>
+                    </div>
                 </div>
+                <ng-template #tipo2>
+                    <!--Selecciona estandar-->
+                    <br>
+                    <h1>¿Eres mayor de edad?</h1>
+
+
+                    <br>
+                    <h4>Sinestesia incluye canciones explicitas, con palabras relacionadas con contenido sexual o
+                        violencia ,los contenidos explícitos son inadecuados para niños y personas impresionables.</h4>
+
+
+                    <div class="selector">
+
+                     
+                    
+                        <select (change)="mayor($event)" class="form-select selector"
+                        aria-label="Default select example">
+                        <option value="">Selecciona una opcion</option>
+                        <option value="1">Si ,soy mayor edad</option>
+                        <option value="0">Soy menor de edad</option>
+                    </select>
+                       
+                    </div>
+
+                </ng-template>
+
             </div>
-
-
-            <br>
+            <ng-template #sinSeleccionarTipo>
+                <br>
+            </ng-template>
 
             <button (click)="Registrarse()" class="btn btn-xxl rounded-pill mt-5">
                 <h1>Registrate</h1>
             </button>
             <br>
-
+            <br>
             <h2>¿Ya tienes cuenta? <a [routerLink]="['/inicioSesion']">Inicia sesión</a></h2>
         </div>
     </div>
