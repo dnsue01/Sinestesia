@@ -18,7 +18,7 @@
             <h1 routerLink="defecto"  >SINESTESIA</h1>
  
           <mat-nav-list>
-            <a mat-list-item routerLink="defecto" class="link">
+            <a mat-list-item routerLink="defecto" class="link" (click)="Inicio()">
             <h2>Inicio</h2> 
               </a>
             <a mat-list-item href="#" class="link">
@@ -33,7 +33,7 @@
                 <h2>Crear una playlist</h2>
                 </a>
             <hr>
-            <a mat-list-item routerLink="ajustes" class="link">
+            <a mat-list-item routerLink="ajustes" class="link" (click)="Ajustes()">
               <h2>Ajustes</h2>
               </a>
 
@@ -43,10 +43,21 @@
           </mat-nav-list>
           </div>
       </div>
-      <div class="col-8 col-sm-9 col-md-9 col-lg-9 col-xl-9  offset-4  offset-sm-3   " id="main">
-        
-          <app-pagina-principal-usuario [nombre]="nombre"></app-pagina-principal-usuario>
-          
+      <div class="col-8 col-sm-9 col-md-9 col-lg-9 col-xl-9  offset-4  offset-sm-3 " id="main">
+
+        <div [ngSwitch]="opcion">
+          <div *ngSwitchCase="'inicio'">
+         
+            <app-pagina-principal-usuario [nombre]="nombre"></app-pagina-principal-usuario>
+          </div>
+          <div *ngSwitchCase="'ajustes'">
+            <app-ajustes [nombre]="nombre"></app-ajustes>
+         
+          </div>
+  
+        </div>      
+         
+     
       </div>
   </div>
 </div>
