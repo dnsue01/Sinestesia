@@ -30,7 +30,9 @@ export class UsuariosService {
     return this.http.post(`${this.url}recuperarNombre.php`, JSON.stringify(usuario));    
   }
   
-
+  recuperarUsuario(nombre:any) {
+    return this.http.post(`${this.url}recuperarUsuario.php`, JSON.stringify(nombre));    
+  }
 
 
 }
