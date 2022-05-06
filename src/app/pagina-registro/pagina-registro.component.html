@@ -16,7 +16,10 @@
 
             <input type="email" class="form-control" id="exampleInputEmail1" [(ngModel)]="usuario.correo"
                 placeholder="Escribe tu email">
-
+                <small id="passwordHelpInline" class="text-muted">
+                    El correo tiene que tener por lo menos un @ y . Un ejemplo:  sinestesia@gmail.es
+                   </small>
+               
             <br>
             <h4>¿Cuál es tu nombre de usuario?</h4>
 
@@ -28,6 +31,9 @@
 
             <input type="password" class="form-control" id="contrasenna" [(ngModel)]="usuario.contrasenna"
                 placeholder="Escribe tu contraseña">
+                <small id="passwordHelpInline" class="text-muted">
+                   La contraseña  por lo menos tiene que tener 5 caracteres ,una letra mayuscula , una minuscula y un signo especial. Un ejemplo: Sinestesia1!
+                  </small>
             <br>
             <h4>Repite tu contraseña</h4>
 

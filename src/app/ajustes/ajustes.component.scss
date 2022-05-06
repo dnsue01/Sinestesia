@@ -4,8 +4,19 @@ img{
     border-radius: 50%;
     margin:2%;
 }
+img:hover{
+    -webkit-filter: grayscale(60%);
+
+}
 .selector{
     display: flex;
     justify-content: center;
     align-items: center;
   }
+  h1{
+    font-weight: 800;
+    line-height: 1.2;
+    font-size: 2em;
+    font-family: "Catamaran", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  }
+

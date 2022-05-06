@@ -4,44 +4,97 @@
     rel="stylesheet" />
 
 
-<div class="container-fluid">
+<div class="container-fluid ">
 
 
-    <div class="card">
+    <div class="card" style="background-color:{{colorFondo}}; color: {{colorLetra}};">
         <div class="card-body">
 
 
             <div class="row">
                 <div class="col-sm-7">
                     <h1 class="titulo">Ajustes</h1>
+               
+                 
                 </div>
                 <div class="col-sm-5 selector">
-                    <img src="assets\ejemplo\ejemplo.jpg" class="rounded-circle">
+                    
+                    <img src="assets\ejemplo\ejemplo.jpg" class="rounded-circle" (click)="Saludar()">
+                    <hr>
                     <h1>{{nombre}}</h1>
+                  
                 </div>
             </div>
+           
+      
+            
             <hr>
-
-
-
             <br>
-            <h4>¿Quieres cambiar tu correo ?</h4>
+            <h4>Tu nombre de usuario es:</h4>
 
-            <input type="email" class="form-control" id="exampleInputEmail1" [(ngModel)]="usuario.correo">
-
+            <input type="email" class="form-control" id="exampleInputEmail1" [(ngModel)]="usuario.nombre" disabled>
             <br>
+            <h4>Este es tu correo </h4>
 
-            <h4>¿Cuál es tu contresaña?</h4>
+            <input type="email" class="form-control" id="exampleInputEmail12" [(ngModel)]="usuario.correo" disabled>
+       
+            <hr>
+            <h4>Cambia tu foto de perfil</h4>
+            <br>
+            <input type="file">
 
-            <input type="password" class="form-control" id="contrasenna" [(ngModel)]="usuario.contrasennaConfirmacion"
+            <hr>
+            <h4>Cambia tu contresaña</h4>
+            <br>
+        
+
+            <h4>¿Cuál era tu contresaña?</h4>
+
+            <input type="password" class="form-control" id="contrasenna1" [(ngModel)]="usuario.contrasennaConfirmacion"
                 placeholder="Escribe tu contraseña">
 
             <br>
 
-            <h4>¿Cuál es tu contresaña?</h4>
+            <h4>¿Cuál es tu nueva contresaña?</h4>
 
-            <input type="password" class="form-control" id="contrasenna" [(ngModel)]="usuario.contrasennaConfirmacion1"
-                placeholder="Escribe tu contraseña">
+            <input type="password" class="form-control" id="contrasenna2" [(ngModel)]="usuario.contrasennaConfirmacion1"
+                placeholder="Escribe tu nueva contraseña">
+
+            <br>
+
+            <h4>Repite tu nueva contresaña</h4>
+
+            <input type="password" class="form-control" id="contrasenna3" [(ngModel)]="usuario.contrasennaConfirmacion1"
+                placeholder="Escribe tu nueva contraseña">
+
+            <hr>
+            <h4>Personalización</h4>
+
+            <h4>Elije color de fondo</h4>
+
+            <select  (change)="seleccionarFondo($event)" class="form-select selector"
+            aria-label="Default select example">
+            <option value="">Elije tu color</option>
+            <option *ngFor="let color of coloresSelecionables" value="{{color.id}}">{{color.colorE}} </option>
+           </select>
+
+           <br>
+
+           <h4>Elije color de letra</h4>
+
+           <select (change)="seleccionarLetra($event)" class="form-select selector"
+           aria-label="Default select example">
+           <option value="">Elije tu color</option>
+           <option *ngFor="let color of coloresSelecionables" value="{{color.id}}">{{color.colorE}} </option>
+          </select>
+
+          <br>
+
+
+
+          <button  class="btn btn-xxl rounded-pill mt-5" style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};">
+            <h1>Guardar</h1>
+        </button>
 
         </div>
     </div>

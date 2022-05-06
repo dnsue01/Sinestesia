@@ -1,0 +1,69 @@
+{
+    "colors": [
+      {
+        "color": "black",
+         "colorE": "negro",
+        "category": "hue",
+        "id": "1",
+        "type": "primary",
+        "code": {
+          "rgba": [255,255,255,1],
+          "hex": "#000"
+        }
+      },
+      {
+        "color": "white",
+        "colorE": "blanco",
+        "id": "2",
+        "category": "value",
+        "code": {
+          "rgba": [0,0,0,1],
+          "hex": "#FFF"
+        }
+      },
+      {
+        "color": "red",
+        "colorE": "rojo",
+        "id": "3",
+        "category": "hue",
+        "type": "primary",
+        "code": {
+          "rgba": [255,0,0,1],
+          "hex": "#FF0"
+        }
+      },
+      {
+        "color": "blue",
+        "colorE": "azul",
+        "id": "4",
+        "category": "hue",
+        "type": "primary",
+        "code": {
+          "rgba": [0,0,255,1],
+          "hex": "#00F"
+        }
+      },
+      {
+        "color": "yellow",
+        "colorE": "amarillo",
+        "id": "5",
+        "category": "hue",
+        "type": "primary",
+        "code": {
+          "rgba": [255,255,0,1],
+          "hex": "#FF0"
+        }
+      },
+      {
+        "color": "green",
+        "id": "6",
+        "colorE": "verde",
+        "category": "hue",
+        "type": "secondary",
+        "code": {
+          "rgba": [0,255,0,1],
+          "hex": "#0F0"
+        }
+      }
+    ]
+  }
