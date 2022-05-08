@@ -75,6 +75,25 @@ export class AjustesComponent implements OnInit {
     });
   }
 
+
+
+
+ 
+
+  seleccionarLetra(e: any) {
+    var idColor: any = e.target.value
+    this.cambiarIdAColorLetra(idColor);
+    this.usuario.color_fuente = idColor
+
+  }
+
+
+//subir la foto
+  myForm = new FormGroup({
+    file: new FormControl('', [Validators.required]),
+    fileSource: new FormControl('', [Validators.required])
+  });
+   
   onFileSelected(event:any) {
 
     const file:File = event.target.files[0];
@@ -94,24 +113,6 @@ export class AjustesComponent implements OnInit {
 }
 
 
- 
-
-  seleccionarLetra(e: any) {
-    var idColor: any = e.target.value
-    this.cambiarIdAColorLetra(idColor);
-    this.usuario.color_fuente = idColor
-
-  }
-
-  myForm = new FormGroup({
-    file: new FormControl('', [Validators.required]),
-    fileSource: new FormControl('', [Validators.required])
-  });
-   
-
-
-   
- 
   get f(){
     return this.myForm.controls;
   }
@@ -133,11 +134,23 @@ export class AjustesComponent implements OnInit {
     this.http.post('http://localhost/sinestesia/subirFotos.php', formData)
       .subscribe((res:any) => {
         console.log(res['mensaje']);
-        
+        console.log(res['id']);
         if(res['mensaje']){
-          alert('Uploaded Successfully.');
+      
+          Swal.fire({
+
+            icon: 'success',
+            title: 'Subida a la base de datos',
+            showConfirmButton: false,
+            timer: 700
+          })
         }else{
-          alert('No se pueden subir archivos de este tipo.');
+       
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'no se pueden subir archivos de este tipo',
+          })
         }
       
       })
