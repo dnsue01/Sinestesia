@@ -1,7 +1,13 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { UsuariosService } from '../usuarios.service';
+
 import listadeColores from 'src/assets/json/colores.json';
+import listadeTamanno from 'src/assets/json/tamannoLetra.json';
+
 import Swal from 'sweetalert2';
+import { HttpClient } from '@angular/common/http';
+
+import { FormGroup, FormControl, Validators} from '@angular/forms';
 @Component({
   selector: 'app-ajustes',
   templateUrl: './ajustes.component.html',
@@ -27,6 +33,10 @@ export class AjustesComponent implements OnInit {
   colores: any = listadeColores;
   coloresSelecionables: any;
   
+  //Tamanno de json
+  tamanno:any = listadeTamanno;
+  tamannoSeleccionable: any;
+
   //colores de la bd
   colorLetra: string = this.usuario.color_fuente;
   colorFondo: string = this.usuario.color_fondo;
@@ -38,11 +48,16 @@ export class AjustesComponent implements OnInit {
   //comprobacion de colores
   iguales: boolean = false;
 
-  constructor(private usuariosServicio: UsuariosService) { }
+  //archivo
+
+  fileName = '';
+
+  constructor(private usuariosServicio: UsuariosService,private http: HttpClient) { }
 
   ngOnInit(): void {
     this.recuperarUsuario();
     this.coloresSelecionables = this.colores.colors
+    this.tamannoSeleccionable = this.tamanno.Tamannos
   }
 
   //recuperar el usuario de la bd
@@ -60,6 +75,25 @@ export class AjustesComponent implements OnInit {
     });
   }
 
+  onFileSelected(event:any) {
+
+    const file:File = event.target.files[0];
+
+    if (file) {
+
+        this.fileName = file.name;
+
+        const formData = new FormData();
+
+        formData.append("thumbnail", file);
+
+        const upload$ = this.http.post("http://localhost/sinestesia/subirFotos.php", formData);
+
+        upload$.subscribe();
+    }
+}
+
+
  
 
   seleccionarLetra(e: any) {
@@ -68,6 +102,61 @@ export class AjustesComponent implements OnInit {
     this.usuario.color_fuente = idColor
 
   }
+
+  myForm = new FormGroup({
+    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    file: new FormControl('', [Validators.required]),
+    fileSource: new FormControl('', [Validators.required])
+  });
+   
+  /*------------------------------------------
+  --------------------------------------------
+  Created constructor
+  --------------------------------------------
+  --------------------------------------------*/
+
+   
+  /**
+   * Write code on Method
+   *
+   * @return response()
+   */
+  get f(){
+    return this.myForm.controls;
+  }
+   
+  /**
+   * Write code on Method
+   *
+   * @return response()
+   */
+  onFileChange(event:any) {
+   
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.myForm.patchValue({
+        fileSource: file
+      });
+    }
+  } 
+   
+  /**
+   * Write code on Method
+   *
+   * @return response()
+   */
+  submit(){
+    const formData = new FormData();
+    formData.append('file', this.myForm.get('fileSource')?.value);
+      
+    this.http.post('http://localhost/sinestesia/subirFotos.php', formData)
+      .subscribe(res => {
+        console.log(res);
+        alert('Uploaded Successfully.');
+      })
+  }
+
+
 
   seleccionarFondo(e: any) {
     var idColor: any = e.target.value

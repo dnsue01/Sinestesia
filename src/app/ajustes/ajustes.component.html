@@ -48,19 +48,39 @@
             <input type="email" class="form-control" id="exampleInputEmail12" [(ngModel)]="usuario.correo" disabled>
 
             <hr>
-            <br>
-            <h2>Cambia tu foto de perfil</h2>
-
             
-                <form action="subirFotos.php" method="post" enctype="multipart/form-data">
-    
-                    <input id="file-input" type="file" name="mi_foto">
-                    <input type="hidden" value="usuario.id" name="id">
-                    <input type="submit" name="submit" value="Upload">
-                </form>
-
-
-           
+            <form [formGroup]="myForm" (ngSubmit)="submit()">
+     
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input
+                        formControlName="name"
+                        id="name"
+                        type="text"
+                        class="form-control">
+                    <div *ngIf="f['name'].touched && f['name'].invalid" class="alert alert-danger">
+                        <div *ngIf="f['name'].errors && f['name'].errors['required']">Name is required.</div>
+             
+              
+                        <div *ngIf="f['name'].errors && f['name'].errors['minlength']">Name should be 3 character.</div>
+                    </div>
+                </div>
+                     
+                <div class="form-group">
+                    <label for="file">File</label>
+                    <input
+                        formControlName="file"
+                        id="file"
+                        type="file"
+                        class="form-control"
+                        (change)="onFileChange($event)">
+                    <div *ngIf="f['file'].touched && f['file'].invalid" class="alert alert-danger">
+                        <div *ngIf="f['file'].errors && f['file'].errors['required']">File is required.</div>
+                    </div>
+                </div>
+                         
+                <button class="btn btn-primary" [disabled]="myForm.invalid" type="submit">Submit</button>
+            </form>
 
             <hr>
 

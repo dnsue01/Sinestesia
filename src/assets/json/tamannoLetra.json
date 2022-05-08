@@ -1,16 +1,16 @@
 {
     "Tamannos": [
       {
-        "tamanno": "small",
+        "tamanno": "medium",
          "id": "1"
       },
       {
-        "tamanno": "medium",
+        "tamanno": "small",
          "id": "2"
       },
       {
         "tamanno": "large",
-         "id": "2"
+         "id": "3"
       }
       
     ]
