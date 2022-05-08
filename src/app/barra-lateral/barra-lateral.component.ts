@@ -20,7 +20,7 @@ export class BarraLateralComponent {
   constructor(private breakpointObserver: BreakpointObserver, private route: ActivatedRoute) { }
 
   nombre = this.route.snapshot.params["nombre"];
-  opcion:string = "0";
+  opcion:string = "";
 
   ngOnInit(): void {
   
@@ -28,7 +28,7 @@ export class BarraLateralComponent {
   }
   Inicio(){
     this.opcion="inicio"
-    console.log(this.opcion);
+
     
   }
   Ajustes(){

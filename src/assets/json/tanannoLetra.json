@@ -1,0 +1,17 @@
+{
+    "Tamannos": [
+      {
+        "tamanno": "small",
+         "id": "1"
+      },
+      {
+        "tamanno": "medium",
+         "id": "2"
+      },
+      {
+        "tamanno": "large",
+         "id": "2"
+      }
+      
+    ]
+  }

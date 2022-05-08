@@ -1,13 +1,5 @@
-img{
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    margin:2%;
-}
-img:hover{
-    -webkit-filter: grayscale(60%);
 
-}
+
 .selector{
     display: flex;
     justify-content: center;
@@ -20,3 +12,23 @@ img:hover{
     font-family: "Catamaran", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   }
 
+  .image-upload > input
+  {
+      display: none;
+  }
+  
+  .image-upload img
+  {
+      
+      cursor: pointer;
+  }
+  img{
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin:2%;
+}
+img:hover{
+  -webkit-filter: grayscale(60%);
+
+}

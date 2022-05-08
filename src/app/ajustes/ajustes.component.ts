@@ -11,9 +11,11 @@ export class AjustesComponent implements OnInit {
   @Input() nombre = "";
 
   usuario = {
+    id:"",
     correo: "",
     nombre: "",
     contrasennaEncrip: "",
+    contrasennaAntigua: "",
     contrasennaConfirmacion: "",
     contrasennaConfirmacion1: "",
     tamanno_letra: "",
@@ -21,15 +23,19 @@ export class AjustesComponent implements OnInit {
     color_fuente: "",
   }
 
+  //Colores de json
   colores: any = listadeColores;
   coloresSelecionables: any;
   
-  colorLetra: string = "";
-  colorFondo: string = "";
+  //colores de la bd
+  colorLetra: string = this.usuario.color_fuente;
+  colorFondo: string = this.usuario.color_fondo;
 
+  //colores defecto del boton
   colorBotonFondo:string="#198754";
   colorBotonLetra:string="white";
 
+  //comprobacion de colores
   iguales: boolean = false;
 
   constructor(private usuariosServicio: UsuariosService) { }
@@ -37,13 +43,12 @@ export class AjustesComponent implements OnInit {
   ngOnInit(): void {
     this.recuperarUsuario();
     this.coloresSelecionables = this.colores.colors
-
   }
 
+  //recuperar el usuario de la bd
   recuperarUsuario() {
     this.usuariosServicio.recuperarUsuario(this.nombre).subscribe((datos: any) => {
-
-
+      this.usuario.id = datos[0];
       this.usuario.correo = datos[1];
       this.usuario.nombre = datos[2];
       this.usuario.contrasennaEncrip = datos[3];
@@ -55,10 +60,7 @@ export class AjustesComponent implements OnInit {
     });
   }
 
-  Saludar() {
-    console.log("hola");
-
-  }
+ 
 
   seleccionarLetra(e: any) {
     var idColor: any = e.target.value
@@ -122,6 +124,8 @@ export class AjustesComponent implements OnInit {
           this.colorBotonLetra="white"
 
         }
+        
+        
       }
     }
   }
@@ -145,11 +149,32 @@ export class AjustesComponent implements OnInit {
           this.colorBotonFondo="white"
           this.colorBotonLetra="black"
         }
+        if (this.colorFondo == "white" && this.colorLetra == "") {
+          this.colorLetra = "black"
+          this.colorBotonFondo="black"
+          this.colorBotonLetra="white"
+        }
         if (this.colorFondo == "blue" && this.colorLetra == "") {
           this.colorLetra = "white"
           this.colorBotonFondo="white"
-
         }
+        if(this.colorFondo == "red" && this.colorLetra == "" ){
+          this.colorBotonFondo="black"
+          this.colorBotonLetra="red"
+        }
+
+        if(this.colorFondo == "green" && this.colorLetra == "" ){
+          this.colorBotonFondo="black"
+          this.colorBotonLetra="green"
+        }
+
+        if(this.colorFondo == "yellow" && this.colorLetra == "" ){
+          this.colorBotonFondo="black"
+          this.colorBotonLetra="yellow"
+        }
+
+  
+
       }
 
       if (this.iguales) {
@@ -179,4 +204,110 @@ export class AjustesComponent implements OnInit {
     }
   }
 
+  cambiarContrasenna(){
+
+
+    
+    if(this.usuario.contrasennaAntigua!=""){
+
+     if(this.usuario.contrasennaConfirmacion!=""){
+
+    
+      if(this.usuario.contrasennaConfirmacion1!=""){
+        
+        if(this.usuario.contrasennaConfirmacion == this.usuario.contrasennaConfirmacion1){
+
+          
+          if(this.comprobarContrasenna(this.usuario.contrasennaConfirmacion)){
+
+        
+            this.comprobarContrasennaBD();
+
+            
+          }else{
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'La nueva contraseña no cumple nuestras reglas',
+            })
+          }
+          
+        }else{
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Los campos de la confirmación de la nueva contraseña no son iguales',
+          })
+        }
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'El campo de la confirmación de la nueva contraseña esta vacio',
+        })
+      }
+     }else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El campo de la nueva contraseña esta vacio',
+      })
+     }
+      
+    }else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El campo de la contraseña esta vacio',
+      })
+    }
+  }
+
+
+  comprobarContrasenna(contrasenna: any) {
+    //Contraseña de minimo 5 caracteres un simbolo especial y debe incluir mayusculas y minusculas
+    var re = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{5,}$/;
+    return re.test(contrasenna);
+  }
+
+
+  comprobarContrasennaBD(){
+
+    this.usuariosServicio.comprobarContrasennaBD(this.usuario).subscribe((datos: any) => {
+    
+      if(datos){
+
+        this.ActualizarContrasenna();
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'La contraseña no concuerda',
+        })
+      }
+    
+    });
+
+  }
+
+
+  ActualizarContrasenna(){
+    this.usuariosServicio.ActualizarContrasenna(this.usuario).subscribe((datos: any) => {
+    
+      if (datos['resultado']=='OK') {
+        Swal.fire({
+
+          icon: 'success',
+          title: 'Contraseña cambiada correctamente',
+          showConfirmButton: false,
+          timer: 700
+        })
+     
+      }
+    
+    })
+    
+  }
+
+  
 }
