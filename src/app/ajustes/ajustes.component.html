@@ -63,7 +63,7 @@
                         class="form-control"
                         (change)="onFileChange($event)">
                     <div *ngIf="f['file'].touched && f['file'].invalid" class="alert alert-danger">
-                        <div *ngIf="f['file'].errors && f['file'].errors['required']">File is required.</div>
+                        <div *ngIf="f['file'].errors && f['file'].errors['required']">Necesitas poner una imagen.</div>
                     </div>
                 </div>
                          
