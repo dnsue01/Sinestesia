@@ -104,32 +104,18 @@ export class AjustesComponent implements OnInit {
   }
 
   myForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     file: new FormControl('', [Validators.required]),
     fileSource: new FormControl('', [Validators.required])
   });
    
-  /*------------------------------------------
-  --------------------------------------------
-  Created constructor
-  --------------------------------------------
-  --------------------------------------------*/
+
 
    
-  /**
-   * Write code on Method
-   *
-   * @return response()
-   */
+ 
   get f(){
     return this.myForm.controls;
   }
    
-  /**
-   * Write code on Method
-   *
-   * @return response()
-   */
   onFileChange(event:any) {
    
     if (event.target.files.length > 0) {
@@ -140,18 +126,14 @@ export class AjustesComponent implements OnInit {
     }
   } 
    
-  /**
-   * Write code on Method
-   *
-   * @return response()
-   */
   submit(){
     const formData = new FormData();
     formData.append('file', this.myForm.get('fileSource')?.value);
       
     this.http.post('http://localhost/sinestesia/subirFotos.php', formData)
-      .subscribe(res => {
-        console.log(res);
+      .subscribe((res:any) => {
+        console.log(res['mensaje']);
+         
         alert('Uploaded Successfully.');
       })
   }
