@@ -133,8 +133,13 @@ export class AjustesComponent implements OnInit {
     this.http.post('http://localhost/sinestesia/subirFotos.php', formData)
       .subscribe((res:any) => {
         console.log(res['mensaje']);
-         
-        alert('Uploaded Successfully.');
+        
+        if(res['mensaje']){
+          alert('Uploaded Successfully.');
+        }else{
+          alert('No se pueden subir archivos de este tipo.');
+        }
+      
       })
   }
 
