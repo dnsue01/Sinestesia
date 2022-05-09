@@ -7,7 +7,7 @@
 <div class="container-fluid ">
 
 
-    <div class="card" style="background-color:{{colorFondo}}; color: {{colorLetra}};font-size: x-large ">
+    <div class="card" style="background-color:{{colorFondo}}; color: {{colorLetra}};font-size: {{tamanno}} ">
         <div class="card-body">
 
 
@@ -19,20 +19,16 @@
                 </div>
                 <div class="col-sm-5 selector">
 
-
-
-
                     <div class="image-upload">
+                        <div *ngIf="idYFoto.extension == ''; else fotoBD">
 
-                        <img src="assets\ejemplo\ejemplo.jpg">
-
-
+                            <img src="assets/ejemplo/sinestesia.png">
+                        </div>
+                        <ng-template #fotoBD>
+                            <img src="{{urlFotos}}{{idYFoto.extension}}">
+                        </ng-template>
                     </div>
-                    <hr>
                     <h1>{{nombre}}</h1>
-
-
-
                 </div>
             </div>
 
@@ -48,26 +44,24 @@
             <input type="email" class="form-control" id="exampleInputEmail12" [(ngModel)]="usuario.correo" disabled>
 
             <hr>
-            
+
             <form [formGroup]="myForm" (ngSubmit)="submit()">
-     
-            
-                     
+
+
+
                 <div class="form-group">
                     <h2>Cambia tu foto</h2>
                     <br>
-                    <input
-                        formControlName="file"
-                        id="file"
-                        type="file"
-                        class="form-control"
+                    <input formControlName="file" id="file" type="file" class="form-control"
                         (change)="onFileChange($event)">
                     <div *ngIf="f['file'].touched && f['file'].invalid" class="alert alert-danger">
                         <div *ngIf="f['file'].errors && f['file'].errors['required']">Necesitas poner una imagen.</div>
                     </div>
                 </div>
-                         
-                <button class="btn btn-xxl rounded-pill mt-5"  style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};" [disabled]="myForm.invalid" type="submit">Cambiar</button>
+
+                <button class="btn btn-xxl rounded-pill mt-5"
+                    style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};"
+                    [disabled]="myForm.invalid" type="submit">Cambiar</button>
             </form>
 
             <hr>
@@ -88,12 +82,13 @@
 
             <input type="password" class="form-control" id="contrasenna2" [(ngModel)]="usuario.contrasennaConfirmacion1"
                 placeholder="Escribe tu nueva contraseña">
+                <br>
             <small id="passwordHelpInline" class="text-muted">
                 La contraseña por lo menos tiene que tener 5 caracteres ,una letra mayuscula , una minuscula y un signo
                 especial. Un ejemplo: Sinestesia1!
             </small>
             <br>
-
+            <br>         
             <h4>Repite tu nueva contresaña</h4>
 
             <input type="password" class="form-control" id="contrasenna3" [(ngModel)]="usuario.contrasennaConfirmacion"
@@ -131,18 +126,18 @@
 
             <h4>Elije color de letra</h4>
 
-            <select (change)="seleccionarLetra($event)" class="form-select selector"
+            <select (change)="seleccionarTamanno($event)" class="form-select selector"
                 aria-label="Default select example">
-                <option value="">Elije tu color</option>
-                <option *ngFor="let color of coloresSelecionables" value="{{color.id}}">{{color.colorE}} </option>
+                <option value="">Elije tu tamaño de letra</option>
+                <option *ngFor="let tamanno of tamannoSeleccionable" value="{{tamanno.id}}">{{tamanno.tamanno}} </option>
             </select>
 
             <br>
 
 
-            <button class="btn btn-xxl rounded-pill mt-5"
+            <button (click)="personalizar()" class="btn btn-xxl rounded-pill mt-5"
                 style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};">
-                <h1>Guardar Colores</h1>
+                <h1>Guardar Personalización</h1>
             </button>
 
         </div>

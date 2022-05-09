@@ -40,6 +40,20 @@ export class UsuariosService {
   ActualizarContrasenna(usuario: any) {
     return this.http.post(`${this.url}ActualizarContrasenna.php`, JSON.stringify(usuario));
   }
+
+  ActualizarFoto(idYFoto: any) {
+    return this.http.post(`${this.url}ActualizarFoto.php`, JSON.stringify(idYFoto));
+  }
+  RecuperarFoto(usuario: any) {
+    return this.http.post(`${this.url}RecuperarFoto.php`, JSON.stringify(usuario));
+  }
+  RecuperarTipoUsuario(id: any) {
+    return this.http.post(`${this.url}RecuperarTipoUsuario.php`, JSON.stringify(id));
+  }
+  Personalizar(usuario: any) {
+    return this.http.post(`${this.url}Personalizar.php`, JSON.stringify(usuario));
+  }
+
 }
 
 

@@ -40,6 +40,7 @@ export class AjustesComponent implements OnInit {
   //colores de la bd
   colorLetra: string = this.usuario.color_fuente;
   colorFondo: string = this.usuario.color_fondo;
+  tamannoLetra:string = this.usuario.tamanno_letra;
 
   //colores defecto del boton
   colorBotonFondo:string="#198754";
@@ -48,9 +49,22 @@ export class AjustesComponent implements OnInit {
   //comprobacion de colores
   iguales: boolean = false;
 
-  //archivo
+  idYFoto = {
+    id:"",
+    nombre:"",
+    extension:""
+  }
 
-  fileName = '';
+  idYColores={
+    id:"",
+    tamanno:"",
+    colorFondo:"",
+    colorletra:""
+  }
+
+  //archivo
+  nombreArchivo = '';
+  urlFotos='http://localhost/sinestesia/contenido/fotos/';
 
   constructor(private usuariosServicio: UsuariosService,private http: HttpClient) { }
 
@@ -58,6 +72,7 @@ export class AjustesComponent implements OnInit {
     this.recuperarUsuario();
     this.coloresSelecionables = this.colores.colors
     this.tamannoSeleccionable = this.tamanno.Tamannos
+  
   }
 
   //recuperar el usuario de la bd
@@ -70,7 +85,10 @@ export class AjustesComponent implements OnInit {
       this.usuario.tamanno_letra = datos[4];
       this.usuario.color_fondo = datos[5];
       this.usuario.color_fuente = datos[6];
-   
+      this.recuperarFoto();
+      this.cambiarIdAColorFondo(datos[5]);
+      this.cambiarIdATamanno(datos[4]);
+      this.cambiarIdAColorLetra(datos[6]);
 
     });
   }
@@ -80,12 +98,7 @@ export class AjustesComponent implements OnInit {
 
  
 
-  seleccionarLetra(e: any) {
-    var idColor: any = e.target.value
-    this.cambiarIdAColorLetra(idColor);
-    this.usuario.color_fuente = idColor
 
-  }
 
 
 //subir la foto
@@ -100,7 +113,7 @@ export class AjustesComponent implements OnInit {
 
     if (file) {
 
-        this.fileName = file.name;
+        this.nombreArchivo = file.name;
 
         const formData = new FormData();
 
@@ -132,18 +145,19 @@ export class AjustesComponent implements OnInit {
     formData.append('file', this.myForm.get('fileSource')?.value);
       
     this.http.post('http://localhost/sinestesia/subirFotos.php', formData)
-      .subscribe((res:any) => {
-        console.log(res['mensaje']);
-        console.log(res['id']);
-        if(res['mensaje']){
+      .subscribe((datos:any) => {
+        console.log(datos['mensaje']);
+       
+     
+        if(datos['mensaje']){
+       //recoger el nombre de la foto y el id del usuario
+       this.idYFoto.nombre =   datos['id']
+       this.idYFoto.id = this.usuario.id
+       this.idYFoto.extension =  datos['nombreCompleto']
       
-          Swal.fire({
-
-            icon: 'success',
-            title: 'Subida a la base de datos',
-            showConfirmButton: false,
-            timer: 700
-          })
+       
+          this.ActualizarFoto();
+         
         }else{
        
           Swal.fire({
@@ -156,7 +170,48 @@ export class AjustesComponent implements OnInit {
       })
   }
 
+  ActualizarFoto(){
 
+    this.usuariosServicio.ActualizarFoto(this.idYFoto).subscribe((datos: any) => {
+    
+      if (datos['resultado']=='OK') {
+        Swal.fire({
+          icon: 'success',
+          title: 'Foto actualizada correctamente',
+          showConfirmButton: false,
+          timer: 700
+        })
+      }
+    })
+  }
+//recogo la foto de la bd
+  recuperarFoto(){
+    this.usuariosServicio.RecuperarFoto(this.usuario.id).subscribe((datos: any) => {
+      console.log(datos['resultado']);
+      this.idYFoto.extension = datos['mensaje']
+    })
+
+  }
+
+  //personalizacion
+
+  seleccionarLetra(e: any) {
+    var idColor: any = e.target.value
+    this.cambiarIdAColorLetra(idColor);
+    this.usuario.color_fuente = idColor
+
+  }
+
+  
+  seleccionarTamanno(e: any) {
+    var idTamanno: any = e.target.value
+    this.cambiarIdATamanno(idTamanno);
+    this.usuario.tamanno_letra = idTamanno
+    console.log(this.usuario.tamanno_letra);
+    
+  
+    
+  }
 
   seleccionarFondo(e: any) {
     var idColor: any = e.target.value
@@ -173,6 +228,17 @@ export class AjustesComponent implements OnInit {
   recogerColorLetraBd(colorId: any) {
     colorId = this.usuario.color_fuente
     this.cambiarIdAColorLetra(colorId)
+
+  }
+  cambiarIdATamanno(idtamanno:any){
+    for (let i = 0; i < this.tamannoSeleccionable.length; i++) {
+      
+        if(this.tamannoSeleccionable[i].id == idtamanno){
+          this.tamanno = this.tamannoSeleccionable[i].tamanno
+          
+        }
+      
+    }
 
   }
 
@@ -284,19 +350,44 @@ export class AjustesComponent implements OnInit {
   }
 
   comprobarColores() {
-    console.log(this.colorFondo + " " + this.colorLetra);
+    
 
     if (this.colorFondo == this.colorLetra) {
 
       this.iguales = true
 
     }
+  }  
+  personalizar(){
+    this.idYColores.id = this.usuario.id
+    this.idYColores.colorFondo = this.usuario.color_fondo
+    this.idYColores.colorletra = this.usuario.color_fuente
+    this.idYColores.tamanno = this.usuario.tamanno_letra
+
+    
+    
+    this.usuariosServicio.Personalizar(this.idYColores).subscribe((datos: any) => {
+    
+     
+      if (datos['resultado']=='OK') {
+        Swal.fire({
+
+          icon: 'success',
+          title: 'Colores cambiados correctamente',
+          showConfirmButton: false,
+          timer: 700
+        })
+      }
+    
+    });
+
   }
+
+  
+  //contraseñas
 
   cambiarContrasenna(){
 
-
-    
     if(this.usuario.contrasennaAntigua!=""){
 
      if(this.usuario.contrasennaConfirmacion!=""){
@@ -351,6 +442,10 @@ export class AjustesComponent implements OnInit {
       })
     }
   }
+
+
+
+
 
 
   comprobarContrasenna(contrasenna: any) {

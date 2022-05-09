@@ -1,4 +1,5 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { UsuariosService } from '../usuarios.service';
 @Component({
   selector: 'app-pagina-principal-usuario',
   templateUrl: './pagina-principal-usuario.component.html',
@@ -6,11 +7,60 @@ import { Component, OnInit,Input } from '@angular/core';
 })
 export class PaginaPrincipalUsuarioComponent implements OnInit {
 
-  @Input() nombre="";
-  constructor() { }
+  @Input() nombre = "";
+  estandar: boolean = true;
+
+
+  usuario = {
+    id: "",
+    correo: "",
+    nombre: "",
+    contrasennaEncrip: "",
+    tamanno_letra: "",
+    color_fondo: "",
+    color_fuente: "",
+  }
+  //paso el id del usuario y la foto
+  idYFoto = {
+    id: "",
+    nombre: "",
+    extension: ""
+  }
+  urlFotos='http://localhost/sinestesia/contenido/fotos/';
+
+  constructor(private usuariosServicio: UsuariosService) { }
 
   ngOnInit(): void {
-  
+    this.recuperarUsuario();
+  }
+  //recuperar el usuario de la bd
+  recuperarUsuario() {
+    this.usuariosServicio.recuperarUsuario(this.nombre).subscribe((datos: any) => {
+      this.usuario.id = datos[0];
+      this.usuario.correo = datos[1];
+      this.usuario.nombre = datos[2];
+      this.usuario.contrasennaEncrip = datos[3];
+      this.usuario.tamanno_letra = datos[4];
+      this.usuario.color_fondo = datos[5];
+      this.usuario.color_fuente = datos[6];
+      this.recuperarTipoUsuario();
+      this.recuperarFoto();
+    });
   }
 
+  //comprobar que tipo de usuario es
+  recuperarTipoUsuario() {
+    this.usuariosServicio.RecuperarTipoUsuario(this.usuario.id).subscribe((datos: any) => {
+      this.estandar = datos["mensaje"]
+
+    });
+  }
+  recuperarFoto() {
+    this.usuariosServicio.RecuperarFoto(this.usuario.id).subscribe((datos: any) => {
+      console.log(datos['resultado']);
+      this.idYFoto.extension = datos['mensaje']
+    })
+
+
+  }
 }
