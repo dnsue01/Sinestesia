@@ -3,6 +3,7 @@ import { UsuariosService } from '../usuarios.service';
 
 import listadeColores from 'src/assets/json/colores.json';
 import listadeTamanno from 'src/assets/json/tamannoLetra.json';
+
 @Component({
   selector: 'app-pagina-principal-usuario',
   templateUrl: './pagina-principal-usuario.component.html',
