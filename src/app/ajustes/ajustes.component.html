@@ -14,8 +14,8 @@
             <div class="row">
                 <div class="col-sm-7">
                     <h1 class="titulo">Ajustes</h1>
-
-
+                    <hr>
+                    <h1>{{nombre}}</h1>
                 </div>
                 <div class="col-sm-5 selector">
 
@@ -28,18 +28,18 @@
                             <img src="{{urlFotos}}{{idYFoto.extension}}">
                         </ng-template>
                     </div>
-                    <h1>{{nombre}}</h1>
+
                 </div>
             </div>
 
             <hr>
 
             <br>
-            <h3>Tu nombre de usuario es:</h3>
+            <h1>Tu nombre de usuario es:</h1>
 
             <input type="text" class="form-control" id="exampleInputEmail1" [(ngModel)]="usuario.nombre" disabled>
             <br>
-            <h4>Este es tu correo </h4>
+            <h1>Este es tu correo </h1>
 
             <input type="email" class="form-control" id="exampleInputEmail12" [(ngModel)]="usuario.correo" disabled>
 
@@ -50,7 +50,7 @@
 
 
                 <div class="form-group">
-                    <h2>Cambia tu foto</h2>
+                    <h1>Cambia tu foto</h1>
                     <br>
                     <input formControlName="file" id="file" type="file" class="form-control"
                         (change)="onFileChange($event)">
@@ -67,29 +67,29 @@
             <hr>
 
 
-            <h2>Cambia tu contresaña</h2>
+            <h1>Cambia tu contraseña</h1>
             <br>
 
 
-            <h4>¿Cuál era tu contresaña?</h4>
+            <h1>¿Cuál era tu contraseña?</h1>
 
             <input type="password" class="form-control" id="contrasenna1" [(ngModel)]="usuario.contrasennaAntigua"
                 placeholder="Escribe tu contraseña">
 
             <br>
 
-            <h4>¿Cuál es tu nueva contresaña?</h4>
+            <h1>¿Cuál es tu nueva contraseña?</h1>
 
             <input type="password" class="form-control" id="contrasenna2" [(ngModel)]="usuario.contrasennaConfirmacion1"
                 placeholder="Escribe tu nueva contraseña">
-                <br>
+            <br>
             <small id="passwordHelpInline" class="text-muted">
                 La contraseña por lo menos tiene que tener 5 caracteres ,una letra mayuscula , una minuscula y un signo
                 especial. Un ejemplo: Sinestesia1!
             </small>
             <br>
-            <br>         
-            <h4>Repite tu nueva contresaña</h4>
+            <br>
+            <h1>Repite tu nueva contraseña</h1>
 
             <input type="password" class="form-control" id="contrasenna3" [(ngModel)]="usuario.contrasennaConfirmacion"
                 placeholder="Escribe tu nueva contraseña">
@@ -100,9 +100,9 @@
                 <h1>Cambiar contraseña</h1>
             </button>
             <hr>
-            <h2>Personalización</h2>
+            <h1>Personalización</h1>
 
-            <h4>Elije color de fondo</h4>
+            <h1>Elije color de fondo</h1>
 
             <select (change)="seleccionarFondo($event)" class="form-select selector"
                 aria-label="Default select example">
@@ -112,7 +112,7 @@
 
             <br>
 
-            <h4>Elije color de letra</h4>
+            <h1>Elije color de letra</h1>
 
             <select (change)="seleccionarLetra($event)" class="form-select selector"
                 aria-label="Default select example">
@@ -124,12 +124,13 @@
 
             <br>
 
-            <h4>Elije color de letra</h4>
+            <h1>Elije tamaño de letra</h1>
 
             <select (change)="seleccionarTamanno($event)" class="form-select selector"
                 aria-label="Default select example">
                 <option value="">Elije tu tamaño de letra</option>
-                <option *ngFor="let tamanno of tamannoSeleccionable" value="{{tamanno.id}}">{{tamanno.tamanno}} </option>
+                <option *ngFor="let tamanno of tamannoSeleccionable" value="{{tamanno.id}}">{{tamanno.tamannoE}}
+                </option>
             </select>
 
             <br>

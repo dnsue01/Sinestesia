@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { UsuariosService } from '../usuarios.service';
+
+import listadeColores from 'src/assets/json/colores.json';
+import listadeTamanno from 'src/assets/json/tamannoLetra.json';
 @Component({
   selector: 'app-pagina-principal-usuario',
   templateUrl: './pagina-principal-usuario.component.html',
@@ -9,8 +12,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
 
   @Input() nombre = "";
   estandar: boolean = true;
-
-
+ 
   usuario = {
     id: "",
     correo: "",
@@ -20,12 +22,21 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
     color_fondo: "",
     color_fuente: "",
   }
+
+   //colores de la bd
+   colorLetra: string = this.usuario.color_fuente;
+   colorFondo: string = this.usuario.color_fondo;
+   tamannoLetra:string = this.usuario.tamanno_letra;
+ 
   //paso el id del usuario y la foto
   idYFoto = {
     id: "",
     nombre: "",
     extension: ""
   }
+
+
+
   urlFotos='http://localhost/sinestesia/contenido/fotos/';
 
   constructor(private usuariosServicio: UsuariosService) { }
@@ -45,6 +56,8 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
       this.usuario.color_fuente = datos[6];
       this.recuperarTipoUsuario();
       this.recuperarFoto();
+ 
+
     });
   }
 
@@ -63,4 +76,6 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
 
 
   }
+
+  
 }

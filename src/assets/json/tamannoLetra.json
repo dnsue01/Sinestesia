@@ -1,15 +1,18 @@
 {
     "Tamannos": [
       {
-        "tamanno": "medium",
-         "id": "1"
-      },
-      {
         "tamanno": "small",
+        "tamannoE": "pequeña",
          "id": "2"
       },
       {
-        "tamanno": "large",
+        "tamanno": "medium",
+        "tamannoE": "mediana",
+         "id": "1"
+      },
+      {
+        "tamanno": "x-large",
+        "tamannoE": "grande",
          "id": "3"
       }
       

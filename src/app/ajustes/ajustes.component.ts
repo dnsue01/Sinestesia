@@ -187,7 +187,6 @@ export class AjustesComponent implements OnInit {
 //recogo la foto de la bd
   recuperarFoto(){
     this.usuariosServicio.RecuperarFoto(this.usuario.id).subscribe((datos: any) => {
-      console.log(datos['resultado']);
       this.idYFoto.extension = datos['mensaje']
     })
 
@@ -207,9 +206,6 @@ export class AjustesComponent implements OnInit {
     var idTamanno: any = e.target.value
     this.cambiarIdATamanno(idTamanno);
     this.usuario.tamanno_letra = idTamanno
-    console.log(this.usuario.tamanno_letra);
-    
-  
     
   }
 
@@ -232,12 +228,9 @@ export class AjustesComponent implements OnInit {
   }
   cambiarIdATamanno(idtamanno:any){
     for (let i = 0; i < this.tamannoSeleccionable.length; i++) {
-      
         if(this.tamannoSeleccionable[i].id == idtamanno){
           this.tamanno = this.tamannoSeleccionable[i].tamanno
-          
         }
-      
     }
 
   }
@@ -245,9 +238,7 @@ export class AjustesComponent implements OnInit {
   cambiarIdAColorLetra(idColor: any) {
 
     for (let i = 0; i < this.coloresSelecionables.length; i++) {
-
       if (this.coloresSelecionables[i].id == idColor) {
-
         this.colorLetra = this.coloresSelecionables[i].color
         this.comprobarColores()
         this.colorBotonFondo=this.colorLetra
@@ -290,9 +281,7 @@ export class AjustesComponent implements OnInit {
   cambiarIdAColorFondo(idColor: any) {
 
     for (let i = 0; i < this.coloresSelecionables.length; i++) {
-      
-
-  
+    
       if (this.coloresSelecionables[i].id == idColor) {
         this.colorFondo = this.coloresSelecionables[i].color
 
