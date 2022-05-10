@@ -53,6 +53,9 @@ export class UsuariosService {
   Personalizar(usuario: any) {
     return this.http.post(`${this.url}Personalizar.php`, JSON.stringify(usuario));
   }
+  comprobarNombreCancion(cancion: any) {
+    return this.http.post(`${this.url}ComprobarCancion.php`, JSON.stringify(cancion));
+  }
 
 }
 

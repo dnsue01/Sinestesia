@@ -23,7 +23,6 @@
         <br>
 
 
-
         <form [formGroup]="myForm" (ngSubmit)="submitCancion()">
 
             <!--Formulario para subir canciones-->
@@ -38,15 +37,32 @@
                 </div>
             </div>
 
-            <button class="btn btn-xxl rounded-pill mt-5"
-                    style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};"
-                    [disabled]="myForm.invalid" type="submit">Cambiar</button>
-            </form>
+            <button style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};"
+                class="btn btn-xxl rounded-pill mt-5" [disabled]="myForm.invalid" type="submit">
+                Subir Cancion</button>
+        </form>
 
         <!--Si la cancion esta subida-->
         <div *ngIf="subida; else noSubida">Content to render when condition is true.
 
+            <form [formGroup]="myForm" (ngSubmit)="submitCancion()">
 
+                <!--Formulario para subir canciones-->
+    
+                <div class="form-group">
+                    <h1>Sube la caratula</h1>
+                    <br>
+                    <input formControlName="file" id="file" type="file" class="form-control"
+                        (change)="onFileChange($event)">
+                    <div *ngIf="f['file'].touched && f['file'].invalid" class="alert alert-danger">
+                        <div *ngIf="f['file'].errors && f['file'].errors['required']">Necesitas poner una cancion.</div>
+                    </div>
+                </div>
+    
+                <button style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};"
+                    class="btn btn-xxl rounded-pill mt-5" [disabled]="myForm.invalid" type="submit">
+                    Subir Cancion</button>
+            </form>
 
         </div>
         <ng-template #noSubida></ng-template>
