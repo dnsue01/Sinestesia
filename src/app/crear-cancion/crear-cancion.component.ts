@@ -250,9 +250,26 @@ export class CrearCancionComponent implements OnInit {
           //recoger el nombre de la foto y el id del usuario
           
           this.cancion.Url_caratula = datos['nombreCompleto']
-
+          //subida a la base de datos
           
+          
+          Swal.fire({
+            title: 'Perfecto!',
+            text: this.cancion.Nombre+" ya esta subida!",
+            imageUrl: this.urlFotos+this.cancion.Url_caratula,
+            imageWidth: 400,
+            imageHeight: 400,
+            imageAlt: 'Custom image',
+            
+          })
 
+        }
+        else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'no se pueden subir archivos de este tipo',
+          })
         }
       })
     }
