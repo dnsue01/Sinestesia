@@ -69,6 +69,12 @@ export class CrearCancionComponent implements OnInit {
 
   //si esta subida la cancion pude ponerse una caratula
   subida: boolean = false;
+  //si la carutala es correcta
+  caratula:boolean = false;
+
+  //explicita
+  explicita= '';
+  
 
   //archivo
   nombreCancion = '';
@@ -252,16 +258,7 @@ export class CrearCancionComponent implements OnInit {
           this.cancion.Url_caratula = datos['nombreCompleto']
           //subida a la base de datos
           
-          
-          Swal.fire({
-            title: 'Perfecto!',
-            text: this.cancion.Nombre+" ya esta subida!",
-            imageUrl: this.urlFotos+this.cancion.Url_caratula,
-            imageWidth: 400,
-            imageHeight: 400,
-            imageAlt: 'Custom image',
-            
-          })
+          this.caratula = true;
 
         }
         else {
@@ -272,6 +269,32 @@ export class CrearCancionComponent implements OnInit {
           })
         }
       })
+    }
+
+    cancionExplicita(e: any){
+      this.explicita = e.target.value
+      this.cancion.explicita =  this.explicita
+    }
+
+    subirCancion(){
+      if(this.explicita !=""){
+        Swal.fire({
+          title: 'Perfecto!',
+          text: this.cancion.Nombre+" ya esta subida!",
+          imageUrl: this.urlFotos+this.cancion.Url_caratula,
+          imageWidth: 400,
+          imageHeight: 400,
+          imageAlt: 'Custom image',
+          
+        })
+
+      }else{
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Tienes que elegir si es explicita o no',
+        })
+      }
     }
 
         //personalizacion

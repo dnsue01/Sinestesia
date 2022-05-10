@@ -28,18 +28,18 @@
             <!--Formulario para subir canciones-->
 
             <div class="form-group">
-                <h1>Sube tu cancion</h1>
+                <h1>Subir archivo de audio</h1>
                 <br>
                 <input formControlName="file" id="file" type="file" class="form-control"
                     (change)="onFileChange($event)">
                 <div *ngIf="f['file'].touched && f['file'].invalid" class="alert alert-danger">
-                    <div *ngIf="f['file'].errors && f['file'].errors['required']">Necesitas poner una cancion.</div>
+                    <div *ngIf="f['file'].errors && f['file'].errors['required']">Subir archivo de audio.</div>
                 </div>
             </div>
 
             <button style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};"
                 class="btn btn-xxl rounded-pill mt-5" [disabled]="myForm.invalid" type="submit">
-                Subir Cancion</button>
+                Subir archivo de audio</button>
         </form>
 
         <!--Si la cancion esta subida-->
@@ -48,8 +48,9 @@
             <form [formGroup]="myForm1" (ngSubmit)="submitFoto()">
 
                 <!--Formulario para subir la caratula-->
-    
+
                 <div class="form-group">
+                    <br>
                     <h1>Sube la caratula</h1>
                     <br>
                     <input formControlName="file" id="file" type="file" class="form-control"
@@ -58,11 +59,34 @@
                         <div *ngIf="f['file'].errors && f['file'].errors['required']">Necesitas poner una foto.</div>
                     </div>
                 </div>
-    
+
                 <button style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};"
                     class="btn btn-xxl rounded-pill mt-5" [disabled]="myForm.invalid" type="submit">
                     Subir Caratula</button>
             </form>
+
+            <!--Si la caratula es correcta-->
+            <div *ngIf="caratula; else NoCaratula">
+                <br>
+                <h1>¿Tu canción es explicita?</h1>
+                <select (change)="cancionExplicita($event)" class="form-select selector"
+                    aria-label="Default select example">
+                    <option value="">Selecciona una opcion</option>
+                    <option value="1">Explicita</option>
+                    <option value="0">No explicita</option>
+                </select>
+
+                <small>Las canciones explicita son las que contienen palabras relacionadas con contenido sexual o
+                    violencia ,los contenidos explícitos son inadecuados para niños y personas impresionables.</small>
+                <br>
+                <button (click)="subirCancion()" class="btn btn-xxl rounded-pill mt-5"
+                    style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};">
+                    <h1>Subir Cancion</h1>
+                </button>
+
+            </div>
+            <ng-template #NoCaratula></ng-template>
+
 
         </div>
         <ng-template #noSubida></ng-template>
