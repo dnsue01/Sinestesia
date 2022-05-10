@@ -278,19 +278,9 @@ export class CrearCancionComponent implements OnInit {
 
     subirCancion(){
       if(this.explicita !=""){
-        console.log(this.cancion);
+        this.insertarCancion();
         
-        /*
-        Swal.fire({
-          title: 'Perfecto!',
-          text: this.cancion.Nombre+" ya esta subida!",
-          imageUrl: this.urlFotos+this.cancion.Url_caratula,
-          imageWidth: 400,
-          imageHeight: 400,
-          imageAlt: 'Custom image',
-          
-        })
-*/
+   
       }else{
         Swal.fire({
           icon: 'error',
@@ -298,6 +288,20 @@ export class CrearCancionComponent implements OnInit {
           text: 'Tienes que elegir si es explicita o no',
         })
       }
+    }
+
+    insertarCancion(){
+
+      this.usuariosServicio.insertarCancion(this.cancion).subscribe((datos: any) => {
+        if (datos['resultado']=='OK') {
+          Swal.fire({
+            icon: 'success',
+            title: 'Cancion subida perfectamente correctamente',
+            showConfirmButton: false,
+            timer: 700
+          })
+        }
+      })
     }
 
         //personalizacion

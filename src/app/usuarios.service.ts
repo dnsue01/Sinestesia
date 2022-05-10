@@ -56,7 +56,9 @@ export class UsuariosService {
   comprobarNombreCancion(cancion: any) {
     return this.http.post(`${this.url}ComprobarCancion.php`, JSON.stringify(cancion));
   }
-
+  insertarCancion(cancion: any) {
+    return this.http.post(`${this.url}insertarCancion.php`, JSON.stringify(cancion));
+  }
 }
 
 
