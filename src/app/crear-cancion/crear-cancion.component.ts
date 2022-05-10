@@ -278,6 +278,9 @@ export class CrearCancionComponent implements OnInit {
 
     subirCancion(){
       if(this.explicita !=""){
+        console.log(this.cancion);
+        
+        /*
         Swal.fire({
           title: 'Perfecto!',
           text: this.cancion.Nombre+" ya esta subida!",
@@ -287,7 +290,7 @@ export class CrearCancionComponent implements OnInit {
           imageAlt: 'Custom image',
           
         })
-
+*/
       }else{
         Swal.fire({
           icon: 'error',
