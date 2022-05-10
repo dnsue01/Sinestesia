@@ -37,6 +37,7 @@ export class CrearCancionComponent implements OnInit {
     Id_cancion: "",
     Nombre: "",
     Url_cancion: "",
+    Url_caratula: "",
     Id_artista: "",
     Id_album: "",
     Id_adminAu: "",
@@ -69,10 +70,9 @@ export class CrearCancionComponent implements OnInit {
   //si esta subida la cancion pude ponerse una caratula
   subida: boolean = false;
 
- 
-
   //archivo
   nombreCancion = '';
+  nombreFoto = '';
 
   constructor(private usuariosServicio: UsuariosService, private http: HttpClient) { }
 
@@ -135,6 +135,26 @@ export class CrearCancionComponent implements OnInit {
     }
   }
 
+  onFileSelected1(event: any) {
+    //archivo que recojo
+    const file: File = event.target.files[0];
+
+    if (file) {
+      //nombre del archivo
+      this.nombreFoto = file.name;
+      //formato
+      const formData = new FormData();
+
+      console.log(this.nombreFoto);
+      
+      formData.append("thumbnail", file);
+      //subir el archivo al php
+      const upload$ = this.http.post("http://localhost/sinestesia/subirFotos.php", formData);
+
+      upload$.subscribe();
+    }
+  }
+
   //falta el archivo
   get f() {
     return this.myForm.controls;
@@ -149,14 +169,25 @@ export class CrearCancionComponent implements OnInit {
       });
     }
   }
-  //subir la foto
+ //cuando cambia el input del archivo
+ onFileChange1(event: any) {
+
+  if (event.target.files.length > 0) {
+    const file = event.target.files[0];
+    this.myForm1.patchValue({
+      fileSource: file
+    });
+  }
+}
+
+  //subir la cancion
   submitCancion() {
     if (this.cancion.Nombre != "") {
 
       //comprobacion del nombre
       this.comprobarNombreCancion();
 
-    
+
     } else {
       Swal.fire({
         icon: 'error',
@@ -167,12 +198,12 @@ export class CrearCancionComponent implements OnInit {
 
   }
   comprobarNombreCancion() {
-    console.log(this.cancion);
-    
-      this.usuariosServicio.comprobarNombreCancion(this.cancion.Nombre).subscribe((datos: any) => {
-      if(!datos["mensaje"]){
-        
-       //enviar archivo
+
+
+    this.usuariosServicio.comprobarNombreCancion(this.cancion.Nombre).subscribe((datos: any) => {
+      if (!datos["mensaje"]) {
+
+        //enviar archivo
         const formData = new FormData();
         formData.append('file', this.myForm.get('fileSource')?.value);
 
@@ -183,6 +214,7 @@ export class CrearCancionComponent implements OnInit {
               //recoger el nombre de la foto y el id del usuario
               this.cancion.Id_artista = this.usuario.id
               this.cancion.Url_cancion = datos['nombreCompleto']
+              this.subida = true;
 
             } else {
               Swal.fire({
@@ -192,47 +224,65 @@ export class CrearCancionComponent implements OnInit {
               })
             }
           })
-        
-      }else{
+
+      } else {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'Ya hay una cancion con ese nombre...Prueba otro',
         })
       }
-      
-      });
-    }
-  
 
-
-
-  //personalizacion
-
-  cambiarIdAColorFondo(idColor: any) {
-    for (let i = 0; i < this.coloresSelecionables.length; i++) {
-      if (this.coloresSelecionables[i].id == idColor) {
-        this.colorFondo = this.coloresSelecionables[i].color
-        this.colorBotonLetra = this.colorBotonFondo
-      }
-    }
+    });
   }
 
-  cambiarIdATamanno(idtamanno: any) {
-    for (let i = 0; i < this.tamannoSeleccionable.length; i++) {
-      if (this.tamannoSeleccionable[i].id == idtamanno) {
-        this.tamanno = this.tamannoSeleccionable[i].tamanno
-      }
-    }
-  }
 
-  cambiarIdAColorLetra(idColor: any) {
-    for (let i = 0; i < this.coloresSelecionables.length; i++) {
-      if (this.coloresSelecionables[i].id == idColor) {
-        this.colorLetra = this.coloresSelecionables[i].color
-        this.colorBotonFondo = this.colorLetra
-      }
-    }
-  }
+  submitFoto() {
 
-}
+    //enviar archivo
+    const formData = new FormData();
+    formData.append('file', this.myForm1.get('fileSource')?.value);
+
+    this.http.post('http://localhost/sinestesia/subirFotos.php', formData)
+      .subscribe((datos: any) => {
+
+        if (datos['mensaje']) {
+          //recoger el nombre de la foto y el id del usuario
+          
+          this.cancion.Url_caratula = datos['nombreCompleto']
+
+          
+
+        }
+      })
+    }
+
+        //personalizacion
+
+        cambiarIdAColorFondo(idColor: any) {
+          for (let i = 0; i < this.coloresSelecionables.length; i++) {
+            if (this.coloresSelecionables[i].id == idColor) {
+              this.colorFondo = this.coloresSelecionables[i].color
+              this.colorBotonLetra = this.colorBotonFondo
+            }
+          }
+        }
+
+        cambiarIdATamanno(idtamanno: any) {
+          for (let i = 0; i < this.tamannoSeleccionable.length; i++) {
+            if (this.tamannoSeleccionable[i].id == idtamanno) {
+              this.tamanno = this.tamannoSeleccionable[i].tamanno
+            }
+          }
+        }
+
+        cambiarIdAColorLetra(idColor: any) {
+          for (let i = 0; i < this.coloresSelecionables.length; i++) {
+            if (this.coloresSelecionables[i].id == idColor) {
+              this.colorLetra = this.coloresSelecionables[i].color
+              this.colorBotonFondo = this.colorLetra
+            }
+          }
+        }
+
+      }

@@ -43,25 +43,25 @@
         </form>
 
         <!--Si la cancion esta subida-->
-        <div *ngIf="subida; else noSubida">Content to render when condition is true.
+        <div *ngIf="subida; else noSubida">
 
-            <form [formGroup]="myForm" (ngSubmit)="submitCancion()">
+            <form [formGroup]="myForm1" (ngSubmit)="submitFoto()">
 
-                <!--Formulario para subir canciones-->
+                <!--Formulario para subir la caratula-->
     
                 <div class="form-group">
                     <h1>Sube la caratula</h1>
                     <br>
                     <input formControlName="file" id="file" type="file" class="form-control"
-                        (change)="onFileChange($event)">
+                        (change)="onFileChange1($event)">
                     <div *ngIf="f['file'].touched && f['file'].invalid" class="alert alert-danger">
-                        <div *ngIf="f['file'].errors && f['file'].errors['required']">Necesitas poner una cancion.</div>
+                        <div *ngIf="f['file'].errors && f['file'].errors['required']">Necesitas poner una foto.</div>
                     </div>
                 </div>
     
                 <button style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};"
                     class="btn btn-xxl rounded-pill mt-5" [disabled]="myForm.invalid" type="submit">
-                    Subir Cancion</button>
+                    Subir Caratula</button>
             </form>
 
         </div>
