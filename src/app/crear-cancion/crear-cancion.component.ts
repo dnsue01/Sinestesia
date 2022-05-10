@@ -69,8 +69,7 @@ export class CrearCancionComponent implements OnInit {
   //si esta subida la cancion pude ponerse una caratula
   subida: boolean = false;
 
-  //boolean para saber si ya hay una cancion de este artista con este nombre
-  nombreValido: boolean | undefined;
+ 
 
   //archivo
   nombreCancion = '';
@@ -158,10 +157,22 @@ export class CrearCancionComponent implements OnInit {
       this.comprobarNombreCancion();
 
     
-      
-      if (this.nombreValido) {
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El campo del nombre no pude estar vacio',
+      })
+    }
 
-
+  }
+  comprobarNombreCancion() {
+    console.log(this.cancion);
+    
+      this.usuariosServicio.comprobarNombreCancion(this.cancion.Nombre).subscribe((datos: any) => {
+      if(!datos["mensaje"]){
+        
+       //enviar archivo
         const formData = new FormData();
         formData.append('file', this.myForm.get('fileSource')?.value);
 
@@ -181,31 +192,15 @@ export class CrearCancionComponent implements OnInit {
               })
             }
           })
+        
       }else{
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Este nombre ya esta utilizado en otra cancion, prueba con otro',
+          text: 'Ya hay una cancion con ese nombre...Prueba otro',
         })
       }
-
-    } else {
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'El campo del nombre no pude estar vacio',
-      })
-    }
-
-  }
-  comprobarNombreCancion() {
-    console.log(this.cancion);
-    
-      this.usuariosServicio.comprobarNombreCancion(this.cancion.Nombre).subscribe((datos: any) => {
-      console.log(datos["mensaje"]);
       
-        
-  
       });
     }
   
