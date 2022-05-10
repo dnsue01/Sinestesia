@@ -278,6 +278,7 @@ export class CrearCancionComponent implements OnInit {
 
     subirCancion(){
       if(this.explicita !=""){
+        
         this.insertarCancion();
         
    
@@ -294,6 +295,7 @@ export class CrearCancionComponent implements OnInit {
 
       this.usuariosServicio.insertarCancion(this.cancion).subscribe((datos: any) => {
         if (datos['resultado']=='OK') {
+          
           Swal.fire({
             icon: 'success',
             title: 'Cancion subida perfectamente correctamente',
