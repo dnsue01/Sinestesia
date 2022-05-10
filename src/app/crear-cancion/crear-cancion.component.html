@@ -1,0 +1,55 @@
+<!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+    rel="stylesheet" />
+
+<div class="card" style="background-color:{{colorFondo}}; color: {{colorLetra}};font-size: {{tamanno}} ">
+    <div class="card-body">
+
+
+        <div class="row">
+            <div class="col-sm-7">
+                <h1 class="titulo">Subir Cancion</h1>
+                <hr>
+                <h1>{{nombre}}</h1>
+            </div>
+        </div>
+        <hr>
+        <h1>Escribe el de la cancion</h1>
+
+        <input type="text" class="form-control" id="nombreCancion" [(ngModel)]="cancion.Nombre"
+            placeholder="Escribe el nombre de la cancion">
+
+        <br>
+
+
+
+        <form [formGroup]="myForm" (ngSubmit)="submitCancion()">
+
+            <!--Formulario para subir canciones-->
+
+            <div class="form-group">
+                <h1>Sube tu cancion</h1>
+                <br>
+                <input formControlName="file" id="file" type="file" class="form-control"
+                    (change)="onFileChange($event)">
+                <div *ngIf="f['file'].touched && f['file'].invalid" class="alert alert-danger">
+                    <div *ngIf="f['file'].errors && f['file'].errors['required']">Necesitas poner una cancion.</div>
+                </div>
+            </div>
+
+            <button class="btn btn-xxl rounded-pill mt-5"
+                    style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};"
+                    [disabled]="myForm.invalid" type="submit">Cambiar</button>
+            </form>
+
+        <!--Si la cancion esta subida-->
+        <div *ngIf="subida; else noSubida">Content to render when condition is true.
+
+
+
+        </div>
+        <ng-template #noSubida></ng-template>
+
+    </div>
+</div>

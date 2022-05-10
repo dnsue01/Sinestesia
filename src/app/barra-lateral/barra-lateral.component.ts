@@ -48,7 +48,9 @@ export class BarraLateralComponent {
     this.opcion="ajustes"
   }
 
-
+  SubirCancion(){
+    this.opcion="subirCancion"
+  }
 
 
     //recuperar el usuario de la bd

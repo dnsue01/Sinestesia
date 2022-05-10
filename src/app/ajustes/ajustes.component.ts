@@ -1,10 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
+//importar el servicio
 import { UsuariosService } from '../usuarios.service';
-
+//importar los json
 import listadeColores from 'src/assets/json/colores.json';
 import listadeTamanno from 'src/assets/json/tamannoLetra.json';
-
+//alertas
 import Swal from 'sweetalert2';
+//para hacer la llamada de subir
 import { HttpClient } from '@angular/common/http';
 
 import { FormGroup, FormControl, Validators} from '@angular/forms';
@@ -14,6 +16,7 @@ import { FormGroup, FormControl, Validators} from '@angular/forms';
   styleUrls: ['./ajustes.component.scss']
 })
 export class AjustesComponent implements OnInit {
+  //recojo del padre
   @Input() nombre = "";
 
   usuario = {
@@ -49,12 +52,13 @@ export class AjustesComponent implements OnInit {
   //comprobacion de colores
   iguales: boolean = false;
 
+//paso el id del usuario y guado la extension y el nombre del archivo
   idYFoto = {
     id:"",
     nombre:"",
     extension:""
   }
-
+//paso el id del usuario y la presonalizacion
   idYColores={
     id:"",
     tamanno:"",
@@ -72,7 +76,7 @@ export class AjustesComponent implements OnInit {
     this.recuperarUsuario();
     this.coloresSelecionables = this.colores.colors
     this.tamannoSeleccionable = this.tamanno.Tamannos
-  
+
   }
 
   //recuperar el usuario de la bd
@@ -85,6 +89,7 @@ export class AjustesComponent implements OnInit {
       this.usuario.tamanno_letra = datos[4];
       this.usuario.color_fondo = datos[5];
       this.usuario.color_fuente = datos[6];
+      //metodos
       this.recuperarFoto();
       this.cambiarIdAColorFondo(datos[5]);
       this.cambiarIdATamanno(datos[4]);
@@ -108,28 +113,28 @@ export class AjustesComponent implements OnInit {
   });
    
   onFileSelected(event:any) {
-
+//archivo que recojo
     const file:File = event.target.files[0];
 
     if (file) {
-
+      //nombre del archivo
         this.nombreArchivo = file.name;
-
+      //formato
         const formData = new FormData();
 
         formData.append("thumbnail", file);
-
+      //subir el archivo al php
         const upload$ = this.http.post("http://localhost/sinestesia/subirFotos.php", formData);
 
         upload$.subscribe();
     }
 }
 
-
+  //falta el archivo
   get f(){
     return this.myForm.controls;
   }
-   
+   //cuando cambia el input del archivo
   onFileChange(event:any) {
    
     if (event.target.files.length > 0) {
@@ -139,7 +144,7 @@ export class AjustesComponent implements OnInit {
       });
     }
   } 
-   
+   //subir la foto
   submit(){
     const formData = new FormData();
     formData.append('file', this.myForm.get('fileSource')?.value);
@@ -151,11 +156,10 @@ export class AjustesComponent implements OnInit {
      
         if(datos['mensaje']){
        //recoger el nombre de la foto y el id del usuario
-       this.idYFoto.nombre =   datos['id']
        this.idYFoto.id = this.usuario.id
+       this.idYFoto.nombre =   datos['id']
        this.idYFoto.extension =  datos['nombreCompleto']
-      
-       
+      //una vez recogido mando todos estos datos a la bd
           this.ActualizarFoto();
          
         }else{
@@ -173,7 +177,6 @@ export class AjustesComponent implements OnInit {
   ActualizarFoto(){
 
     this.usuariosServicio.ActualizarFoto(this.idYFoto).subscribe((datos: any) => {
-    
       if (datos['resultado']=='OK') {
         Swal.fire({
           icon: 'success',
@@ -236,10 +239,10 @@ export class AjustesComponent implements OnInit {
   }
 
   cambiarIdAColorLetra(idColor: any) {
-
     for (let i = 0; i < this.coloresSelecionables.length; i++) {
       if (this.coloresSelecionables[i].id == idColor) {
         this.colorLetra = this.coloresSelecionables[i].color
+        //compruebo que no son iguales
         this.comprobarColores()
         this.colorBotonFondo=this.colorLetra
         this.colorBotonLetra=this.colorFondo
@@ -256,6 +259,7 @@ export class AjustesComponent implements OnInit {
 
           this.iguales=false
 
+          //comprobaciones de colores
         } if (this.colorFondo == "black" && this.colorLetra == "") {
           this.colorLetra = "white"
           this.colorBotonFondo="white";
@@ -281,13 +285,13 @@ export class AjustesComponent implements OnInit {
   cambiarIdAColorFondo(idColor: any) {
 
     for (let i = 0; i < this.coloresSelecionables.length; i++) {
-    
       if (this.coloresSelecionables[i].id == idColor) {
         this.colorFondo = this.coloresSelecionables[i].color
-
+      //compruebo que no son iguales
         this.comprobarColores()
         this.colorBotonFondo=this.colorLetra
         this.colorBotonLetra=this.colorFondo
+        //cambio de colores
         if (this.colorFondo == "black" && this.colorLetra == "") {
           this.colorLetra = "white"
           this.colorBotonFondo="white"
@@ -339,28 +343,23 @@ export class AjustesComponent implements OnInit {
   }
 
   comprobarColores() {
-    
 
     if (this.colorFondo == this.colorLetra) {
-
       this.iguales = true
-
     }
   }  
+  
+  //mandar a la bd la personalizacion
   personalizar(){
     this.idYColores.id = this.usuario.id
     this.idYColores.colorFondo = this.usuario.color_fondo
     this.idYColores.colorletra = this.usuario.color_fuente
     this.idYColores.tamanno = this.usuario.tamanno_letra
 
-    
-    
     this.usuariosServicio.Personalizar(this.idYColores).subscribe((datos: any) => {
     
-     
       if (datos['resultado']=='OK') {
         Swal.fire({
-
           icon: 'success',
           title: 'Colores cambiados correctamente',
           showConfirmButton: false,
@@ -376,20 +375,16 @@ export class AjustesComponent implements OnInit {
   //contraseñas
 
   cambiarContrasenna(){
-
+    //si los campos no estan vacios y la contraseña de confirmacion es igual
     if(this.usuario.contrasennaAntigua!=""){
-
      if(this.usuario.contrasennaConfirmacion!=""){
-
-    
       if(this.usuario.contrasennaConfirmacion1!=""){
-        
         if(this.usuario.contrasennaConfirmacion == this.usuario.contrasennaConfirmacion1){
 
-          
+          //si la nueva contraseña tiene los requisitos          
           if(this.comprobarContrasenna(this.usuario.contrasennaConfirmacion)){
 
-        
+            //compruebo si la contraseña anterior es la que tenia antes
             this.comprobarContrasennaBD();
 
             
@@ -449,7 +444,7 @@ export class AjustesComponent implements OnInit {
     this.usuariosServicio.comprobarContrasennaBD(this.usuario).subscribe((datos: any) => {
     
       if(datos){
-
+        //actualizo la contraseña
         this.ActualizarContrasenna();
       }else{
         Swal.fire({
@@ -469,7 +464,6 @@ export class AjustesComponent implements OnInit {
     
       if (datos['resultado']=='OK') {
         Swal.fire({
-
           icon: 'success',
           title: 'Contraseña cambiada correctamente',
           showConfirmButton: false,

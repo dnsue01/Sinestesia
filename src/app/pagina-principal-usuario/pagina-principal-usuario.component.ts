@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
+//importar el servicio
 import { UsuariosService } from '../usuarios.service';
-
+//imporar los json
 import listadeColores from 'src/assets/json/colores.json';
 import listadeTamanno from 'src/assets/json/tamannoLetra.json';
 
@@ -12,8 +13,11 @@ import listadeTamanno from 'src/assets/json/tamannoLetra.json';
 export class PaginaPrincipalUsuarioComponent implements OnInit {
 
   @Input() nombre = "";
+
+  //si es estandar o artista
   estandar: boolean = true;
- 
+
+  //usario
   usuario = {
     id: "",
     correo: "",
@@ -24,11 +28,11 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
     color_fuente: "",
   }
 
-   //colores de la bd
-   colorLetra: string = this.usuario.color_fuente;
-   colorFondo: string = this.usuario.color_fondo;
-   tamannoLetra:string = this.usuario.tamanno_letra;
- 
+  //colores de la bd
+  colorLetra: string = this.usuario.color_fuente;
+  colorFondo: string = this.usuario.color_fondo;
+  tamannoLetra: string = this.usuario.tamanno_letra;
+
   //paso el id del usuario y la foto
   idYFoto = {
     id: "",
@@ -36,9 +40,16 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
     extension: ""
   }
 
+  //Colores de json
+  colores: any = listadeColores;
+  coloresSelecionables: any;
 
+  //Tamanno de json
+  tamanno: any = listadeTamanno;
+  tamannoSeleccionable: any;
 
-  urlFotos='http://localhost/sinestesia/contenido/fotos/';
+  //url donde estan las fotos del servidor
+  urlFotos = 'http://localhost/sinestesia/contenido/fotos/';
 
   constructor(private usuariosServicio: UsuariosService) { }
 
@@ -55,9 +66,17 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
       this.usuario.tamanno_letra = datos[4];
       this.usuario.color_fondo = datos[5];
       this.usuario.color_fuente = datos[6];
+
+      //colores y tamaños
+      this.coloresSelecionables = this.colores.colors
+      this.tamannoSeleccionable = this.tamanno.Tamannos
+      //metodos
       this.recuperarTipoUsuario();
       this.recuperarFoto();
- 
+      this.cambiarIdATamanno(datos[4])
+      this.cambiarIdAColorFondo(datos[5])
+      this.cambiarIdAColorLetra(datos[6])
+   
 
     });
   }
@@ -69,14 +88,38 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
 
     });
   }
+  //recoger la foto de la base de datos
   recuperarFoto() {
     this.usuariosServicio.RecuperarFoto(this.usuario.id).subscribe((datos: any) => {
       console.log(datos['resultado']);
       this.idYFoto.extension = datos['mensaje']
     })
-
-
   }
 
-  
+  //personalizacion
+
+  cambiarIdAColorFondo(idColor: any) {
+    for (let i = 0; i < this.coloresSelecionables.length; i++) {
+      if (this.coloresSelecionables[i].id == idColor) {
+        this.colorFondo = this.coloresSelecionables[i].color
+      }
+    }
+  }
+
+  cambiarIdATamanno(idtamanno: any) {
+    for (let i = 0; i < this.tamannoSeleccionable.length; i++) {
+      if (this.tamannoSeleccionable[i].id == idtamanno) {
+        this.tamanno = this.tamannoSeleccionable[i].tamanno
+      }
+    }
+  }
+
+  cambiarIdAColorLetra(idColor: any) {
+    for (let i = 0; i < this.coloresSelecionables.length; i++) {
+      if (this.coloresSelecionables[i].id == idColor) {
+        this.colorLetra = this.coloresSelecionables[i].color
+      }
+    }
+  }
+
 }

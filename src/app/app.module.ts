@@ -21,6 +21,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { PaginaPrincipalUsuarioComponent } from './pagina-principal-usuario/pagina-principal-usuario.component';
 
 import {  ReactiveFormsModule } from '@angular/forms';
+import { CrearCancionComponent } from './crear-cancion/crear-cancion.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {  ReactiveFormsModule } from '@angular/forms';
     PaginaInicioSesionComponent,
     BarraLateralComponent,
     AjustesComponent,
-    PaginaPrincipalUsuarioComponent
+    PaginaPrincipalUsuarioComponent,
+    CrearCancionComponent
   ],
   imports: [
     BrowserModule,
