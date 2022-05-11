@@ -62,6 +62,9 @@ export class UsuariosService {
   recogerCancionesArtista(id: any) {
     return this.http.post(`${this.url}recogerCancionesArtista.php`, JSON.stringify(id));
   }
+  borrarCancion(id: any) {
+    return this.http.post(`${this.url}borrarCancion.php`, JSON.stringify(id));
+  }
   
 }
 

@@ -17,14 +17,18 @@ export class BarraLateralComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private route: ActivatedRoute,private usuariosServicio: UsuariosService) { }
-
+  constructor(private breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private usuariosServicio: UsuariosService) { }
+  //parametros que paso a los hijos
   nombre = this.route.snapshot.params["nombre"];
-  opcion:string = "";
-  estandar:boolean = true;
+  //hago un string opcion para comprobar que opcion elige
+  opcion: string = "";
+  //el usuario es estandar
+  estandar: boolean = true;
+  //cancion que le paso desde el hijo
+
 
   usuario = {
-    id:"",
+    id: "",
     correo: "",
     nombre: "",
     contrasennaEncrip: "",
@@ -35,44 +39,45 @@ export class BarraLateralComponent {
 
 
   ngOnInit(): void {
-  
+
     this.recuperarUsuario();
-
-  }
-  Inicio(){
-    this.opcion="inicio"
-
-    
-  }
-  Ajustes(){
-    this.opcion="ajustes"
-  }
-
-  SubirCancion(){
-    this.opcion="subirCancion"
-  }
-
-
-    //recuperar el usuario de la bd
-    recuperarUsuario() {
-      this.usuariosServicio.recuperarUsuario(this.nombre).subscribe((datos: any) => {
-        this.usuario.id = datos[0];
-        this.usuario.correo = datos[1];
-        this.usuario.nombre = datos[2];
-        this.usuario.contrasennaEncrip = datos[3];
-        this.usuario.tamanno_letra = datos[4];
-        this.usuario.color_fondo = datos[5];
-        this.usuario.color_fuente = datos[6];
-        this.recuperarTipoUsuario();
-      });
-    }
-
-    //comprobar que tipo de usuario es
-    recuperarTipoUsuario() {
-      this.usuariosServicio.RecuperarTipoUsuario(this.usuario.id).subscribe((datos: any) => {
-       this.estandar = datos["mensaje"]
  
-      });
-    }
+
+  }
+  Inicio() {
+    this.opcion = "inicio"
+
+
+  }
+  Ajustes() {
+    this.opcion = "ajustes"
+  }
+
+  SubirCancion() {
+    this.opcion = "subirCancion"
+  }
+
+
+  //recuperar el usuario de la bd
+  recuperarUsuario() {
+    this.usuariosServicio.recuperarUsuario(this.nombre).subscribe((datos: any) => {
+      this.usuario.id = datos[0];
+      this.usuario.correo = datos[1];
+      this.usuario.nombre = datos[2];
+      this.usuario.contrasennaEncrip = datos[3];
+      this.usuario.tamanno_letra = datos[4];
+      this.usuario.color_fondo = datos[5];
+      this.usuario.color_fuente = datos[6];
+      this.recuperarTipoUsuario();
+    });
+  }
+
+  //comprobar que tipo de usuario es
+  recuperarTipoUsuario() {
+    this.usuariosServicio.RecuperarTipoUsuario(this.usuario.id).subscribe((datos: any) => {
+      this.estandar = datos["mensaje"]
+
+    });
+  }
 
 }

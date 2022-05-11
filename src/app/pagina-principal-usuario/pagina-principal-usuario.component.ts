@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input,Output, EventEmitter } from '@angular/core';
 //importar el servicio
 import { UsuariosService } from '../usuarios.service';
 //imporar los json
 import listadeColores from 'src/assets/json/colores.json';
 import listadeTamanno from 'src/assets/json/tamannoLetra.json';
 
+import Swal from 'sweetalert2'
 @Component({
   selector: 'app-pagina-principal-usuario',
   templateUrl: './pagina-principal-usuario.component.html',
@@ -13,6 +14,12 @@ import listadeTamanno from 'src/assets/json/tamannoLetra.json';
 export class PaginaPrincipalUsuarioComponent implements OnInit {
 
   @Input() nombre = "";
+
+  //le paso la cancion al padre
+
+  
+
+
 
   //si es estandar o artista
   estandar: boolean = true;
@@ -26,7 +33,10 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
     tamanno_letra: "",
     color_fondo: "",
     color_fuente: "",
-  }
+  } 
+  
+  //canciones cuando es artista
+  CancionesArtista:any;
   //cancion
   cancion = {
     Id_cancion: "",
@@ -40,8 +50,12 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
     Autorizada: ""
   }
 
-  //canciones cuando es artista
-  CancionesArtista:any;
+  //cancion a reproducir
+  cancionRepro:any;
+  cancionSeleccionada:boolean = false;
+
+  //saber si es explicita
+  caratula:string = "";
 
   //colores de la bd
   colorLetra: string = this.usuario.color_fuente;
@@ -65,7 +79,8 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
 
   //url donde estan las fotos del servidor
   urlFotos = 'http://localhost/sinestesia/contenido/fotos/';
-
+  //url donde estan las canciones del servidor
+  urlCanciones = 'http://localhost/sinestesia/contenido/canciones/';
 
   constructor(private usuariosServicio: UsuariosService) { }
 
@@ -149,9 +164,62 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
 recogerCancionesArtista() {
   this.usuariosServicio.recogerCancionesArtista(this.usuario.id).subscribe((datos: any) => {
    this.CancionesArtista = datos;
-    console.log(this.CancionesArtista);
-    
+
   })
 }
+sacarCancion(cancion:any){
+this.cancionRepro = cancion;
+this.cancionSeleccionada = true;
+
+}
+
+borrar(idCancion:any){
+
+  Swal.fire({
+    
+    title: '¿Estas seguro?',
+    text: "No podras recuperarla una vez borrada!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Si, quiero borrarla !',
+    cancelButtonText: 'No, cancelar!',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.isConfirmed) {
+
+    
+      this.borrarCancion(idCancion);
+    
+    } else if (
+      /* Read more about handling dismissals below */
+      result.dismiss === Swal.DismissReason.cancel
+    ) {
+      Swal.fire(
+        'Cancelado!',
+        'Tu canncion esta a salvo',
+        'info'
+      )
+    }
+  })
+
+
+}
+
+
+
+borrarCancion(idCancion:any) {
+  this.usuariosServicio.borrarCancion(idCancion).subscribe((datos: any) => {
+    if (datos['resultado']=='OK') {
+      Swal.fire(
+        'Borrado!',
+        'Tu cancion ha sido borrada con exito!',
+        'success'
+      )
+      this.recogerCancionesArtista();
+    }
+   
+  })
+}
+
 
 }
