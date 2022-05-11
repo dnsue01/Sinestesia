@@ -39,7 +39,6 @@ export class CrearCancionComponent implements OnInit {
     Url_cancion: "",
     Url_caratula: "",
     Id_artista: "",
-    Id_album: "",
     Id_adminAu: "",
     explicita: "",
     Autorizada: ""

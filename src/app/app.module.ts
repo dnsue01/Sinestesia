@@ -22,6 +22,7 @@ import { PaginaPrincipalUsuarioComponent } from './pagina-principal-usuario/pagi
 
 import {  ReactiveFormsModule } from '@angular/forms';
 import { CrearCancionComponent } from './crear-cancion/crear-cancion.component';
+import { CrearAlbumComponent } from './crear-album/crear-album.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { CrearCancionComponent } from './crear-cancion/crear-cancion.component';
     BarraLateralComponent,
     AjustesComponent,
     PaginaPrincipalUsuarioComponent,
-    CrearCancionComponent
+    CrearCancionComponent,
+    CrearAlbumComponent
   ],
   imports: [
     BrowserModule,

@@ -7,7 +7,7 @@ import { BarraLateralComponent } from './barra-lateral/barra-lateral.component';
 import { AjustesComponent } from './ajustes/ajustes.component';
 import { PaginaPrincipalUsuarioComponent } from './pagina-principal-usuario/pagina-principal-usuario.component';
 import { CrearCancionComponent } from './crear-cancion/crear-cancion.component';
-
+import { CrearAlbumComponent } from './crear-album/crear-album.component';
 const routes: Routes = [
   { path: "",redirectTo:"inicio" ,pathMatch:"full"},  //ruta por defecto
   { path: "inicio", component: PaginaInicioComponent },
@@ -19,7 +19,8 @@ const routes: Routes = [
     {path:"",redirectTo:"defecto",pathMatch:"full"},
     {path:"ajustes",component:AjustesComponent},
     {path:"defecto",component:PaginaPrincipalUsuarioComponent},
-    {path:"crearCancion",component:CrearCancionComponent}
+    {path:"crearCancion",component:CrearCancionComponent},
+    {path:"crearAlbum",component:CrearAlbumComponent}
   ]},
   
 

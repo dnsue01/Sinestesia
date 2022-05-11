@@ -44,10 +44,9 @@ export class BarraLateralComponent {
  
 
   }
+  //seleccionar opciones
   Inicio() {
     this.opcion = "inicio"
-
-
   }
   Ajustes() {
     this.opcion = "ajustes"
@@ -56,8 +55,9 @@ export class BarraLateralComponent {
   SubirCancion() {
     this.opcion = "subirCancion"
   }
-
-
+  CrearAlbum(){
+    this.opcion = "CrearAlbum"
+}
   //recuperar el usuario de la bd
   recuperarUsuario() {
     this.usuariosServicio.recuperarUsuario(this.nombre).subscribe((datos: any) => {

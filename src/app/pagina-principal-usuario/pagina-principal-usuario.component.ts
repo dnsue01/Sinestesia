@@ -45,7 +45,6 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
     Url_caratula: "",
     Id_artista: "",
     Id_album: "",
-    Id_adminAu: "",
     explicita: "",
     Autorizada: ""
   }
@@ -163,9 +162,10 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
 recogerCancionesArtista() {
   this.usuariosServicio.recogerCancionesArtista(this.usuario.id).subscribe((datos: any) => {
    this.CancionesArtista = datos;
-
+  
   })
 }
+
 sacarCancion(cancion:any){
 this.cancionRepro = cancion;
 this.cancionSeleccionada = true;
@@ -186,11 +186,11 @@ borrar(idCancion:any){
   }).then((result) => {
     if (result.isConfirmed) {
 
-    
+    //metodo de borar
       this.borrarCancion(idCancion);
     
     } else if (
-      /* Read more about handling dismissals below */
+    //si le da a cancelar
       result.dismiss === Swal.DismissReason.cancel
     ) {
       Swal.fire(
