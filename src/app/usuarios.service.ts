@@ -65,6 +65,12 @@ export class UsuariosService {
   borrarCancion(id: any) {
     return this.http.post(`${this.url}borrarCancion.php`, JSON.stringify(id));
   }
+  comprobarNombreAlbum(cancion: any) {
+    return this.http.post(`${this.url}comprobarNombreAlbum.php`, JSON.stringify(cancion));
+  }
+  insertarAlbum(album: any) {
+    return this.http.post(`${this.url}insertarAlbum.php`, JSON.stringify(album));
+  }
   
 }
 

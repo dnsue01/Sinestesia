@@ -111,6 +111,8 @@ export class CrearCancionComponent implements OnInit {
 
 
   //subir la cancion
+
+  //compruebo que el formulario ha recivido un archivo
   myForm = new FormGroup({
     file: new FormControl('', [Validators.required]),
     fileSource: new FormControl('', [Validators.required])
@@ -121,6 +123,8 @@ export class CrearCancionComponent implements OnInit {
     file: new FormControl('', [Validators.required]),
     fileSource: new FormControl('', [Validators.required])
   });
+
+  //segundo paso recojo el primer archivo de los que ha pasado
 
   onFileSelected(event: any) {
     //archivo que recojo
@@ -160,7 +164,7 @@ export class CrearCancionComponent implements OnInit {
     }
   }
 
-  //falta el archivo
+  //excepccion para saber que falta el archivo falta el archivo
   get f() {
     return this.myForm.controls;
   }
@@ -186,7 +190,10 @@ export class CrearCancionComponent implements OnInit {
 }
 
   //subir la cancion
+
+  
   submitCancion() {
+    //compruebo el nombre antes de subir nada
     if (this.cancion.Nombre != "") {
 
       //comprobacion del nombre
@@ -212,6 +219,7 @@ export class CrearCancionComponent implements OnInit {
         const formData = new FormData();
         formData.append('file', this.myForm.get('fileSource')?.value);
 
+    //paso el archivo al php si esta dentro de los parametros que he dictaminado se sube 
         this.http.post('http://localhost/sinestesia/subirCanciones.php', formData)
           .subscribe((datos: any) => {
 
@@ -297,7 +305,7 @@ export class CrearCancionComponent implements OnInit {
           
           Swal.fire({
             icon: 'success',
-            title: 'Cancion subida perfectamente correctamente',
+            title: 'Cancion subida perfectamente',
             showConfirmButton: false,
             timer: 700
           })

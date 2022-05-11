@@ -36,33 +36,37 @@ export class CrearAlbumComponent implements OnInit {
   }
 
   album = {
-    nombre:"",
-    foto_album:"",
-    Id_usuario:"",
+    nombre: "",
+    foto_album: "",
+    Id_usuario: "",
   }
 
 
-   //colores de la bd
-   colorLetra: string = this.usuario.color_fuente;
-   colorFondo: string = this.usuario.color_fondo;
-   tamannoLetra: string = this.usuario.tamanno_letra;
-   //colores defecto del boton
-   colorBotonFondo: string = this.colorLetra;
-   colorBotonLetra: string = this.colorFondo;
- 
-   //Colores de json
-   colores: any = listadeColores;
-   coloresSelecionables: any;
- 
-   //Tamanno de json
-   tamanno: any = listadeTamanno;
-   tamannoSeleccionable: any;
- 
-   //url donde estan las fotos del servidor
-   urlFotos = 'http://localhost/sinestesia/contenido/fotos/';
+  //colores de la bd
+  colorLetra: string = this.usuario.color_fuente;
+  colorFondo: string = this.usuario.color_fondo;
+  tamannoLetra: string = this.usuario.tamanno_letra;
+  //colores defecto del boton
+  colorBotonFondo: string = this.colorLetra;
+  colorBotonLetra: string = this.colorFondo;
 
-   //comprobar si el album esta subido
-   subido:boolean = false;
+  //Colores de json
+  colores: any = listadeColores;
+  coloresSelecionables: any;
+
+  //Tamanno de json
+  tamanno: any = listadeTamanno;
+  tamannoSeleccionable: any;
+
+
+  //archivo
+  nombreArchivo = '';
+
+  //url donde estan las fotos del servidor
+  urlFotos = 'http://localhost/sinestesia/contenido/fotos/';
+
+  //comprobar si el album esta subido
+  subido: boolean = false;
 
   constructor(private usuariosServicio: UsuariosService, private http: HttpClient) { }
 
@@ -70,7 +74,7 @@ export class CrearAlbumComponent implements OnInit {
     this.recuperarUsuario();
   }
 
-   
+
   //recuperar el usuario de la bd
   recuperarUsuario() {
     this.usuariosServicio.recuperarUsuario(this.nombre).subscribe((datos: any) => {
@@ -94,38 +98,153 @@ export class CrearAlbumComponent implements OnInit {
   }
 
 
+  //subirFoto
+
+  //subir la foto
+  myForm = new FormGroup({
+    file: new FormControl('', [Validators.required]),
+    fileSource: new FormControl('', [Validators.required])
+  });
+
+  onFileSelected(event: any) {
+    //archivo que recojo
+    const file: File = event.target.files[0];
+
+    if (file) {
+      //nombre del archivo
+      this.nombreArchivo = file.name;
+      //formato
+      const formData = new FormData();
+
+      formData.append("thumbnail", file);
+      //subir el archivo al php
+      const upload$ = this.http.post("http://localhost/sinestesia/subirFotos.php", formData);
+
+      upload$.subscribe();
+    }
+  }
+
+  //falta el archivo
+  get f() {
+    return this.myForm.controls;
+  }
+  //cuando cambia el input del archivo
+  onFileChange(event: any) {
+
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.myForm.patchValue({
+        fileSource: file
+      });
+    }
+  }
+  //subir la foto
+  submit() {
+    const formData = new FormData();
+    formData.append('file', this.myForm.get('fileSource')?.value);
+
+    this.http.post('http://localhost/sinestesia/subirFotos.php', formData)
+      .subscribe((datos: any) => {
 
 
+        if (datos['mensaje']) {
 
-    //personalizacion
+          this.album.foto_album = datos['nombreCompleto']
 
-    cambiarIdAColorFondo(idColor: any) {
-          for (let i = 0; i < this.coloresSelecionables.length; i++) {
-        if (this.coloresSelecionables[i].id == idColor) {
-          this.colorFondo = this.coloresSelecionables[i].color
-          this.colorBotonLetra = this.colorBotonFondo
+        } else {
+
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'no se pueden subir archivos de este tipo',
+          })
         }
-      }
+
+      })
+  }
+
+  //subir Album
+
+  subirAlbum() {
+    //comprobar si se han rellenado los campos
+    if (this.album.nombre != "") {
+     
+      this.comprobarNombreAlbum();
+
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'El nombre del album no debe de estar vacio',
+      })
     }
 
-    cambiarIdATamanno(idtamanno: any) {
-      for (let i = 0; i < this.tamannoSeleccionable.length; i++) {
-        if (this.tamannoSeleccionable[i].id == idtamanno) {
-          this.tamanno = this.tamannoSeleccionable[i].tamanno
+
+  }
+
+  //comprobar Nombre Album
+
+  comprobarNombreAlbum() {
+
+    this.usuariosServicio.comprobarNombreAlbum(this.album.nombre).subscribe((datos: any) => {
+      if (!datos["mensaje"]) {
+        this.album.Id_usuario = this.usuario.id
+        this.insertarAlbum();
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Ya hay un album con este nombre',
+        })
+      }
+    })
+  }
+//insertar Album base de datos
+  insertarAlbum(){
+     this.usuariosServicio.insertarAlbum(this.album).subscribe((datos: any) => {
+        if (datos['resultado']=='OK') {
+          this.subido = true;
+          Swal.fire({
+            icon: 'success',
+            title: 'Album subido correctamente',
+            showConfirmButton: false,
+            timer: 700
+          })
         }
+
+  })
+}
+
+
+  //personalizacion
+
+  cambiarIdAColorFondo(idColor: any) {
+    for (let i = 0; i < this.coloresSelecionables.length; i++) {
+      if (this.coloresSelecionables[i].id == idColor) {
+        this.colorFondo = this.coloresSelecionables[i].color
+        this.colorBotonLetra = this.colorFondo
       }
     }
+  }
 
-    cambiarIdAColorLetra(idColor: any) {
-      for (let i = 0; i < this.coloresSelecionables.length; i++) {
-        if (this.coloresSelecionables[i].id == idColor) {
-          this.colorLetra = this.coloresSelecionables[i].color
-          this.colorBotonFondo = this.colorLetra
-        }
+  cambiarIdATamanno(idtamanno: any) {
+    for (let i = 0; i < this.tamannoSeleccionable.length; i++) {
+      if (this.tamannoSeleccionable[i].id == idtamanno) {
+        this.tamanno = this.tamannoSeleccionable[i].tamanno
       }
     }
+  }
+
+  cambiarIdAColorLetra(idColor: any) {
+    for (let i = 0; i < this.coloresSelecionables.length; i++) {
+      if (this.coloresSelecionables[i].id == idColor) {
+        this.colorLetra = this.coloresSelecionables[i].color
+        this.colorBotonFondo = this.colorLetra
+      }
+    }
+  }
 
 
-    
+
 
 }

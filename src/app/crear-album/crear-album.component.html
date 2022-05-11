@@ -13,30 +13,66 @@
                 <hr>
                 <h1>{{nombre}}</h1>
             </div>
-            <div *ngIf="subido; else noSubido">
-                
+            <div *ngIf="album.nombre!=''; else noSubido">
+
                 <div class="col-5 col-sm-5 col-md-5 col-xl-5">
-                    <div class="card mb-3">
-                        <img class="card-img-top" src="..." alt="Card image cap">
-                        <div class="card-body">
-                          <h1 class="card-title">Card title</h1>
+                    <div class="card">
+
+                        
+                        <div *ngIf="album.foto_album!=''; else noImg">
+                            <img class="card-img-top imgAlbum" src="{{urlFotos}}{{album.foto_album}}" alt="Card image cap">
                         </div>
-                      </div>
+
+                        <ng-template #noImg></ng-template>
+
+
+                        <div class="card-body">
+                            <h1 class="card-title">{{album.nombre}}</h1>
+                        </div>
+                    </div>
                 </div>
             </div>
-            
-          
+
             <ng-template #noSubido></ng-template>
         </div>
         <hr>
-        <h1>Escribe el de la cancion</h1>
+        <h1>Escribe el nombre de tu album</h1>
 
 
+
+        <input type="text" class="form-control" id="nombreAlbum" [(ngModel)]="album.nombre">
+
+        <br>
+
+        <form [formGroup]="myForm" (ngSubmit)="submit()">
+
+
+
+            <div class="form-group">
+                <h1>Cambia tu foto</h1>
+                <br>
+                <input formControlName="file" id="file" type="file" class="form-control"
+                    (change)="onFileChange($event)">
+                <div *ngIf="f['file'].touched && f['file'].invalid" class="alert alert-danger">
+                    <div *ngIf="f['file'].errors && f['file'].errors['required']">Necesitas poner una imagen.</div>
+                </div>
+            </div>
+
+            <button class="btn btn-xxl rounded-pill mt-5"
+                style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};" [disabled]="myForm.invalid"
+                type="submit">subir foto</button>
+        </form>
+
+
+        <div class="row">
             <button style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};"
-                class="btn btn-xxl rounded-pill mt-5"  type="submit">
-                Subir archivo de audio</button>
-     
+                class="btn btn-xxl rounded-pill mt-5" type="submit" (click)="subirAlbum()">
+                Subir album</button>
 
-       
+        </div>
+
+
+
+
     </div>
 </div>
