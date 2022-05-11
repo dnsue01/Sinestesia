@@ -42,6 +42,47 @@
             <div class="col-12 col-sm-12 col-md-12 col-xl-12">
               <h1>Canciones</h1>
               <div class="col-10 col-sm-10 col-md-10 col-xl-10 ">
+                <div class="table-responsive">
+
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th scope="col">Caratula</th>
+                        <th scope="col">nombre</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let cancion of CancionesArtista">
+                        <th scope="row" (click)="sacarCancion(cancion[2])">
+                          <img class="cancion" src="{{urlFotos}}{{cancion[3]}}">
+                        </th>
+
+                        <td>
+                          <h2>{{cancion[1]}}</h2>
+                        </td>
+                        <td>
+                          <button (click)="borrarCan(cancion[0])">Borrar</button>
+                        </td>
+                        <td>
+                          <audio src="{{urlCanciones}}{{cancion[2]}}" controls></audio>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-xl-12">
+              <br>
+              <h1>Albumes</h1>
+
+
+              <div class="table-responsive">
+
                 <table class="table table-hover">
                   <thead>
                     <tr>
@@ -51,28 +92,29 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let cancion of CancionesArtista">
-                      <th scope="row" (click)="sacarCancion(cancion[2])">
-                        <img class="cancion" src="{{urlFotos}}{{cancion[3]}}">
+                    <tr *ngFor="let album of albumesArtista">
+                      <th scope="row" >
+                        <img class="cancion" src="{{urlFotos}}{{album[2]}}">
                       </th>
 
                       <td>
-                        <h2>{{cancion[1]}}</h2>
+                        <h2>{{album[1]}}</h2>
                       </td>
                       <td>
-                        <button (click)="borrar(cancion[0])">Borrar</button>
+                        <button (click)="borrarAlbu(album[0])">Borrar</button>
+                      </td>
+                      <td>
+                       <select>
+                         <option>1</option>
+                       </select>
                       </td>
                     </tr>
                   </tbody>
                 </table>
               </div>
 
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12 col-sm-12 col-md-12 col-xl-12">
-              <br>
-              <h1>Albumes</h1>
+
+
 
             </div>
 

@@ -71,6 +71,13 @@ export class UsuariosService {
   insertarAlbum(album: any) {
     return this.http.post(`${this.url}insertarAlbum.php`, JSON.stringify(album));
   }
+    recogerAlbumsArtista(id: any) {
+    return this.http.post(`${this.url}recogerAlbumsArtista.php`, JSON.stringify(id));
+  }
+
+  borrarAlbum(id: any) {
+    return this.http.post(`${this.url}borrarAlbum.php`, JSON.stringify(id));
+  }
   
 }
 

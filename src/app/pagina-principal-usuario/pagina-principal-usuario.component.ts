@@ -1,4 +1,4 @@
-import { Component, OnInit, Input,Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 //importar el servicio
 import { UsuariosService } from '../usuarios.service';
 //imporar los json
@@ -17,7 +17,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
 
   //le paso la cancion al padre
 
-  
+
 
 
 
@@ -33,10 +33,13 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
     tamanno_letra: "",
     color_fondo: "",
     color_fuente: "",
-  } 
-  
+  }
+
   //canciones cuando es artista
-  CancionesArtista:any;
+  CancionesArtista: any;
+
+  //albumes cuando es artista
+  albumesArtista: any;
   //cancion
   cancion = {
     Id_cancion: "",
@@ -50,11 +53,11 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   }
 
   //cancion a reproducir
-  cancionRepro:any;
-  cancionSeleccionada:boolean = false;
+  cancionRepro: any;
+  cancionSeleccionada: boolean = false;
 
   //saber si es explicita
-  caratula:string = "";
+  caratula: string = "";
 
   //colores de la bd
   colorLetra: string = this.usuario.color_fuente;
@@ -106,9 +109,6 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
       this.cambiarIdATamanno(datos[4])
       this.cambiarIdAColorFondo(datos[5])
       this.cambiarIdAColorLetra(datos[6])
-      //metodos artista
-      this.recogerCancionesArtista();
-
 
     });
   }
@@ -118,6 +118,14 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
     this.usuariosServicio.RecuperarTipoUsuario(this.usuario.id).subscribe((datos: any) => {
       this.estandar = datos["mensaje"]
 
+      //metodos si es estadar
+      if (this.estandar) {
+
+      } else {
+        //metodos artista
+        this.recogerCancionesArtista();
+        this.recogerAlbumesArtista();
+      }
     });
   }
   //recoger la foto de la base de datos
@@ -154,71 +162,121 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
     }
   }
 
-////////////////////////////////////////////////////////
+  ////////////////////////////////////////////////////////
 
-//metodos artista
-
-
-recogerCancionesArtista() {
-  this.usuariosServicio.recogerCancionesArtista(this.usuario.id).subscribe((datos: any) => {
-   this.CancionesArtista = datos;
-  
-  })
-}
-
-sacarCancion(cancion:any){
-this.cancionRepro = cancion;
-this.cancionSeleccionada = true;
-
-}
-
-borrar(idCancion:any){
-
-  Swal.fire({
-    
-    title: '¿Estas seguro?',
-    text: "No podras recuperarla una vez borrada!",
-    icon: 'warning',
-    showCancelButton: true,
-    confirmButtonText: 'Si, quiero borrarla !',
-    cancelButtonText: 'No, cancelar!',
-    reverseButtons: true
-  }).then((result) => {
-    if (result.isConfirmed) {
-
-    //metodo de borar
-      this.borrarCancion(idCancion);
-    
-    } else if (
-    //si le da a cancelar
-      result.dismiss === Swal.DismissReason.cancel
-    ) {
-      Swal.fire(
-        'Cancelado!',
-        'Tu canncion esta a salvo',
-        'info'
-      )
-    }
-  })
+  //metodos artista
 
 
-}
+  recogerCancionesArtista() {
+    this.usuariosServicio.recogerCancionesArtista(this.usuario.id).subscribe((datos: any) => {
+      this.CancionesArtista = datos;
+
+    })
+  }
+
+  recogerAlbumesArtista() {
+    this.usuariosServicio.recogerAlbumsArtista(this.usuario.id).subscribe((datos: any) => {
+      this.albumesArtista = datos;
+      console.log(this.albumesArtista);
+
+    })
+  }
+
+  sacarCancion(cancion: any) {
+    this.cancionRepro = cancion;
+    this.cancionSeleccionada = true;
+
+  }
+
+  borrarCan(idCancion: any) {
+
+    Swal.fire({
+
+      title: '¿Estas seguro?',
+      text: "No podras recuperarla una vez borrada!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, quiero borrarla !',
+      cancelButtonText: 'No, cancelar!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        //metodo de borar
+        this.borrarCancion(idCancion);
+
+      } else if (
+        //si le da a cancelar
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        Swal.fire(
+          'Cancelado!',
+          'Tu canncion esta a salvo',
+          'info'
+        )
+      }
+    })
 
 
+  }
+  borrarAlbu(idAlbum: any) {
 
-borrarCancion(idCancion:any) {
-  this.usuariosServicio.borrarCancion(idCancion).subscribe((datos: any) => {
-    if (datos['resultado']=='OK') {
-      Swal.fire(
-        'Borrado!',
-        'Tu cancion ha sido borrada con exito!',
-        'success'
-      )
-      this.recogerCancionesArtista();
-    }
-   
-  })
-}
+    Swal.fire({
 
+      title: '¿Estas seguro?',
+      text: "No podras recuperarlo una vez borrado!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, quiero borrarlo!',
+      cancelButtonText: 'No, cancelar!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        //metodo de borar
+        this.borrarAlbum(idAlbum);
+
+      } else if (
+        //si le da a cancelar
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        Swal.fire(
+          'Cancelado!',
+          'Tu album esta a salvo',
+          'info'
+        )
+      }
+    })
+
+
+  }
+
+
+  borrarCancion(idCancion: any) {
+    this.usuariosServicio.borrarCancion(idCancion).subscribe((datos: any) => {
+      if (datos['resultado'] == 'OK') {
+        Swal.fire(
+          'Borrado!',
+          'Tu cancion ha sido borrada con exito!',
+          'success'
+        )
+        this.recogerCancionesArtista();
+      }
+
+    })
+  }
+  borrarAlbum(idAlbum: any) {
+    this.usuariosServicio.borrarAlbum(idAlbum).subscribe((datos: any) => {
+      if (datos['resultado'] == 'OK') {
+        Swal.fire(
+          'Borrado!',
+          'Tu album ha sido borrado con exito!',
+          'success'
+        )
+        this.recogerAlbumesArtista();
+      }
+
+    })
+  }
 
 }
