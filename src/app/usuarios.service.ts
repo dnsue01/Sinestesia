@@ -59,6 +59,10 @@ export class UsuariosService {
   insertarCancion(cancion: any) {
     return this.http.post(`${this.url}insertarCancion.php`, JSON.stringify(cancion));
   }
+  recogerCancionesArtista(id: any) {
+    return this.http.post(`${this.url}recogerCancionesArtista.php`, JSON.stringify(id));
+  }
+  
 }
 
 

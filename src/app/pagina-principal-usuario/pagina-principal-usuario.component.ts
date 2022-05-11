@@ -27,6 +27,21 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
     color_fondo: "",
     color_fuente: "",
   }
+  //cancion
+  cancion = {
+    Id_cancion: "",
+    Nombre: "",
+    Url_cancion: "",
+    Url_caratula: "",
+    Id_artista: "",
+    Id_album: "",
+    Id_adminAu: "",
+    explicita: "",
+    Autorizada: ""
+  }
+
+  //canciones cuando es artista
+  CancionesArtista:any;
 
   //colores de la bd
   colorLetra: string = this.usuario.color_fuente;
@@ -50,6 +65,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
 
   //url donde estan las fotos del servidor
   urlFotos = 'http://localhost/sinestesia/contenido/fotos/';
+
 
   constructor(private usuariosServicio: UsuariosService) { }
 
@@ -76,7 +92,9 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
       this.cambiarIdATamanno(datos[4])
       this.cambiarIdAColorFondo(datos[5])
       this.cambiarIdAColorLetra(datos[6])
-   
+      //metodos artista
+      this.recogerCancionesArtista();
+
 
     });
   }
@@ -95,6 +113,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
       this.idYFoto.extension = datos['mensaje']
     })
   }
+
 
   //personalizacion
 
@@ -121,5 +140,18 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
       }
     }
   }
+
+////////////////////////////////////////////////////////
+
+//metodos artista
+
+
+recogerCancionesArtista() {
+  this.usuariosServicio.recogerCancionesArtista(this.usuario.id).subscribe((datos: any) => {
+   this.CancionesArtista = datos;
+    console.log(this.CancionesArtista);
+    
+  })
+}
 
 }

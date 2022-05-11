@@ -50,24 +50,14 @@
                               </tr>
                             </thead>
                             <tbody>
-                              <tr>
+                              <tr *ngFor="let cancion of CancionesArtista">
                                 <th scope="row">
-                                    <img class="cancion" src="assets/ejemplo/sinestesia.png">
+                                    <img class="cancion" src="{{urlFotos}}{{cancion[3]}}">
                                 </th>
                               
-                                <td>Otto</td>
+                                <td>{{cancion[1]}}</td>
                               
-                              </tr>
-                              <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                           
-                                <td>@fat</td>
-                              </tr>
-                              <tr>
-                                <th scope="row">3</th>
-                                <td colspan="2">Larry the Bird</td>
-                              
+                                <td>{{cancion.Id_album}}</td>
                               </tr>
                             </tbody>
                           </table>
