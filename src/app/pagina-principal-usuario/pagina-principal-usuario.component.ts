@@ -124,7 +124,6 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   //recoger la foto de la base de datos
   recuperarFoto() {
     this.usuariosServicio.RecuperarFoto(this.usuario.id).subscribe((datos: any) => {
-      console.log(datos['resultado']);
       this.idYFoto.extension = datos['mensaje']
     })
   }
