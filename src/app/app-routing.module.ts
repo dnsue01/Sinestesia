@@ -8,6 +8,8 @@ import { AjustesComponent } from './ajustes/ajustes.component';
 import { PaginaPrincipalUsuarioComponent } from './pagina-principal-usuario/pagina-principal-usuario.component';
 import { CrearCancionComponent } from './crear-cancion/crear-cancion.component';
 import { CrearAlbumComponent } from './crear-album/crear-album.component';
+import { AlbumComponent } from './album/album.component';
+
 const routes: Routes = [
   { path: "",redirectTo:"inicio" ,pathMatch:"full"},  //ruta por defecto
   { path: "inicio", component: PaginaInicioComponent },
@@ -20,7 +22,9 @@ const routes: Routes = [
     {path:"ajustes",component:AjustesComponent},
     {path:"defecto",component:PaginaPrincipalUsuarioComponent},
     {path:"crearCancion",component:CrearCancionComponent},
-    {path:"crearAlbum",component:CrearAlbumComponent}
+    {path:"crearAlbum",component:CrearAlbumComponent},
+    {path:"album/:id",component:AlbumComponent}
+
   ]},
   
 

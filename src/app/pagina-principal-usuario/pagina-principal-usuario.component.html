@@ -49,6 +49,8 @@
                       <tr>
                         <th scope="col">Caratula</th>
                         <th scope="col">nombre</th>
+                        <th scope="col">cancion</th>
+                        <th scope="col">borrar</th>
 
                       </tr>
                     </thead>
@@ -62,10 +64,10 @@
                           <h2>{{cancion[1]}}</h2>
                         </td>
                         <td>
-                          <button (click)="borrarCan(cancion[0])">Borrar</button>
+                          <audio src="{{urlCanciones}}{{cancion[2]}}" controls></audio>
                         </td>
                         <td>
-                          <audio src="{{urlCanciones}}{{cancion[2]}}" controls></audio>
+                          <button (click)="borrarCan(cancion[0])">Borrar</button>
                         </td>
                       </tr>
                     </tbody>
@@ -93,7 +95,7 @@
                   </thead>
                   <tbody>
                     <tr *ngFor="let album of albumesArtista">
-                      <th scope="row" >
+                      <th scope="row">
                         <img class="cancion" src="{{urlFotos}}{{album[2]}}">
                       </th>
 
@@ -104,9 +106,9 @@
                         <button (click)="borrarAlbu(album[0])">Borrar</button>
                       </td>
                       <td>
-                       <select>
-                         <option>1</option>
-                       </select>
+                        <select>
+                          <option>1</option>
+                        </select>
                       </td>
                     </tr>
                   </tbody>
