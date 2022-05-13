@@ -71,6 +71,20 @@
             <h2>Salir</h2>
           </a>
         </mat-nav-list>
+        <footer class="page-footer font-small blue">
+
+          <div class="footer-copyright text-center py-3">
+            <div *ngIf="hayCancion == true; else noCancion">
+              <h1>{{tituloCancion}}</h1>
+              <hr>
+              <img class="cancion" src="{{urlFotos}}{{carutlaCancion}}">
+              <audio autoplay src="{{urlCanciones}}{{cancionRepro}}" controls></audio>
+           
+              </div>
+            <ng-template #noCancion></ng-template>
+          </div>
+        </footer>
+
       </div>
     </div>
     <div class="col-8 col-sm-9 col-md-9 col-lg-9 col-xl-9  offset-4  offset-sm-3 " id="main">
@@ -78,7 +92,12 @@
       <div [ngSwitch]="opcion">
         <div *ngSwitchCase="'inicio'">
 
-          <app-pagina-principal-usuario (parentFunction)="parentFunction($event)" [nombre]="nombre">
+          <app-pagina-principal-usuario (crearBotonAnnadir)="crearBotonAnnadir($event)"
+            (pasarCancion)=" pasarCancion($event)"
+            (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
+            (pasarTituloCancion)="pasarTituloCancion($event)"
+            (pasarCaratulaCancion)="pasarCaratulaCancion($event)"
+            [nombre]="nombre">
           </app-pagina-principal-usuario>
         </div>
         <div *ngSwitchCase="'ajustes'">

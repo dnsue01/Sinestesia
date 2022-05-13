@@ -27,11 +27,34 @@ export class BarraLateralComponent {
   
   //cancion y album
   albumYCancion:boolean = false;
-  //recivo si hay una cancion y un album
-  parentFunction(data:any){
-    this.albumYCancion = data
-  }
 
+  //cancion
+  cancionRepro:any;
+  carutlaCancion:any;
+  tituloCancion:string = "";
+  hayCancion:boolean = false;
+  //recivo si hay una cancion y un album
+  crearBotonAnnadir(datos:any){
+    this.albumYCancion = datos
+  }
+  //url donde estan las fotos del servidor
+  urlFotos = 'http://localhost/sinestesia/contenido/fotos/';
+  //url donde estan las canciones del servidor
+   urlCanciones = 'http://localhost/sinestesia/contenido/canciones/';
+
+  //pasar Audio
+  pasarCancion(datos:any){
+    this.cancionRepro = datos
+    this.hayCancion = true;
+  }
+//pasar imagen
+  pasarCaratulaCancion(datos:any){
+    this.carutlaCancion = datos
+  }
+//pasar nombre
+  pasarTituloCancion(datos:any){
+    this.tituloCancion = datos
+  }
 
   usuario = {
     id: "",
@@ -47,7 +70,6 @@ export class BarraLateralComponent {
   ngOnInit(): void {
 
     this.recuperarUsuario();
- 
 
   }
   //seleccionar opciones

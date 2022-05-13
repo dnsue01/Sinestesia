@@ -49,7 +49,6 @@
                       <tr>
                         <th scope="col">Caratula</th>
                         <th scope="col">nombre</th>
-                        <th scope="col">cancion</th>
 
 
                       </tr>
@@ -57,17 +56,19 @@
                     <tbody>
                       <div *ngIf="hayCanciones; else noCanciones">
                       </div>
-                     
+                    
                       <tr *ngFor="let cancion of CancionesArtista">
-                        <th scope="row" (click)="sacarCancion(cancion[2])">
+                         <!--Metodos para pasar al padre-->
+                        <th scope="row" 
+                        (click)="sacarCancion(cancion[2])" 
+                        (click)="pasarTitulo(cancion[1])"
+                        (click)="pasarCaratula(cancion[3])"
+                        >
                           <img class="cancion" src="{{urlFotos}}{{cancion[3]}}">
                         </th>
 
                         <td>
                           <h2>{{cancion[1]}}</h2>
-                        </td>
-                        <td>
-                          <audio src="{{urlCanciones}}{{cancion[2]}}" controls></audio>
                         </td>
                         <td>
                           <button (click)="borrarCan(cancion[0])">Borrar</button>

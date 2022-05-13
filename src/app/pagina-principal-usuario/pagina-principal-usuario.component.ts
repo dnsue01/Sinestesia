@@ -13,11 +13,24 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./pagina-principal-usuario.component.scss']
 })
 export class PaginaPrincipalUsuarioComponent implements OnInit {
+//lo que recivo del padre
 
   @Input() nombre = "";
 
-  @Output() parentFunction:EventEmitter<any>= new EventEmitter()
+//lo que envio al padre
 
+
+ //pasar si hay albumes y canciones
+  @Output() crearBotonAnnadir:EventEmitter<any>= new EventEmitter()
+ //pasar el audio de la cancion la barra
+  @Output() pasarCancion:EventEmitter<any>= new EventEmitter()
+  //pasar la caratula de la cancion la barra
+  @Output() pasarCaratulaCancion:EventEmitter<any>= new EventEmitter()
+   //pasar el titulo de la cancion la barra
+  @Output() pasarTituloCancion:EventEmitter<any>= new EventEmitter()
+
+
+  
   idAlbum = "";
 
 
@@ -41,6 +54,8 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   //canciones cuando es artista
   CancionesArtista: any;
   hayCanciones:boolean= true;
+  cancionTitulo = "";
+  cancionCaratula = "";
   //albumes cuando es artista
   albumesArtista: any;
   hayAlbumes:boolean= true;
@@ -62,7 +77,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
 
   //cancion a reproducir
   cancionRepro: any;
-  cancionSeleccionada: boolean = false;
+
 
   //saber si es explicita
   caratula: string = "";
@@ -186,7 +201,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
         //si hay canciones compruebo si tambien hay albumes
         if(this.hayAlbumes){
           this.albumYcancion = true;
-          this.parentFunction.emit(this.albumYcancion)
+          this.crearBotonAnnadir.emit(this.albumYcancion)
         }
       }
 
@@ -204,7 +219,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
         //si hay albumes compruebo que tambien haya canciones
         if(this.hayCanciones){
           this.albumYcancion = true;
-          this.parentFunction.emit(this.albumYcancion)
+          this.crearBotonAnnadir.emit(this.albumYcancion)
         }
       }
 
@@ -213,9 +228,26 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
 
   sacarCancion(cancion: any) {
     this.cancionRepro = cancion;
-    this.cancionSeleccionada = true;
+    //pasar cancion al padre
+    this.pasarCancion.emit(this.cancionRepro)
+    
 
   }
+
+
+  pasarTitulo(cancion: any) {
+    this.cancionTitulo = cancion;
+    //pasar titulo cancion al padre
+    this.pasarTituloCancion.emit(this.cancionTitulo)
+  
+  }
+  pasarCaratula(cancion: any){
+  this.cancionCaratula = cancion;
+  this.pasarCaratulaCancion.emit(this.cancionCaratula)
+  
+  }
+
+ 
 
   detalleAlbum(albumId:any){
     this.idAlbum = albumId;
@@ -272,7 +304,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
         //si es menor que cero la opcion de añadir canciones se quita
         if(this.albumesArtista.length<0){
           this.albumYcancion = true;
-          this.parentFunction.emit(this.albumYcancion)
+          this.crearBotonAnnadir.emit(this.albumYcancion)
         }
      
 
