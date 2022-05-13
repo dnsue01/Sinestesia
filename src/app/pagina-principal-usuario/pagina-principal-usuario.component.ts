@@ -28,7 +28,8 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   @Output() pasarCaratulaCancion:EventEmitter<any>= new EventEmitter()
    //pasar el titulo de la cancion la barra
   @Output() pasarTituloCancion:EventEmitter<any>= new EventEmitter()
-
+  //pasar el titulo de la cancion la barra
+  @Output() pasarIdAlbum:EventEmitter<any>= new EventEmitter()
 
   
   idAlbum = "";
@@ -243,14 +244,14 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   }
   pasarCaratula(cancion: any){
   this.cancionCaratula = cancion;
+  //pasar caratula
   this.pasarCaratulaCancion.emit(this.cancionCaratula)
   
   }
 
- 
-
   detalleAlbum(albumId:any){
     this.idAlbum = albumId;
+    this.pasarIdAlbum.emit(this.idAlbum)
    
   }
 
@@ -346,6 +347,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
           'success'
         )
         this.recogerAlbumesArtista();
+            
       }
 
     })

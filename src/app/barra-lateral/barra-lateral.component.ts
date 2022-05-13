@@ -36,6 +36,8 @@ export class BarraLateralComponent {
   //recivo si hay una cancion y un album
   crearBotonAnnadir(datos:any){
     this.albumYCancion = datos
+    console.log(datos);
+    
   }
   //url donde estan las fotos del servidor
   urlFotos = 'http://localhost/sinestesia/contenido/fotos/';
