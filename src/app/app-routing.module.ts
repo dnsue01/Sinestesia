@@ -23,8 +23,6 @@ const routes: Routes = [
     {path:"defecto",component:PaginaPrincipalUsuarioComponent},
     {path:"crearCancion",component:CrearCancionComponent},
     {path:"crearAlbum",component:CrearAlbumComponent},
-    {path:"album/:id",component:AlbumComponent}
-
   ]},
   
 

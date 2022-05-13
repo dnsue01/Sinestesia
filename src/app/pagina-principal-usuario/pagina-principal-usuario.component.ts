@@ -6,7 +6,7 @@ import listadeColores from 'src/assets/json/colores.json';
 import listadeTamanno from 'src/assets/json/tamannoLetra.json';
 
 import Swal from 'sweetalert2'
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 @Component({
   selector: 'app-pagina-principal-usuario',
   templateUrl: './pagina-principal-usuario.component.html',
@@ -16,7 +16,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
 
   @Input() nombre = "";
 
-  //le paso la cancion al padre
+  idAlbum = "";
 
 
 
@@ -85,7 +85,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   //url donde estan las canciones del servidor
   urlCanciones = 'http://localhost/sinestesia/contenido/canciones/';
 
-  constructor(private usuariosServicio: UsuariosService,private router: Router) { }
+  constructor(private usuariosServicio: UsuariosService,private router: Router,private activateRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
     this.recuperarUsuario();
@@ -178,7 +178,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   recogerAlbumesArtista() {
     this.usuariosServicio.recogerAlbumsArtista(this.usuario.id).subscribe((datos: any) => {
       this.albumesArtista = datos;
-      console.log(this.albumesArtista);
+      
 
     })
   }
@@ -190,8 +190,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   }
 
   detalleAlbum(albumId:any){
-    console.log(albumId);
-    this.router.navigate(["/album",albumId]); 
+    this.idAlbum = albumId; 
   }
 
   borrarCan(idCancion: any) {
