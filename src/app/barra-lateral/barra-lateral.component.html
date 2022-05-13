@@ -25,7 +25,7 @@
 
 
 
-          <div *ngIf="estandar; else elseBlock">
+          <div *ngIf="estandar; else artsita">
 
             <a mat-list-item href="#" class="link">
               <h2>Lista de playlist</h2>
@@ -39,15 +39,25 @@
             </a>
 
           </div>
-          <ng-template #elseBlock>
-            <a mat-list-item class="link" (click)="SubirCancion()">
+          <ng-template #artsita>
+            <a mat-list-item routerLink="crearCancion" (click)="SubirCancion()">
 
               <h2>Subir una cancion</h2>
             </a>
 
-            <a mat-list-item class="link" (click)="CrearAlbum()">
+            <a mat-list-item routerLink="crearAlbum" (click)="CrearAlbum()">
               <h2>Crear un album</h2>
             </a>
+
+            <div *ngIf="albumYCancion; else noAlbumNiCancion">
+
+
+              <a mat-list-item routerLink="annadirCancionesAlbum" (click)="annadirCancionesAlbum()">
+                <h2>Añadir canciones a Album</h2>
+              </a>
+
+            </div>
+            <ng-template #noAlbumNiCancion></ng-template>
 
 
           </ng-template>
@@ -64,11 +74,12 @@
       </div>
     </div>
     <div class="col-8 col-sm-9 col-md-9 col-lg-9 col-xl-9  offset-4  offset-sm-3 " id="main">
-
+      <!--Hago un switchCase para seleccionar cual quiero que aparazaca-->
       <div [ngSwitch]="opcion">
         <div *ngSwitchCase="'inicio'">
 
-          <app-pagina-principal-usuario  [nombre]="nombre"></app-pagina-principal-usuario>
+          <app-pagina-principal-usuario (parentFunction)="parentFunction($event)" [nombre]="nombre">
+          </app-pagina-principal-usuario>
         </div>
         <div *ngSwitchCase="'ajustes'">
           <app-ajustes [nombre]="nombre"></app-ajustes>
@@ -80,7 +91,12 @@
         <div *ngSwitchCase="'CrearAlbum'">
           <app-crear-album [nombre]="nombre"></app-crear-album>
         </div>
-        
+        <div *ngSwitchCase="'annadirCancionesAlbum'">
+          <app-annadir-canciones-album></app-annadir-canciones-album>
+        </div>
+
+
+        <!--Opcion por defecto-->
         <div *ngSwitchDefault>
           <app-pagina-principal-usuario [nombre]="nombre"></app-pagina-principal-usuario>
 

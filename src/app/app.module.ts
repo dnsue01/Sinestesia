@@ -24,6 +24,7 @@ import {  ReactiveFormsModule } from '@angular/forms';
 import { CrearCancionComponent } from './crear-cancion/crear-cancion.component';
 import { CrearAlbumComponent } from './crear-album/crear-album.component';
 import { AlbumComponent } from './album/album.component';
+import { AnnadirCancionesAlbumComponent } from './annadir-canciones-album/annadir-canciones-album.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { AlbumComponent } from './album/album.component';
     PaginaPrincipalUsuarioComponent,
     CrearCancionComponent,
     CrearAlbumComponent,
-    AlbumComponent
+    AlbumComponent,
+    AnnadirCancionesAlbumComponent
   ],
   imports: [
     BrowserModule,

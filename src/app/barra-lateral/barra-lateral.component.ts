@@ -24,7 +24,13 @@ export class BarraLateralComponent {
   opcion: string = "";
   //el usuario es estandar
   estandar: boolean = true;
-  //cancion que le paso desde el hijo
+  
+  //cancion y album
+  albumYCancion:boolean = false;
+  //recivo si hay una cancion y un album
+  parentFunction(data:any){
+    this.albumYCancion = data
+  }
 
 
   usuario = {
@@ -57,6 +63,10 @@ export class BarraLateralComponent {
   }
   CrearAlbum(){
     this.opcion = "CrearAlbum"
+}
+
+annadirCancionesAlbum(){
+  this.opcion = "annadirCancionesAlbum"
 }
   //recuperar el usuario de la bd
   recuperarUsuario() {

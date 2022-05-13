@@ -16,7 +16,7 @@
             <div *ngIf="album.nombre!=''; else noSubido">
 
                 <div class="col-5 col-sm-5 col-md-5 col-xl-5">
-                    <div class="card">
+                    <div class="card " style="background-color:{{colorLetra}}; color: {{colorFondo}};">
 
                         
                         <div *ngIf="album.foto_album!=''; else noImg">
@@ -49,7 +49,7 @@
 
 
             <div class="form-group">
-                <h1>Cambia tu foto</h1>
+                <h1>Ponle una foto al album</h1>
                 <br>
                 <input formControlName="file" id="file" type="file" class="form-control"
                     (change)="onFileChange($event)">
@@ -63,13 +63,19 @@
                 type="submit">subir foto</button>
         </form>
 
-
-        <div class="row">
-            <button style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};"
-                class="btn btn-xxl rounded-pill mt-5" type="submit" (click)="subirAlbum()">
-                Subir album</button>
-
+        <div *ngIf="album.foto_album!=''; else noImg2">
+            
+            <div class="row">
+                <button style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};"
+                    class="btn btn-xxl rounded-pill mt-5" type="submit" (click)="subirAlbum()">
+                    Subir album</button>
+    
+            </div>
         </div>
+
+        <ng-template #noImg2></ng-template>
+
+
 
 
 

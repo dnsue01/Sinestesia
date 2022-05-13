@@ -16,6 +16,8 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
 
   @Input() nombre = "";
 
+  @Output() parentFunction:EventEmitter<any>= new EventEmitter()
+
   idAlbum = "";
 
 
@@ -38,9 +40,14 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
 
   //canciones cuando es artista
   CancionesArtista: any;
-
+  hayCanciones:boolean= true;
   //albumes cuando es artista
   albumesArtista: any;
+  hayAlbumes:boolean= true;
+
+  //si hay una cancion y un album le paso la informacion al padre
+  albumYcancion:boolean = false;
+
   //cancion
   cancion = {
     Id_cancion: "",
@@ -124,8 +131,9 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
 
       } else {
         //metodos artista
-        this.recogerCancionesArtista();
         this.recogerAlbumesArtista();
+        this.recogerCancionesArtista();
+      
       }
     });
   }
@@ -171,6 +179,16 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   recogerCancionesArtista() {
     this.usuariosServicio.recogerCancionesArtista(this.usuario.id).subscribe((datos: any) => {
       this.CancionesArtista = datos;
+        //si no hay declaro la variable a false
+      if(this.CancionesArtista.length==0){
+        this.hayCanciones = false;
+      }else{
+        //si hay canciones compruebo si tambien hay albumes
+        if(this.hayAlbumes){
+          this.albumYcancion = true;
+          this.parentFunction.emit(this.albumYcancion)
+        }
+      }
 
     })
   }
@@ -178,7 +196,17 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   recogerAlbumesArtista() {
     this.usuariosServicio.recogerAlbumsArtista(this.usuario.id).subscribe((datos: any) => {
       this.albumesArtista = datos;
-      
+     //si no hay declaro la variable a false
+      if(this.albumesArtista.length==0){
+        this.hayAlbumes = false;
+        
+      }else{
+        //si hay albumes compruebo que tambien haya canciones
+        if(this.hayCanciones){
+          this.albumYcancion = true;
+          this.parentFunction.emit(this.albumYcancion)
+        }
+      }
 
     })
   }
@@ -190,7 +218,8 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   }
 
   detalleAlbum(albumId:any){
-    this.idAlbum = albumId; 
+    this.idAlbum = albumId;
+   
   }
 
   borrarCan(idCancion: any) {
@@ -240,6 +269,12 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
 
         //metodo de borar
         this.borrarAlbum(idAlbum);
+        //si es menor que cero la opcion de añadir canciones se quita
+        if(this.albumesArtista.length<0){
+          this.albumYcancion = true;
+          this.parentFunction.emit(this.albumYcancion)
+        }
+     
 
       } else if (
         //si le da a cancelar

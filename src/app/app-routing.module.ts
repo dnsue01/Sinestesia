@@ -9,6 +9,7 @@ import { PaginaPrincipalUsuarioComponent } from './pagina-principal-usuario/pagi
 import { CrearCancionComponent } from './crear-cancion/crear-cancion.component';
 import { CrearAlbumComponent } from './crear-album/crear-album.component';
 import { AlbumComponent } from './album/album.component';
+import { AnnadirCancionesAlbumComponent } from './annadir-canciones-album/annadir-canciones-album.component';
 
 const routes: Routes = [
   { path: "",redirectTo:"inicio" ,pathMatch:"full"},  //ruta por defecto
@@ -17,12 +18,15 @@ const routes: Routes = [
   { path: "inicioSesion", component: PaginaInicioSesionComponent },
   //barra lateral y todas las opciones
   { path:"principal/:nombre",component:BarraLateralComponent,
+
+  //opciones de la barra lateral
   children:[
-    {path:"",redirectTo:"defecto",pathMatch:"full"},
+    { path: "",redirectTo:"defecto" ,pathMatch:"full"},
     {path:"ajustes",component:AjustesComponent},
     {path:"defecto",component:PaginaPrincipalUsuarioComponent},
     {path:"crearCancion",component:CrearCancionComponent},
     {path:"crearAlbum",component:CrearAlbumComponent},
+    {path:"annadirCancionesAlbum",component:AnnadirCancionesAlbumComponent}
   ]},
   
 

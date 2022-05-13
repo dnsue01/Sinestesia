@@ -50,11 +50,14 @@
                         <th scope="col">Caratula</th>
                         <th scope="col">nombre</th>
                         <th scope="col">cancion</th>
-                        <th scope="col">borrar</th>
+
 
                       </tr>
                     </thead>
                     <tbody>
+                      <div *ngIf="hayCanciones; else noCanciones">
+                      </div>
+                     
                       <tr *ngFor="let cancion of CancionesArtista">
                         <th scope="row" (click)="sacarCancion(cancion[2])">
                           <img class="cancion" src="{{urlFotos}}{{cancion[3]}}">
@@ -64,12 +67,16 @@
                           <h2>{{cancion[1]}}</h2>
                         </td>
                         <td>
-                          <audio  src="{{urlCanciones}}{{cancion[2]}}" controls></audio>
+                          <audio src="{{urlCanciones}}{{cancion[2]}}" controls></audio>
                         </td>
                         <td>
                           <button (click)="borrarCan(cancion[0])">Borrar</button>
                         </td>
                       </tr>
+                      <ng-template #noCanciones>
+                        <h2>No tienes ninguna cancion todavia....Prueba a crear una desde el menu.</h2>
+
+                      </ng-template>
                     </tbody>
                   </table>
                 </div>
@@ -94,6 +101,10 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <div *ngIf="hayAlbumes; else noAlbumes">
+
+                    </div>
+
                     <tr *ngFor="let album of albumesArtista">
                       <th scope="row" (click)="detalleAlbum(album[0])">
                         <img class="cancion" src="{{urlFotos}}{{album[2]}}">
@@ -105,12 +116,12 @@
                       <td>
                         <button (click)="borrarAlbu(album[0])">Borrar</button>
                       </td>
-                      <td>
-                        <select>
-                          <option>1</option>
-                        </select>
-                      </td>
                     </tr>
+                    <ng-template #noAlbumes>
+                      
+                      <h2>No tienes ningun album todavia....Prueba a crear uno desde el menu.</h2>
+
+                    </ng-template>
                   </tbody>
                 </table>
               </div>
@@ -119,7 +130,7 @@
 
 
             </div>
-            
+
 
 
           </div>
