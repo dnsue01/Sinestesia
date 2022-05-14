@@ -24,7 +24,7 @@
           </a>
 
 
-
+          <!--Si el usuario es  estandar-->
           <div *ngIf="estandar; else artsita">
 
             <a mat-list-item href="#" class="link">
@@ -39,6 +39,7 @@
             </a>
 
           </div>
+          <!--Si el usuario es  artista-->
           <ng-template #artsita>
             <a mat-list-item routerLink="crearCancion" (click)="SubirCancion()">
 
@@ -48,10 +49,10 @@
             <a mat-list-item routerLink="crearAlbum" (click)="CrearAlbum()">
               <h2>Crear un album</h2>
             </a>
-
+            <!--Si hay una cancion y un album se actva esta opcion-->
             <div *ngIf="albumYCancion; else noAlbumNiCancion">
 
-
+              <hr>
               <a mat-list-item routerLink="annadirCancionesAlbum" (click)="annadirCancionesAlbum()">
                 <h2>Añadir canciones a album</h2>
               </a>
@@ -79,8 +80,8 @@
               <hr>
               <img class="cancion" src="{{urlFotos}}{{carutlaCancion}}">
               <audio autoplay src="{{urlCanciones}}{{cancionRepro}}" controls></audio>
-           
-              </div>
+
+            </div>
             <ng-template #noCancion></ng-template>
           </div>
         </footer>
@@ -93,10 +94,8 @@
         <div *ngSwitchCase="'inicio'">
 
           <app-pagina-principal-usuario (crearBotonAnnadir)="crearBotonAnnadir($event)"
-            (pasarCancion)=" pasarCancion($event)"
-            (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
-            (pasarTituloCancion)="pasarTituloCancion($event)"
-            (pasarCaratulaCancion)="pasarCaratulaCancion($event)"
+            (pasarCancion)=" pasarCancion($event)" (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
+            (pasarTituloCancion)="pasarTituloCancion($event)" (pasarCaratulaCancion)="pasarCaratulaCancion($event)"
             [nombre]="nombre">
           </app-pagina-principal-usuario>
         </div>
