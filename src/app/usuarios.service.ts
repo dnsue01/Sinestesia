@@ -94,6 +94,9 @@ export class UsuariosService {
   recuperarCancionAlbum(id: any) {
     return this.http.post(`${this.url}recuperarCancionAlbum.php`, JSON.stringify(id));
   }
+  borrarCancionAlbum(albumYcancion: any) {
+    return this.http.post(`${this.url}borrarCancionAlbum.php`, JSON.stringify(albumYcancion));
+  }
 }
 
 

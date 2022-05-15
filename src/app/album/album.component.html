@@ -16,31 +16,36 @@
             <div class="table-responsive">
                 <table class="table table-hover" style="color: {{colorLetra}} ;">
                     <thead>
-                      <tr>
-                        <th scope="col">Caratula</th>
-                        <th scope="col">nombre</th>
-                      </tr>
+                        <tr>
+                            <th scope="col">Caratula</th>
+                            <th scope="col">nombre</th>
+                        </tr>
                     </thead>
                     <tbody>
-    
-                      <tr *ngFor="let cancion of CancionesAlbum">
-                         <!--Metodos para pasar al padre-->
-                        <th scope="row" 
 
-                        >
-                          <img class="cancion" src="{{urlFotos}}{{cancion[3]}}">
-                        </th>
+                        <tr *ngFor="let cancion of CancionesAlbum">
+                         
+                           
 
-                        <td>
-                          <h2>{{cancion[1]}}</h2>
-                        </td>
-                        <td>
-                          <button (click)="borrarCan(cancion[0])">Borrar</button>
-                        </td>
-                      </tr>
+
+                            <!--Metodos para pasar al padre-->
+                            <th scope="row">
+                                <img class="cancion" src="{{urlFotos}}{{cancion[3]}}">
+                            </th>
+
+                            <td>
+                                <h2>{{cancion[1]}}</h2>
+                            </td>
+                            <td>
+                                <button (click)="borrarCan(cancion[0])">Borrar</button>
+                            </td>
+
+                       
+                        </tr>
+                      
                     </tbody>
-                  </table>
-              </div>
+                </table>
+            </div>
         </div>
 
 

@@ -50,6 +50,10 @@ export class AlbumComponent implements OnInit {
     Id_usuario: ""
   }
 
+  albumYcancion={
+    idalbum:"",
+    idCancion:""
+  }
 
   //cancion
   cancion = {
@@ -80,6 +84,7 @@ export class AlbumComponent implements OnInit {
 
   //canciones album
   CancionesAlbum: any = [];
+  hayCanciones:boolean= true;
 
   //url donde estan las fotos del servidor
   urlFotos = 'http://localhost/sinestesia/contenido/fotos/';
@@ -156,7 +161,16 @@ export class AlbumComponent implements OnInit {
   recuperarCancionesAlbum() {
     this.usuariosServicio.recuperarCancionesAlbum(this.idAlbum).subscribe((datos: any) => {
       this.idCanciones = datos;
-      this.recuperarCancion()
+      console.log(this.idCanciones.length);
+      
+      if(this.idCanciones.length==0){
+        this.hayCanciones=false;
+        console.log(this.hayCanciones);
+        
+      }else{
+        this.recuperarCancion()
+      }
+  
     })
   }
 
@@ -189,8 +203,12 @@ export class AlbumComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
+        this.albumYcancion.idCancion = idCancion;
+        this.albumYcancion.idalbum = this.idAlbum
         //metodo de borar
-        console.log(idCancion+"borrada");
+        this.borrarCancion(this.albumYcancion)
+
+        this.recuperarAlbum();
         
 
       } else if (
@@ -206,6 +224,20 @@ export class AlbumComponent implements OnInit {
     })
 
 
+  }
+
+  borrarCancion(idCancion: any) {
+    this.usuariosServicio.borrarCancionAlbum(idCancion).subscribe((datos: any) => {
+      if (datos['resultado'] == 'OK') {
+        Swal.fire(
+          'Borrado!',
+          'Tu cancion ha sido borrada con exito!',
+          'success'
+        )
+
+      }
+
+    })
   }
 
 }
