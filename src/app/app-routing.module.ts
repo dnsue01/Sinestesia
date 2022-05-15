@@ -26,7 +26,8 @@ const routes: Routes = [
     {path:"defecto",component:PaginaPrincipalUsuarioComponent},
     {path:"crearCancion",component:CrearCancionComponent},
     {path:"crearAlbum",component:CrearAlbumComponent},
-    {path:"annadirCancionesAlbum",component:AnnadirCancionesAlbumComponent}
+    {path:"annadirCancionesAlbum",component:AnnadirCancionesAlbumComponent},
+    {path:"album/:id",component:AlbumComponent}
   ]},
   
 

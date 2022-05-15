@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
 import { ActivatedRoute } from '@angular/router';
 import { UsuariosService } from '../usuarios.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-barra-lateral',
   templateUrl: './barra-lateral.component.html',
@@ -17,7 +18,7 @@ export class BarraLateralComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private usuariosServicio: UsuariosService) { }
+  constructor(private breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private usuariosServicio: UsuariosService,private router:Router) { }
   //parametros que paso a los hijos
   nombre = this.route.snapshot.params["nombre"];
   //hago un string opcion para comprobar que opcion elige
@@ -28,15 +29,21 @@ export class BarraLateralComponent {
   //cancion y album
   albumYCancion:boolean = false;
 
+  //ha seleccionado un album
+  albumSelccionado:boolean = false;
+
   //cancion
   cancionRepro:any;
   carutlaCancion:any;
   tituloCancion:string = "";
   hayCancion:boolean = false;
+
+  //album
+  idAlbum:string="";
+
   //recivo si hay una cancion y un album
   crearBotonAnnadir(datos:any){
     this.albumYCancion = datos
-    console.log(datos);
     
   }
   //url donde estan las fotos del servidor
@@ -56,6 +63,13 @@ export class BarraLateralComponent {
 //pasar nombre
   pasarTituloCancion(datos:any){
     this.tituloCancion = datos
+  }
+//pasar id de album
+  pasarIdAlbum(datos:any){
+   this.idAlbum = datos;
+   this.albumSelccionado = true;
+   //esto lo hago para que entre directamente a la ruta
+   this.opcion = "detalleAlbum";
   }
 
   usuario = {
@@ -92,6 +106,8 @@ export class BarraLateralComponent {
 annadirCancionesAlbum(){
   this.opcion = "annadirCancionesAlbum"
 }
+
+
   //recuperar el usuario de la bd
   recuperarUsuario() {
     this.usuariosServicio.recuperarUsuario(this.nombre).subscribe((datos: any) => {

@@ -63,6 +63,7 @@
 
           </ng-template>
 
+
           <hr>
           <a mat-list-item routerLink="ajustes" class="link" (click)="Ajustes()">
             <h2>Ajustes</h2>
@@ -93,9 +94,15 @@
       <div [ngSwitch]="opcion">
         <div *ngSwitchCase="'inicio'">
 
-          <app-pagina-principal-usuario (crearBotonAnnadir)="crearBotonAnnadir($event)"
-            (pasarCancion)=" pasarCancion($event)" (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
-            (pasarTituloCancion)="pasarTituloCancion($event)" (pasarCaratulaCancion)="pasarCaratulaCancion($event)"
+    <!--Comunicacion entre padre e hijo con los distintos metodos-->
+          <app-pagina-principal-usuario 
+          
+          (crearBotonAnnadir)="crearBotonAnnadir($event)"
+            (pasarCancion)=" pasarCancion($event)"
+            (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
+            (pasarTituloCancion)="pasarTituloCancion($event)" 
+            (pasarCaratulaCancion)="pasarCaratulaCancion($event)"
+            (pasarIdAlbum)="pasarIdAlbum($event)"
             [nombre]="nombre">
           </app-pagina-principal-usuario>
         </div>
@@ -111,6 +118,9 @@
         </div>
         <div *ngSwitchCase="'annadirCancionesAlbum'">
           <app-annadir-canciones-album [nombre]="nombre"></app-annadir-canciones-album>
+        </div>
+        <div *ngSwitchCase="'detalleAlbum'">
+          <app-album [idAlbum]="idAlbum"></app-album>
         </div>
 
 

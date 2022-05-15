@@ -8,12 +8,16 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class AlbumComponent implements OnInit {
 
-  @Input() nombre = "";
+  //recoger el i del album
   @Input() idAlbum = "";
 
+  //recoger el nombre
+  @Input() nombre = "";
+  
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    console.log(this.idAlbum);
     
   }
   
