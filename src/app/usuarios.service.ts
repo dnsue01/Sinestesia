@@ -85,6 +85,15 @@ export class UsuariosService {
   insertarCancionAlbum(album: any) {
     return this.http.post(`${this.url}insertarCancionAlbum.php`, JSON.stringify(album));
   }
+  recuperarAlbum(idAlbum: any) {
+    return this.http.post(`${this.url}recuperarAlbum.php`, JSON.stringify(idAlbum));
+  }
+  recuperarCancionesAlbum(id: any) {
+    return this.http.post(`${this.url}recuperarCancionesAlbum.php`, JSON.stringify(id));
+  }
+  recuperarCancionAlbum(id: any) {
+    return this.http.post(`${this.url}recuperarCancionAlbum.php`, JSON.stringify(id));
+  }
 }
 
 

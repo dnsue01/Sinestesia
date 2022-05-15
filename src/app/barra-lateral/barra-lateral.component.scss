@@ -55,13 +55,28 @@ background: linear-gradient(to bottom, #859398, #283048); /* W3C, IE 10+/ Edge, 
 
 }
 .cancion{
-  width: 100px;
-  height: 100px;
+  width: 90px;
+  height: 90px;
 }
 
 @media only screen and (max-width: 700px) {
   audio{
     width: 20vh;
   }
+  h1,h2{
+    color: white;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-family: "Catamaran", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 800;
+    line-height: 1.2;
+  
+  }
+  h1{
+   text-align: center;
+   font-size: 3vh;
+   
+  }
+
 }
 

@@ -26,6 +26,7 @@ export class AnnadirCancionesAlbumComponent implements OnInit {
     idCancion: ""
   }
 
+
   idAlbum: string = "";
   idCancion: string = "";
 
@@ -136,7 +137,6 @@ export class AnnadirCancionesAlbumComponent implements OnInit {
   recogerCancionesArtista() {
     this.usuariosServicio.recogerCancionesArtista(this.usuario.id).subscribe((datos: any) => {
       this.CancionesArtista = datos;
-      console.log(this.CancionesArtista);
 
     })
   }

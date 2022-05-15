@@ -49,10 +49,9 @@
             <a mat-list-item routerLink="crearAlbum" (click)="CrearAlbum()">
               <h2>Crear un album</h2>
             </a>
+            <br>
             <!--Si hay una cancion y un album se actva esta opcion-->
             <div *ngIf="albumYCancion; else noAlbumNiCancion">
-
-              <hr>
               <a mat-list-item routerLink="annadirCancionesAlbum" (click)="annadirCancionesAlbum()">
                 <h2>Añadir canciones a album</h2>
               </a>
@@ -94,16 +93,11 @@
       <div [ngSwitch]="opcion">
         <div *ngSwitchCase="'inicio'">
 
-    <!--Comunicacion entre padre e hijo con los distintos metodos-->
-          <app-pagina-principal-usuario 
-          
-          (crearBotonAnnadir)="crearBotonAnnadir($event)"
-            (pasarCancion)=" pasarCancion($event)"
-            (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
-            (pasarTituloCancion)="pasarTituloCancion($event)" 
-            (pasarCaratulaCancion)="pasarCaratulaCancion($event)"
-            (pasarIdAlbum)="pasarIdAlbum($event)"
-            [nombre]="nombre">
+          <!--Comunicacion entre padre e hijo con los distintos metodos-->
+          <app-pagina-principal-usuario (crearBotonAnnadir)="crearBotonAnnadir($event)"
+            (pasarCancion)=" pasarCancion($event)" (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
+            (pasarTituloCancion)="pasarTituloCancion($event)" (pasarCaratulaCancion)="pasarCaratulaCancion($event)"
+            (pasarIdAlbum)="pasarIdAlbum($event)" [nombre]="nombre">
           </app-pagina-principal-usuario>
         </div>
         <div *ngSwitchCase="'ajustes'">
@@ -120,7 +114,7 @@
           <app-annadir-canciones-album [nombre]="nombre"></app-annadir-canciones-album>
         </div>
         <div *ngSwitchCase="'detalleAlbum'">
-          <app-album [idAlbum]="idAlbum"></app-album>
+          <app-album [nombre]="nombre" [idAlbum]="idAlbum"></app-album>
         </div>
 
 

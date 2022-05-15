@@ -154,7 +154,6 @@ export class CrearCancionComponent implements OnInit {
       //formato
       const formData = new FormData();
 
-      console.log(this.nombreFoto);
       
       formData.append("thumbnail", file);
       //subir el archivo al php
