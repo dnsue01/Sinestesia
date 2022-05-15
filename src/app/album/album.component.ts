@@ -8,6 +8,7 @@ import { UsuariosService } from '../usuarios.service';
 //imporar los json
 import listadeColores from 'src/assets/json/colores.json';
 import listadeTamanno from 'src/assets/json/tamannoLetra.json';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-album',
@@ -171,6 +172,40 @@ export class AlbumComponent implements OnInit {
       })
 
     }
+  }
+
+  
+  borrarCan(idCancion: any) {
+
+    Swal.fire({
+
+      title: '¿Estas seguro?',
+      text: "Vas a borrar esta cancion de del album!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, quiero borrarla !',
+      cancelButtonText: 'No, cancelar!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        //metodo de borar
+        console.log(idCancion+"borrada");
+        
+
+      } else if (
+        //si le da a cancelar
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        Swal.fire(
+          'Cancelado!',
+          'Tu canncion esta a salvo',
+          'info'
+        )
+      }
+    })
+
+
   }
 
 }
