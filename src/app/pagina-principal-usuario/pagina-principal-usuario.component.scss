@@ -18,3 +18,16 @@ h1{
   .card{
       min-height:100vh;
   }
+
+  .playlist{
+    width: 120px;
+    height: 80px;
+  }
+  .playlistTitulo{
+      text-align: left;
+  }
+  
+  .centro{
+    display: flex;
+    justify-content: center;
+  }

@@ -126,6 +126,9 @@ export class UsuariosService {
   comprobarPlaylistUnica(idUsuario: any) {
     return this.http.post(`${this.url}comprobarPlaylistUnica.php`, JSON.stringify(idUsuario));
   }
+  recuperarPlaylistUnica(idUsuario: any) {
+    return this.http.post(`${this.url}recuperarPlaylistUnica.php`, JSON.stringify(idUsuario));
+  }
 
 }
 

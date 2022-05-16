@@ -13,30 +13,34 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./pagina-principal-usuario.component.scss']
 })
 export class PaginaPrincipalUsuarioComponent implements OnInit {
-//lo que recivo del padre
+  //lo que recivo del padre
 
   @Input() nombre = "";
 
-//lo que envio al padre
+  //lo que envio al padre
 
 
- //pasar si hay albumes y canciones
-  @Output() crearBotonAnnadir:EventEmitter<any>= new EventEmitter()
- //pasar el audio de la cancion la barra
-  @Output() pasarCancion:EventEmitter<any>= new EventEmitter()
+  //pasar si hay albumes y canciones
+  @Output() crearBotonAnnadir: EventEmitter<any> = new EventEmitter()
+  //pasar el audio de la cancion la barra
+  @Output() pasarCancion: EventEmitter<any> = new EventEmitter()
   //pasar la caratula de la cancion la barra
-  @Output() pasarCaratulaCancion:EventEmitter<any>= new EventEmitter()
-   //pasar el titulo de la cancion la barra
-  @Output() pasarTituloCancion:EventEmitter<any>= new EventEmitter()
+  @Output() pasarCaratulaCancion: EventEmitter<any> = new EventEmitter()
+  //pasar el titulo de la cancion la barra
+  @Output() pasarTituloCancion: EventEmitter<any> = new EventEmitter()
   //pasar el id del album para acceder al otro componente
-  @Output() pasarIdAlbum:EventEmitter<any>= new EventEmitter()
+  @Output() pasarIdAlbum: EventEmitter<any> = new EventEmitter()
 
-  
   idAlbum = "";
 
+  //playlisit
+  playList = {
+    Id_playlist: "",
+    Nombre: "",
+    foto: "",
+    Id_usuario: ""
 
-
-
+  }
 
   //si es estandar o artista
   estandar: boolean = true;
@@ -54,15 +58,15 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
 
   //canciones cuando es artista
   CancionesArtista: any;
-  hayCanciones:boolean= true;
+  hayCanciones: boolean = true;
   cancionTitulo = "";
   cancionCaratula = "";
   //albumes cuando es artista
   albumesArtista: any;
-  hayAlbumes:boolean= true;
+  hayAlbumes: boolean = true;
 
   //si hay una cancion y un album le paso la informacion al padre
-  albumYcancion:boolean = false;
+  albumYcancion: boolean = false;
 
   //cancion
   cancion = {
@@ -108,7 +112,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   //url donde estan las canciones del servidor
   urlCanciones = 'http://localhost/sinestesia/contenido/canciones/';
 
-  constructor(private usuariosServicio: UsuariosService,private router: Router,private activateRoute:ActivatedRoute) { }
+  constructor(private usuariosServicio: UsuariosService, private router: Router, private activateRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.recuperarUsuario();
@@ -150,7 +154,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
         //metodos artista
         this.recogerAlbumesArtista();
         this.recogerCancionesArtista();
-      
+
       }
     });
   }
@@ -196,12 +200,12 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   recogerCancionesArtista() {
     this.usuariosServicio.recogerCancionesArtista(this.usuario.id).subscribe((datos: any) => {
       this.CancionesArtista = datos;
-        //si no hay declaro la variable a false
-      if(this.CancionesArtista.length==0){
+      //si no hay declaro la variable a false
+      if (this.CancionesArtista.length == 0) {
         this.hayCanciones = false;
-      }else{
+      } else {
         //si hay canciones compruebo si tambien hay albumes
-        if(this.hayAlbumes){
+        if (this.hayAlbumes) {
           this.albumYcancion = true;
           this.crearBotonAnnadir.emit(this.albumYcancion)
         }
@@ -213,13 +217,13 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   recogerAlbumesArtista() {
     this.usuariosServicio.recogerAlbumsArtista(this.usuario.id).subscribe((datos: any) => {
       this.albumesArtista = datos;
-     //si no hay declaro la variable a false
-      if(this.albumesArtista.length==0){
+      //si no hay declaro la variable a false
+      if (this.albumesArtista.length == 0) {
         this.hayAlbumes = false;
-        
-      }else{
+
+      } else {
         //si hay albumes compruebo que tambien haya canciones
-        if(this.hayCanciones){
+        if (this.hayCanciones) {
           this.albumYcancion = true;
           this.crearBotonAnnadir.emit(this.albumYcancion)
         }
@@ -227,31 +231,31 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
 
     })
   }
-//reproducir en la barra lateral
+  //reproducir en la barra lateral
   sacarCancion(cancion: any) {
     this.cancionRepro = cancion;
     //pasar cancion al padre
     this.pasarCancion.emit(this.cancionRepro)
-    
+
 
   }
   pasarTitulo(cancion: any) {
     this.cancionTitulo = cancion;
     //pasar titulo cancion al padre
     this.pasarTituloCancion.emit(this.cancionTitulo)
-  
+
   }
-  pasarCaratula(cancion: any){
-  this.cancionCaratula = cancion;
-  //pasar caratula
-  this.pasarCaratulaCancion.emit(this.cancionCaratula)
-  
+  pasarCaratula(cancion: any) {
+    this.cancionCaratula = cancion;
+    //pasar caratula
+    this.pasarCaratulaCancion.emit(this.cancionCaratula)
+
   }
 
-  detalleAlbum(albumId:any){
+  detalleAlbum(albumId: any) {
     this.idAlbum = albumId;
     this.pasarIdAlbum.emit(this.idAlbum)
-   
+
   }
 
   borrarCan(idCancion: any) {
@@ -302,11 +306,11 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
         //metodo de borar
         this.borrarAlbum(idAlbum);
         //si es menor que cero la opcion de añadir canciones se quita
-        if(this.albumesArtista.length<0){
+        if (this.albumesArtista.length < 0) {
           this.albumYcancion = true;
           this.crearBotonAnnadir.emit(this.albumYcancion)
         }
-     
+
 
       } else if (
         //si le da a cancelar
@@ -346,21 +350,32 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
           'success'
         )
         this.recogerAlbumesArtista();
-            
+
       }
 
     })
   }
 
-/////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////
 
-//metodos si es usuario
+  //metodos si es usuario
 
-comprobarListaPersonal(){
+  comprobarListaPersonal() {
 
     this.usuariosServicio.comprobarPlaylistUnica(this.usuario.id).subscribe((datos: any) => {
-   
-      console.log(datos);
+
+      this.recuperarPlaylistUnica()
+
+    })
+  }
+  recuperarPlaylistUnica() {
+
+    this.usuariosServicio.recuperarPlaylistUnica(this.usuario.id).subscribe((datos: any) => {
+      this.playList.Id_playlist = datos[0]
+      this.playList.Nombre = datos[1]
+      this.playList.foto= datos[2]
+      this.playList.Id_usuario = datos[3]
+      console.log(this.playList);
       
     })
   }

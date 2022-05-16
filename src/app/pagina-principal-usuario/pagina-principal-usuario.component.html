@@ -10,7 +10,7 @@
       <div *ngIf="estandar; else artista">
 
 
-        <div class=" selector">
+        <div class="selector">
 
           <div class="row">
 
@@ -35,8 +35,44 @@
             </div>
           </div>
         </div>
-          <hr>
+        <hr>
+        <div class="row">
+          <div class="col-4 col-sm-4 col-lg-3 col-md-4 col-xl-3">
+            <img class="playlist" src="{{urlFotos}}{{playList.foto}}">
+            <br>
+          </div>
+          <div class="col-9 col-sm-9 col-lg-9 col-md-9 col-xl-9">
+            <br>
+            <h1 class="playlistTitulo">{{playList.Nombre}}</h1>
 
+          </div>
+
+        </div>
+
+        <div class="row">
+          
+          <div class="table-responsive">
+            <table class="table table-hover" style="color: {{colorLetra}} ;" >
+              <thead>
+                <tr>
+                  <th scope="col">Caratula</th>
+                  <th scope="col">Nombre</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Otto</td>
+                  <td>@mdo</td>
+                  <td>
+                    <button>Eliminar</button>
+                  </td>
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
 
       </div>
 
