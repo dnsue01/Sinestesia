@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Swal from 'sweetalert2';
-import {Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { UsuariosService } from '../usuarios.service';
 
 @Component({
@@ -10,7 +10,7 @@ import { UsuariosService } from '../usuarios.service';
 })
 export class PaginaInicioSesionComponent implements OnInit {
 
-  constructor(private usuariosServicio: UsuariosService,private router: Router) { }
+  constructor(private usuariosServicio: UsuariosService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -19,7 +19,11 @@ export class PaginaInicioSesionComponent implements OnInit {
     correo: "",
     contrasenna: "",
   }
+//id del usuario
+  idUsuario: any;
 
+  //cuenta de administrador 
+  admin:any;
 
   iniciarSesion() {
 
@@ -56,7 +60,7 @@ export class PaginaInicioSesionComponent implements OnInit {
   comprobacion() {
     this.usuariosServicio.comprobarUsuarioInicio(this.usuario).subscribe((datos: any) => {
       if (datos) {
-       this.inicioSesion();
+        this.inicioSesion();
 
       } else {
         Swal.fire({
@@ -72,7 +76,7 @@ export class PaginaInicioSesionComponent implements OnInit {
   inicioSesion() {
     this.usuariosServicio.iniciarSesion(this.usuario).subscribe((datos: any) => {
       if (datos) {
-     
+
         Swal.fire({
 
           icon: 'success',
@@ -80,8 +84,9 @@ export class PaginaInicioSesionComponent implements OnInit {
           showConfirmButton: false,
           timer: 700
         })
-        
-        this.recuperarNombre();
+
+       //recuperar id del usuario para saber que tipo es 
+        this.recuperarId();
 
       } else {
         Swal.fire({
@@ -94,20 +99,48 @@ export class PaginaInicioSesionComponent implements OnInit {
     });
   }
 
-  recuperarNombre(){
+  recuperarNombre() {
     this.usuariosServicio.recuperarNombre(this.usuario).subscribe((datos: any) => {
       if (datos['resultado'] == 'OK') {
-        this.entrar(datos['mensaje']);
+        this.entrarUsuario(datos['mensaje']);
+      
       }
-     
-     
+
     });
   }
-  
+
+  recuperarId() {
+    this.usuariosServicio.recuperarId(this.usuario).subscribe((datos: any) => {
+      if (datos['resultado'] == 'OK') {
+        //compruebo que tipo de usuario es 
+        this.idUsuario = datos['mensaje']
+        this.comprobarAdmin();
+      }
+
+    });
+
+  }
+
+  comprobarAdmin() {
+    this.usuariosServicio.comprobarAdmin(this.idUsuario).subscribe((datos: any) => {
+      //devuelve true si es administrador false si es un usuario normal
+      if(datos["mensaje"]){
+       this.entrarAdmin(this.idUsuario)
+        
+      }else{
+        this.recuperarNombre();
+      }
+      
+      
+    })
+  }
 
 
-  entrar(nombre:any){
-    this.router.navigate(["/principal",nombre]); 
+  entrarUsuario(nombre: any) {
+    this.router.navigate(["/principal", nombre]);
+  }
+  entrarAdmin(id: any) {
+    this.router.navigate(["/panelControl", id]);
   }
 
 }

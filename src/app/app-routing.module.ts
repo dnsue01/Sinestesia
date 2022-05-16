@@ -10,6 +10,7 @@ import { CrearCancionComponent } from './crear-cancion/crear-cancion.component';
 import { CrearAlbumComponent } from './crear-album/crear-album.component';
 import { AlbumComponent } from './album/album.component';
 import { AnnadirCancionesAlbumComponent } from './annadir-canciones-album/annadir-canciones-album.component';
+import { PanelControlComponent } from './panel-control/panel-control.component';
 
 const routes: Routes = [
   { path: "",redirectTo:"inicio" ,pathMatch:"full"},  //ruta por defecto
@@ -29,6 +30,8 @@ const routes: Routes = [
     {path:"annadirCancionesAlbum",component:AnnadirCancionesAlbumComponent},
     {path:"album/:id",component:AlbumComponent}
   ]},
+  //administradores
+  {path:"panelControl/:id",component:PanelControlComponent}
   
 
 

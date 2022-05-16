@@ -97,6 +97,13 @@ export class UsuariosService {
   borrarCancionAlbum(albumYcancion: any) {
     return this.http.post(`${this.url}borrarCancionAlbum.php`, JSON.stringify(albumYcancion));
   }
+
+  recuperarId(usuario: any) {
+    return this.http.post(`${this.url}recuperarId.php`, JSON.stringify(usuario));
+  }
+  comprobarAdmin(id: any) {
+    return this.http.post(`${this.url}comprobarAdmin.php`, JSON.stringify(id));
+  }
 }
 
 
