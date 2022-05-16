@@ -25,11 +25,13 @@
 
                         <tr *ngFor="let cancion of CancionesAlbum">
                          
-                           
-
-
                             <!--Metodos para pasar al padre-->
-                            <th scope="row">
+                            <th scope="row"
+                            (click)="sacarCancion(cancion[2])" 
+                            (click)="pasarTitulo(cancion[1])"
+                            (click)="pasarCaratula(cancion[3])"
+                            >
+
                                 <img class="cancion" src="{{urlFotos}}{{cancion[3]}}">
                             </th>
 

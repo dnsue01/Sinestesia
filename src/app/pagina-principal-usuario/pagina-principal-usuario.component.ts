@@ -80,7 +80,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   cancionRepro: any;
 
 
-  //saber si es explicita
+  //saber caratula cancion
   caratula: string = "";
 
   //colores de la bd
@@ -226,7 +226,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
 
     })
   }
-
+//reproducir en la barra lateral
   sacarCancion(cancion: any) {
     this.cancionRepro = cancion;
     //pasar cancion al padre
@@ -234,8 +234,6 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
     
 
   }
-
-
   pasarTitulo(cancion: any) {
     this.cancionTitulo = cancion;
     //pasar titulo cancion al padre

@@ -95,8 +95,9 @@
 
           <!--Comunicacion entre padre e hijo con los distintos metodos-->
           <app-pagina-principal-usuario (crearBotonAnnadir)="crearBotonAnnadir($event)"
-            (pasarCancion)=" pasarCancion($event)" (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
-            (pasarTituloCancion)="pasarTituloCancion($event)" (pasarCaratulaCancion)="pasarCaratulaCancion($event)"
+            (pasarCancion)=" pasarCancion($event)" 
+            (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
+            (pasarTituloCancion)="pasarTituloCancion($event)"
             (pasarIdAlbum)="pasarIdAlbum($event)" [nombre]="nombre">
           </app-pagina-principal-usuario>
         </div>
@@ -113,8 +114,14 @@
         <div *ngSwitchCase="'annadirCancionesAlbum'">
           <app-annadir-canciones-album [nombre]="nombre"></app-annadir-canciones-album>
         </div>
+        <!--Paso los parametros para que se pueda reproducir en la barra latral y el id del album-->
         <div *ngSwitchCase="'detalleAlbum'">
-          <app-album [nombre]="nombre" [idAlbum]="idAlbum"></app-album>
+          <app-album 
+          (pasarCancion)=" pasarCancion($event)" 
+          (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
+          (pasarTituloCancion)="pasarTituloCancion($event)"
+          [nombre]="nombre"
+          [idAlbum]="idAlbum"></app-album>
         </div>
 
 

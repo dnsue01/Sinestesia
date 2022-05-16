@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 
@@ -22,6 +22,13 @@ export class AlbumComponent implements OnInit {
 
   //recoger el nombre
   @Input() nombre = "";
+
+ //pasar el audio de la cancion la barra
+ @Output() pasarCancion:EventEmitter<any>= new EventEmitter()
+ //pasar la caratula de la cancion la barra
+ @Output() pasarCaratulaCancion:EventEmitter<any>= new EventEmitter()
+  //pasar el titulo de la cancion la barra
+ @Output() pasarTituloCancion:EventEmitter<any>= new EventEmitter()
 
   constructor(private route: ActivatedRoute, private usuariosServicio: UsuariosService) { }
 
@@ -66,6 +73,12 @@ export class AlbumComponent implements OnInit {
     explicita: "",
     Autorizada: ""
   }
+  //parametros para pasar al padre
+  cancionTitulo = "";
+  cancionCaratula = "";
+  //cancion a reproducir
+   cancionRepro: any;
+
   //colores de la bd
   colorLetra: string = this.usuario.color_fuente;
   colorFondo: string = this.usuario.color_fondo;
@@ -161,12 +174,8 @@ export class AlbumComponent implements OnInit {
   recuperarCancionesAlbum() {
     this.usuariosServicio.recuperarCancionesAlbum(this.idAlbum).subscribe((datos: any) => {
       this.idCanciones = datos;
-      console.log(this.idCanciones.length);
-      
       if(this.idCanciones.length==0){
         this.hayCanciones=false;
-        console.log(this.hayCanciones);
-        
       }else{
         this.recuperarCancion()
       }
@@ -225,7 +234,7 @@ export class AlbumComponent implements OnInit {
 
 
   }
-
+  //borrar cancion del album de la bd
   borrarCancion(idCancion: any) {
     this.usuariosServicio.borrarCancionAlbum(idCancion).subscribe((datos: any) => {
       if (datos['resultado'] == 'OK') {
@@ -239,5 +248,30 @@ export class AlbumComponent implements OnInit {
 
     })
   }
+
+  //reproducir en la barra lateral
+  sacarCancion(cancion: any) {
+    this.cancionRepro = cancion;
+    //pasar cancion al padre
+    this.pasarCancion.emit(this.cancionRepro)
+    
+
+  }
+  pasarTitulo(cancion: any) {
+    this.cancionTitulo = cancion;
+    //pasar titulo cancion al padre
+    this.pasarTituloCancion.emit(this.cancionTitulo)
+  
+  }
+  pasarCaratula(cancion: any){
+  this.cancionCaratula = cancion;
+  //pasar caratula
+  this.pasarCaratulaCancion.emit(this.cancionCaratula)
+  }
+
+
+
+
+
 
 }
