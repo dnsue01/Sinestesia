@@ -104,6 +104,18 @@ export class UsuariosService {
   comprobarAdmin(id: any) {
     return this.http.post(`${this.url}comprobarAdmin.php`, JSON.stringify(id));
   }
+  recuperarTipoAdmin(id: any) {
+    return this.http.post(`${this.url}recuperarTipoAdmin.php`, JSON.stringify(id));
+  }
+  recuperarNombreAdmin(id: any) {
+    return this.http.post(`${this.url}recuperarNombreAdmin.php`, JSON.stringify(id));
+  }
+  recuperarTodosUsuarios() {
+    return this.http.get(`${this.url}recuperarTodosUsuarios.php`);
+  }
+    recuperarTodasCanciones() {
+    return this.http.get(`${this.url}recuperarTodasCanciones.php`);
+  }
 }
 
 
