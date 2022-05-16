@@ -145,6 +145,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
       //metodos si es estadar
       if (this.estandar) {
 
+        this.comprobarListaPersonal();
       } else {
         //metodos artista
         this.recogerAlbumesArtista();
@@ -355,10 +356,16 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
 
 //metodos si es usuario
 
-crearPlayListUnica(){
-  
+comprobarListaPersonal(){
+
+    this.usuariosServicio.comprobarPlaylistUnica(this.usuario.id).subscribe((datos: any) => {
+   
+      console.log(datos);
+      
+    })
+  }
 }
 
 
 
-}
+

@@ -123,6 +123,10 @@ export class UsuariosService {
   borrarUsuario(idUsuario: any) {
     return this.http.post(`${this.url}borrarUsuario.php`, JSON.stringify(idUsuario));
   }
+  comprobarPlaylistUnica(idUsuario: any) {
+    return this.http.post(`${this.url}comprobarPlaylistUnica.php`, JSON.stringify(idUsuario));
+  }
+
 }
 
 
