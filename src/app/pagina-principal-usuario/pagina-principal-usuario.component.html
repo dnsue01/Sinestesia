@@ -6,10 +6,18 @@
 <div class="card" style="background-color:{{colorFondo}}; color: {{colorLetra}};font-size: {{tamanno}}">
   <div class="card-body">
     <div>
+      <!--Vista del estandar-->
       <div *ngIf="estandar; else artista">
 
 
+
+
+
       </div>
+
+      <!--Vista del artista-->
+
+
 
       <ng-template #artista>
         <div class=" selector">
@@ -56,14 +64,11 @@
                     <tbody>
                       <div *ngIf="hayCanciones; else noCanciones">
                       </div>
-                    
+
                       <tr *ngFor="let cancion of CancionesArtista">
-                         <!--Metodos para pasar al padre-->
-                        <th scope="row" 
-                        (click)="sacarCancion(cancion[2])" 
-                        (click)="pasarTitulo(cancion[1])"
-                        (click)="pasarCaratula(cancion[3])"
-                        >
+                        <!--Metodos para pasar al padre-->
+                        <th scope="row" (click)="sacarCancion(cancion[2])" (click)="pasarTitulo(cancion[1])"
+                          (click)="pasarCaratula(cancion[3])">
                           <img class="cancion" src="{{urlFotos}}{{cancion[3]}}">
                         </th>
 
@@ -119,7 +124,7 @@
                       </td>
                     </tr>
                     <ng-template #noAlbumes>
-                      
+
                       <h2>No tienes ningun album todavia....Prueba a crear uno desde el menu.</h2>
 
                     </ng-template>

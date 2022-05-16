@@ -72,10 +72,10 @@ export class UsuariosService {
     return this.http.post(`${this.url}insertarAlbum.php`, JSON.stringify(album));
   }
 
-    recogerAlbumsArtista(id: any) {
+  recogerAlbumsArtista(id: any) {
     return this.http.post(`${this.url}recogerAlbumsArtista.php`, JSON.stringify(id));
   }
- 
+
   borrarAlbum(id: any) {
     return this.http.post(`${this.url}borrarAlbum.php`, JSON.stringify(id));
   }
@@ -114,13 +114,13 @@ export class UsuariosService {
     return this.http.get(`${this.url}recuperarTodosUsuarios.php`);
   }
 
-    recuperarTodasCanciones() {
+  recuperarTodasCanciones() {
     return this.http.get(`${this.url}recuperarTodasCanciones.php`);
   }
-  AutorizarCancion(cancionYadmin:any) {
+  AutorizarCancion(cancionYadmin: any) {
     return this.http.post(`${this.url}AutorizarCancion.php`, JSON.stringify(cancionYadmin));
   }
-  borrarUsuario(idUsuario:any) {
+  borrarUsuario(idUsuario: any) {
     return this.http.post(`${this.url}borrarUsuario.php`, JSON.stringify(idUsuario));
   }
 }
