@@ -97,7 +97,7 @@ export class AlbumComponent implements OnInit {
 
   //canciones album
   CancionesAlbum: any = [];
-  hayCanciones:boolean= true;
+  hayCanciones:boolean= false;
 
   //url donde estan las fotos del servidor
   urlFotos = 'http://localhost/sinestesia/contenido/fotos/';
@@ -174,9 +174,8 @@ export class AlbumComponent implements OnInit {
   recuperarCancionesAlbum() {
     this.usuariosServicio.recuperarCancionesAlbum(this.idAlbum).subscribe((datos: any) => {
       this.idCanciones = datos;
-      if(this.idCanciones.length==0){
-        this.hayCanciones=false;
-      }else{
+      if(this.idCanciones.length>0){
+        this.hayCanciones=true;
         this.recuperarCancion()
       }
   
@@ -216,7 +215,6 @@ export class AlbumComponent implements OnInit {
         this.albumYcancion.idalbum = this.idAlbum
         //metodo de borar
         this.borrarCancion(this.albumYcancion)
-
         this.recuperarAlbum();
         
 

@@ -57,8 +57,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <div *ngIf="hayCanciones; else noCanciones">
-
+                        <div *ngIf="hayCanciones; else noCanciones"></div>
                             <tr *ngFor="let cancion of canciones">
 
                                 <td>{{cancion[0]}}</td>
@@ -72,7 +71,7 @@
                                     <button>autorizar</button>
                                 </td>
                             </tr>
-                        </div>
+                        
                         <ng-template #noCanciones>
                             <br>
                             <h1>

@@ -22,7 +22,8 @@
                         </tr>
                     </thead>
                     <tbody>
-
+                        <div *ngIf="hayCanciones; else elseBlock"></div>
+                      
                         <tr *ngFor="let cancion of CancionesAlbum">
                          
                             <!--Metodos para pasar al padre-->
@@ -44,7 +45,10 @@
 
                        
                         </tr>
-                      
+                        <ng-template #elseBlock>
+                            <br>
+                            <h1>No hay canciones en el album</h1>
+                        </ng-template>
                     </tbody>
                 </table>
             </div>

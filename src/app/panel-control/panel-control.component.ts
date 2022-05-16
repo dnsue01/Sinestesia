@@ -41,7 +41,7 @@ export class PanelControlComponent implements OnInit {
           this.recuperarTodosUsuarios();
           this.recuperarCanciones();
           break;
-        case "MUSIC":
+        case "MUSICA":
           this.recuperarCanciones();
           break;
         case "USUAR":
