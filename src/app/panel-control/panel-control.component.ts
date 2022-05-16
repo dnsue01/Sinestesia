@@ -20,7 +20,7 @@ export class PanelControlComponent implements OnInit {
   //nombre usuario
   nombre: any;
   //usuarios
-  usarios: any;
+  usuarios: any;
   hayUsuarios: boolean = false;
 
   cancion = {
@@ -44,7 +44,7 @@ export class PanelControlComponent implements OnInit {
       //comprobar que tipo de usuario es 
       switch (this.tipo) {
         case "TOTAL":
-          console.log("todo");
+          //recojo las canciones u los usuarios
           this.recuperarTodosUsuarios();
           this.recuperarCanciones();
           break;
@@ -67,8 +67,8 @@ export class PanelControlComponent implements OnInit {
   }
   recuperarTodosUsuarios() {
     this.usuariosServicio.recuperarTodosUsuarios().subscribe((datos: any) => {
-      this.usarios = datos;
-      if (this.usarios.length > 0) {
+      this.usuarios = datos;
+      if (this.usuarios.length > 0) {
         this.hayUsuarios = true;
       }
     })
@@ -100,7 +100,7 @@ export class PanelControlComponent implements OnInit {
       if (result.isConfirmed) {
         //autorizar
         this.AutorizarCancion();
-        
+        this.recuperarCanciones();
 
       } else if (
         //si le da a cancelar
@@ -115,10 +115,80 @@ export class PanelControlComponent implements OnInit {
     })
   }
 
+
+
+
+  borrarCan(idCancion: any) {
+
+    Swal.fire({
+
+      title: '¿Estas seguro?',
+      text: "No se puede recuperar una vez borrada!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, quiero borrarla !',
+      cancelButtonText: 'No, cancelar!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        //metodo de borar
+        this.borrarCancion(idCancion);
+
+      } else if (
+        //si le da a cancelar
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        Swal.fire(
+          'Cancelado!',
+          'La cancion esta a salvo',
+          'info'
+        )
+      }
+    })
+
+
+  }
+
+
+  borrarUsu(idUsuario: any) {
+
+    Swal.fire({
+
+      title: '¿Estas seguro?',
+      text: "Estas estas a punto de borrar este usuario!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, quiero borrarle !',
+      cancelButtonText: 'No, cancelar!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        //metodo de borar
+        this.borrarUsuario(idUsuario)
+
+      } else if (
+        //si le da a cancelar
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        Swal.fire(
+          'Cancelado!',
+          'El usuario esta a salvo',
+          'info'
+        )
+      }
+    })
+
+
+  }
+
+
+
   AutorizarCancion() {
     this.usuariosServicio.AutorizarCancion(this.cancion).subscribe((datos: any) => {
-    
-      if (datos['resultado']=='OK') {
+
+      if (datos['resultado'] == 'OK') {
         Swal.fire({
           icon: 'success',
           title: 'cancion autorizada!',
@@ -126,6 +196,44 @@ export class PanelControlComponent implements OnInit {
           timer: 700
         })
       }
+      if (this.usuarios.length < 0) {
+        this.hayUsuarios = false;
+      }
+
+    })
+  }
+
+  borrarUsuario(idUsuario: any) {
+    this.usuariosServicio.borrarUsuario(idUsuario).subscribe((datos: any) => {
+      if (datos['resultado'] == 'OK') {
+        Swal.fire(
+          'Borrado!',
+          'El usuario  ha sido borrado con exito!',
+          'success'
+        )
+        if (this.usuarios.length < 0) {
+          this.hayUsuarios = false;
+        }
+        this.RecuperartipoAdmin()
+      }
+
+    })
+  }
+
+  borrarCancion(idCancion: any) {
+    this.usuariosServicio.borrarCancion(idCancion).subscribe((datos: any) => {
+      if (datos['resultado'] == 'OK') {
+        Swal.fire(
+          'Borrado!',
+          'Tu cancion ha sido borrada con exito!',
+          'success'
+        )
+        if (this.canciones.length < 0) {
+          this.hayUsuarios = false;
+        }
+        this.RecuperartipoAdmin()
+      }
+
     })
   }
 

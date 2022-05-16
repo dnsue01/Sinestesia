@@ -29,20 +29,20 @@
                     </thead>
                     <tbody>
                         <div *ngIf="hayUsuarios; else elseBlock"></div>
-                        <tr *ngFor="let usuario of usarios">
+                        <tr *ngFor="let usuario of usuarios">
 
 
                             <td>{{usuario[0]}}</td>
                             <td>{{usuario[2]}}</td>
                             <td>{{usuario[1]}}</td>
                             <td>
-                                <button>borrar</button>
+                                <button (click)="borrarUsu(usuario[0])">borrar</button>
                             </td>
                         </tr>
 
                         <ng-template #elseBlock>
                             <br>
-                          <h1>No hay usuarios o no tienes permiso para verlas.</h1>  
+                          <h1>No hay usuarios o no tienes permiso para verles.</h1>  
                         </ng-template>
                     </tbody>
                 </table>
@@ -68,7 +68,7 @@
                                 <td>
                                     <audio src="{{urlCanciones}}{{cancion[2]}}" controls></audio>
                                 <td>
-                                    <button>borrar</button>
+                                    <button (click)="borrarCan(cancion[0])">borrar</button>
                                 </td>
                                 <td>
                                     <button (click)="autorizar(cancion[0])">autorizar</button>

@@ -120,6 +120,9 @@ export class UsuariosService {
   AutorizarCancion(cancionYadmin:any) {
     return this.http.post(`${this.url}AutorizarCancion.php`, JSON.stringify(cancionYadmin));
   }
+  borrarUsuario(idUsuario:any) {
+    return this.http.post(`${this.url}borrarUsuario.php`, JSON.stringify(idUsuario));
+  }
 }
 
 

@@ -303,10 +303,8 @@ export class CrearCancionComponent implements OnInit {
         if (datos['resultado']=='OK') {
           
           Swal.fire({
-            icon: 'success',
-            title: 'Cancion subida perfectamente',
-            showConfirmButton: false,
-            timer: 700
+            icon: 'info',
+            title: 'Cancion subida, a la espera de validación'
           })
         }
       })
