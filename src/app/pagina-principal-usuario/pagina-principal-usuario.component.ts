@@ -351,4 +351,14 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
     })
   }
 
+/////////////////////////////////////////////////////
+
+//metodos si es usuario
+
+crearPlayListUnica(){
+  
+}
+
+
+
 }
