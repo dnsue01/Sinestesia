@@ -113,8 +113,12 @@ export class UsuariosService {
   recuperarTodosUsuarios() {
     return this.http.get(`${this.url}recuperarTodosUsuarios.php`);
   }
+
     recuperarTodasCanciones() {
     return this.http.get(`${this.url}recuperarTodasCanciones.php`);
+  }
+  AutorizarCancion(cancionYadmin:any) {
+    return this.http.post(`${this.url}AutorizarCancion.php`, JSON.stringify(cancionYadmin));
   }
 }
 

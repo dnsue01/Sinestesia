@@ -25,7 +25,7 @@ export class PanelControlComponent implements OnInit {
 
   cancion = {
     idCancion: "",
-    idArtista: ""
+    idAdmin: ""
 
   }
   //canciones
@@ -83,9 +83,9 @@ export class PanelControlComponent implements OnInit {
     })
   }
 
-  autorizar(idCancion: any, idArtista: any) {
+  autorizar(idCancion: any) {
     this.cancion.idCancion = idCancion
-    this.cancion.idArtista = idArtista
+    this.cancion.idAdmin = this.id
 
     Swal.fire({
 
@@ -98,12 +98,9 @@ export class PanelControlComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-
         //autorizar
-        console.log("autorizada");
+        this.AutorizarCancion();
         
-      
-
 
       } else if (
         //si le da a cancelar
@@ -114,6 +111,20 @@ export class PanelControlComponent implements OnInit {
           'La cancion no ha sido autorizada',
           'info'
         )
+      }
+    })
+  }
+
+  AutorizarCancion() {
+    this.usuariosServicio.AutorizarCancion(this.cancion).subscribe((datos: any) => {
+    
+      if (datos['resultado']=='OK') {
+        Swal.fire({
+          icon: 'success',
+          title: 'cancion autorizada!',
+          showConfirmButton: false,
+          timer: 700
+        })
       }
     })
   }
