@@ -20,10 +20,10 @@ export class PanelControlComponent implements OnInit {
   nombre: any;
   //usuarios
   usarios: any;
-  hayUsuarios:boolean=false;
+  hayUsuarios: boolean = false;
   //canciones
-  canciones:any;
-  hayCanciones:boolean = false;
+  canciones: any;
+  hayCanciones: boolean = false;
   //url de canciones
   urlCanciones = 'http://localhost/sinestesia/contenido/canciones/';
 
@@ -61,19 +61,24 @@ export class PanelControlComponent implements OnInit {
   recuperarTodosUsuarios() {
     this.usuariosServicio.recuperarTodosUsuarios().subscribe((datos: any) => {
       this.usarios = datos;
-      if(this.usarios.length>0){
+      if (this.usarios.length > 0) {
         this.hayUsuarios = true;
       }
     })
   }
+  //recuperar canciones no autorizadas
   recuperarCanciones() {
     this.usuariosServicio.recuperarTodasCanciones().subscribe((datos: any) => {
       this.canciones = datos;
-      if(this.canciones.length>0){
+      if (this.canciones.length > 0) {
         this.hayCanciones = true;
       }
     })
   }
 
+  autorizar(idCancion: any, idArtista: any) {
+    console.log(idCancion + idArtista);
+
+  }
 
 }
