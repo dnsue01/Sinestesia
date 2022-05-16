@@ -20,11 +20,13 @@ export class PanelControlComponent implements OnInit {
   nombre: any;
   //usuarios
   usarios: any;
+  hayUsuarios:boolean=false;
   //canciones
   canciones:any;
+  hayCanciones:boolean = false;
   //url de canciones
   urlCanciones = 'http://localhost/sinestesia/contenido/canciones/';
-  
+
   ngOnInit(): void {
     this.RecuperartipoAdmin()
   }
@@ -40,11 +42,9 @@ export class PanelControlComponent implements OnInit {
           this.recuperarCanciones();
           break;
         case "MUSIC":
-          console.log("musica");
           this.recuperarCanciones();
           break;
         case "USUAR":
-          console.log("USUAR");
           this.recuperarTodosUsuarios();
           break;
 
@@ -61,11 +61,17 @@ export class PanelControlComponent implements OnInit {
   recuperarTodosUsuarios() {
     this.usuariosServicio.recuperarTodosUsuarios().subscribe((datos: any) => {
       this.usarios = datos;
+      if(this.usarios.length>0){
+        this.hayUsuarios = true;
+      }
     })
   }
   recuperarCanciones() {
     this.usuariosServicio.recuperarTodasCanciones().subscribe((datos: any) => {
       this.canciones = datos;
+      if(this.canciones.length>0){
+        this.hayCanciones = true;
+      }
     })
   }
 
