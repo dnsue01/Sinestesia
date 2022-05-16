@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import Swal from 'sweetalert2';
 
 //importar el servicio
 import { UsuariosService } from '../usuarios.service';
@@ -21,6 +22,12 @@ export class PanelControlComponent implements OnInit {
   //usuarios
   usarios: any;
   hayUsuarios: boolean = false;
+
+  cancion = {
+    idCancion: "",
+    idArtista: ""
+
+  }
   //canciones
   canciones: any;
   hayCanciones: boolean = false;
@@ -77,8 +84,38 @@ export class PanelControlComponent implements OnInit {
   }
 
   autorizar(idCancion: any, idArtista: any) {
-    console.log(idCancion + idArtista);
+    this.cancion.idCancion = idCancion
+    this.cancion.idArtista = idArtista
 
+    Swal.fire({
+
+      title: '¿Estas seguro?',
+      text: "vas a autorizar esta  cancion!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, quiero autorizarla!',
+      cancelButtonText: 'No, cancelar!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        //autorizar
+        console.log("autorizada");
+        
+      
+
+
+      } else if (
+        //si le da a cancelar
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        Swal.fire(
+          'Cancelado!',
+          'La cancion no ha sido autorizada',
+          'info'
+        )
+      }
+    })
   }
 
 }

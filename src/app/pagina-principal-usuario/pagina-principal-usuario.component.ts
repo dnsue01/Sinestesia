@@ -276,7 +276,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
       ) {
         Swal.fire(
           'Cancelado!',
-          'Tu canncion esta a salvo',
+          'Tu cancion esta a salvo',
           'info'
         )
       }
