@@ -103,7 +103,64 @@ export class ListaPlayListComponent implements OnInit {
   detallePlayList(idPlaylist: any) {
 
     this.idPlaylist = idPlaylist;
-    this.pasarIdPlaylist.emit(this.idPlaylist )
+    this.pasarIdPlaylist.emit(this.idPlaylist)
+  }
+
+
+  borrarPlay(idPlaylist: any, nombrePlaylist: any) {
+
+    Swal.fire({
+
+      title: '¿Estas seguro?',
+      text: "No se puede recuperar una vez borrada!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, quiero borrarla !',
+      cancelButtonText: 'No, cancelar!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        //condicional para que no pueda borrar la playlist principal
+        if (nombrePlaylist == "Canciones que te gustan") {
+
+          Swal.fire(
+            'Cuidado!',
+            'Esta playlist no se puede borrar!',
+            'warning'
+          )
+        } else {
+          //metodo de borar
+          this.borrarPlaylist(idPlaylist)
+        }
+
+
+      } else if (
+        //si le da a cancelar
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        Swal.fire(
+          'Cancelado!',
+          'La playlist esta a salvo',
+          'info'
+        )
+      }
+    })
+
+
+  }
+
+  borrarPlaylist(id: any) {
+    this.usuariosServicio.borrarPlaylist(id).subscribe((datos: any) => {
+      if (datos['resultado'] == 'OK') {
+        Swal.fire(
+          'Borrada!',
+          'La playlist ha sido borrado con exito!',
+          'success'
+        )
+        this.recogerPlayListUsuario();
+      }
+
+    })
   }
 
   //recoger las playlist del usuario

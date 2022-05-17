@@ -135,6 +135,9 @@ export class UsuariosService {
    recogerPlayListUsuario(idUsuario: any) {
     return this.http.post(`${this.url}recogerPlayListUsuario.php`, JSON.stringify(idUsuario));
   }
+  borrarPlaylist(idUsuario: any) {
+    return this.http.post(`${this.url}borrarPlaylist.php`, JSON.stringify(idUsuario));
+  }
 }
 
 

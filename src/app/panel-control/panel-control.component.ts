@@ -83,6 +83,8 @@ export class PanelControlComponent implements OnInit {
     })
   }
 
+  //autorizar canciones
+
   autorizar(idCancion: any) {
     this.cancion.idCancion = idCancion
     this.cancion.idAdmin = this.id
