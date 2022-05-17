@@ -144,6 +144,9 @@ export class UsuariosService {
   recuperarNuevosArtistas() {
     return this.http.get(`${this.url}recuperarNuevosArtistas.php`);
   }
+  recogerArtista(idUsuario: any) {
+    return this.http.post(`${this.url}recogerArtista.php`, JSON.stringify(idUsuario));
+  }
 }
 
 

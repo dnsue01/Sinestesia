@@ -60,8 +60,8 @@
                                     <h2>{{cancion[1]}}</h2>
                                 </td>
                                 <td>
-                                    <button
-                                        style="background-color:{{colorLetra}}; color: {{colorFondo}};">Añadir a playlist</button>
+                                    <button style="background-color:{{colorLetra}}; color: {{colorFondo}};">Añadir a
+                                        playlist</button>
 
                                 </td>
                                 <td>
@@ -84,6 +84,21 @@
                 <hr>
                 <!--Nuevos artistas-->
                 <h1>Nuevos artistas</h1>
+                <div class="col-12 col-sm-12 col-md-3 col-xl-3" *ngFor="let artista of artistasNuevos">
+                    <div class="card" style="background-color:{{colorLetra}}; color: {{colorFondo}};">
+                        <div class="card-body centro">
+
+               
+                                <img class="perfil" src="{{urlFotos}}{{artista[7]}}">
+                       
+
+                            <hr>
+                            <h1 class="titulo">{{artista[2]}}</h1>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
             </div>
             <div class="row">
                 <hr>
