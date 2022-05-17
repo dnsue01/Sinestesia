@@ -63,15 +63,15 @@
             </div>
 
             <button class="btn btn-xxl rounded-pill mt-5"
-                style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};" [disabled]="myForm.invalid"
+                style="background-color:{{colorLetra}}; color: {{colorFondo}};" [disabled]="myForm.invalid"
                 type="submit">subir foto</button>
         </form>
 
         <div *ngIf="playList.foto!=''; else noImg2">
             
             <div class="row">
-                <button style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};"
-                    class="btn btn-xxl rounded-pill mt-5" type="submit" (click)="subirPlaylist">
+                <button style="background-color:{{colorLetra}}; color: {{colorFondo}};"
+                    class="btn btn-xxl rounded-pill mt-5" type="submit" (click)="subirPlaylist()">
                     Subir playlist</button>
     
             </div>
