@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output ,EventEmitter} from '@angular/core';
 //servicio
 import { UsuariosService } from '../usuarios.service';
 
@@ -15,6 +15,13 @@ export class BusquedaComponent implements OnInit {
   //recoger el nombre
   @Input() nombre = "";
 
+ //pasar el audio de la cancion la barra
+ @Output() pasarCancion:EventEmitter<any>= new EventEmitter()
+ //pasar la caratula de la cancion la barra
+ @Output() pasarCaratulaCancion:EventEmitter<any>= new EventEmitter()
+  //pasar el titulo de la cancion la barra
+ @Output() pasarTituloCancion:EventEmitter<any>= new EventEmitter()
+
   //usario
   usuario = {
     id: "",
@@ -25,6 +32,12 @@ export class BusquedaComponent implements OnInit {
     color_fondo: "",
     color_fuente: "",
   }
+  //parametros para pasar al padre
+  cancionTitulo = "";
+  cancionCaratula = "";
+  //cancion a reproducir
+   cancionRepro: any;
+
   //colores de la bd
   colorLetra: string = this.usuario.color_fuente;
   colorFondo: string = this.usuario.color_fondo;
@@ -46,12 +59,12 @@ export class BusquedaComponent implements OnInit {
 
   busqueda:string = "";
 
-  bucado:boolean = false;
+  buscado:boolean = false;
 
   //arrays de objetos
    albumes:any;
-   canciones:any;
-   artistas:any;
+   cancionesNuevas:any;
+   artistasNuevos:any;
    paises:any;
 
   constructor(private usuariosServicio: UsuariosService) { }
@@ -79,9 +92,56 @@ export class BusquedaComponent implements OnInit {
     this.cambiarIdATamanno(datos[4]);
     this.cambiarIdAColorFondo(datos[5]);
     this.cambiarIdAColorLetra(datos[6]);
-
+    //recoger sin darle a buscar
+    this.recuperarNuevasCanciones()
+    this.recuperarNuevosArtistas()
   });
 }
+
+//buscar
+
+buscar(){
+  this.buscado = true
+}
+
+//recupererar las 4 primeras canciones
+
+
+recuperarNuevasCanciones() {
+  this.usuariosServicio.recuperarNuevasCanciones().subscribe((datos: any) => {
+    this.cancionesNuevas = datos;
+    
+  })
+}
+recuperarNuevosArtistas() {
+  this.usuariosServicio.recuperarNuevosArtistas().subscribe((datos: any) => {
+    this.artistasNuevos = datos;
+    console.log(this.artistasNuevos);
+  })
+}
+
+  //reproducir en la barra lateral
+  sacarCancion(cancion: any) {
+    this.cancionRepro = cancion;
+    //pasar cancion al padre
+    this.pasarCancion.emit(this.cancionRepro)
+    
+
+  }
+  pasarTitulo(cancion: any) {
+    this.cancionTitulo = cancion;
+    //pasar titulo cancion al padre
+    this.pasarTituloCancion.emit(this.cancionTitulo)
+  
+  }
+  pasarCaratula(cancion: any){
+  this.cancionCaratula = cancion;
+  //pasar caratula
+  this.pasarCaratulaCancion.emit(this.cancionCaratula)
+  }
+
+
+
  //personalizacion
 
  cambiarIdAColorFondo(idColor: any) {

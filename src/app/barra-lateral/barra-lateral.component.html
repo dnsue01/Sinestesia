@@ -138,7 +138,11 @@
         </div>
         
         <div *ngSwitchCase="'busqueda'">
-          <app-busqueda [nombre]="nombre"></app-busqueda>
+          <app-busqueda 
+          (pasarCancion)=" pasarCancion($event)" 
+          (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
+          (pasarTituloCancion)="pasarTituloCancion($event)"
+          [nombre]="nombre"></app-busqueda>
         </div>
         <!--Opcion por defecto-->
         <div *ngSwitchDefault>

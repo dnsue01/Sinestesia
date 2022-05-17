@@ -138,6 +138,12 @@ export class UsuariosService {
   borrarPlaylist(idUsuario: any) {
     return this.http.post(`${this.url}borrarPlaylist.php`, JSON.stringify(idUsuario));
   }
+  recuperarNuevasCanciones() {
+    return this.http.get(`${this.url}recuperarNuevasCanciones.php`);
+  }
+  recuperarNuevosArtistas() {
+    return this.http.get(`${this.url}recuperarNuevosArtistas.php`);
+  }
 }
 
 
