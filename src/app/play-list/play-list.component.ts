@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-play-list',
@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PlayListComponent implements OnInit {
 
+  //recoger el i del album
+  @Input() idPlaylist = "";
+
+  //recoger el nombre
+  @Input() nombre = "";
+
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }

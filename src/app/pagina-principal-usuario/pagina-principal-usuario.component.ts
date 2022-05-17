@@ -6,7 +6,7 @@ import listadeColores from 'src/assets/json/colores.json';
 import listadeTamanno from 'src/assets/json/tamannoLetra.json';
 
 import Swal from 'sweetalert2'
-import { ActivatedRoute, Router } from '@angular/router';
+
 @Component({
   selector: 'app-pagina-principal-usuario',
   templateUrl: './pagina-principal-usuario.component.html',
@@ -30,6 +30,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   @Output() pasarTituloCancion: EventEmitter<any> = new EventEmitter()
   //pasar el id del album para acceder al otro componente
   @Output() pasarIdAlbum: EventEmitter<any> = new EventEmitter()
+
 
   idAlbum = "";
 
@@ -112,7 +113,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   //url donde estan las canciones del servidor
   urlCanciones = 'http://localhost/sinestesia/contenido/canciones/';
 
-  constructor(private usuariosServicio: UsuariosService, private router: Router, private activateRoute: ActivatedRoute) { }
+  constructor(private usuariosServicio: UsuariosService) { }
 
   ngOnInit(): void {
     this.recuperarUsuario();

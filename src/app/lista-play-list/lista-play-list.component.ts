@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 //servicio
 import { UsuariosService } from '../usuarios.service';
@@ -18,7 +18,8 @@ import Swal from 'sweetalert2';
 })
 export class ListaPlayListComponent implements OnInit {
 
-
+  //pasar el id de la playlist para acceder al otro componente
+  @Output() pasarIdPlaylist: EventEmitter<any> = new EventEmitter()
 
   //recoger el nombre
   @Input() nombre = "";
@@ -60,7 +61,8 @@ export class ListaPlayListComponent implements OnInit {
   }
   //todas las paylist del usuario
   playlists: any;
-
+  //id de la playlist
+  idPlaylist: any;
 
   //url donde estan las fotos del servidor
   urlFotos = 'http://localhost/sinestesia/contenido/fotos/';
@@ -98,10 +100,10 @@ export class ListaPlayListComponent implements OnInit {
 
   //detalle de la playlist
 
-  detallePlayList(idPlaylist:any){
+  detallePlayList(idPlaylist: any) {
 
-    console.log(idPlaylist);
-    
+    this.idPlaylist = idPlaylist;
+    this.pasarIdPlaylist.emit(this.idPlaylist )
   }
 
   //recoger las playlist del usuario

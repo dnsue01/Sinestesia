@@ -86,9 +86,13 @@
         <div *ngSwitchCase="'inicio'">
 
           <!--Comunicacion entre padre e hijo con los distintos metodos-->
-          <app-pagina-principal-usuario (crearBotonAnnadir)="crearBotonAnnadir($event)"
-            (pasarCancion)=" pasarCancion($event)" (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
-            (pasarTituloCancion)="pasarTituloCancion($event)" (pasarIdAlbum)="pasarIdAlbum($event)" [nombre]="nombre">
+          <app-pagina-principal-usuario 
+            (crearBotonAnnadir)="crearBotonAnnadir($event)"
+            (pasarCancion)=" pasarCancion($event)" 
+            (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
+            (pasarTituloCancion)="pasarTituloCancion($event)" 
+            (pasarIdAlbum)="pasarIdAlbum($event)"
+            [nombre]="nombre">
           </app-pagina-principal-usuario>
         </div>
         <div *ngSwitchCase="'ajustes'">
@@ -107,9 +111,14 @@
           <app-annadir-canciones-album [nombre]="nombre"></app-annadir-canciones-album>
         </div>
         <!--Paso los parametros para que se pueda reproducir en la barra latral y el id del album-->
+
         <div *ngSwitchCase="'detalleAlbum'">
-          <app-album (pasarCancion)=" pasarCancion($event)" (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
-            (pasarTituloCancion)="pasarTituloCancion($event)" [nombre]="nombre" [idAlbum]="idAlbum"></app-album>
+          <app-album 
+          (pasarCancion)=" pasarCancion($event)" 
+          (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
+          (pasarTituloCancion)="pasarTituloCancion($event)"
+          [nombre]="nombre" 
+          [idAlbum]="idAlbum"></app-album>
         </div>
 
         <!--Estandar-->
@@ -119,7 +128,12 @@
         </div>
 
         <div *ngSwitchCase="'listaPlayList'">
-          <app-lista-play-list [nombre]="nombre"></app-lista-play-list>
+          <app-lista-play-list (pasarIdPlaylist)="pasarIdPlaylist($event)" [nombre]="nombre"></app-lista-play-list>
+        </div>
+       
+
+        <div *ngSwitchCase="'detallePlaylist'">
+          <app-play-list  [idPlaylist]="idPlaylist"[nombre]="nombre"></app-play-list>
         </div>
 
         <!--Opcion por defecto-->

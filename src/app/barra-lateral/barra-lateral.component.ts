@@ -41,13 +41,16 @@ export class BarraLateralComponent {
   //album
   idAlbum:string="";
 
+  //playlist
+  idPlaylist:string="";
+  
   //recivo si hay una cancion y un album
   crearBotonAnnadir(datos:any){
     this.albumYCancion = datos
     
   }
   //url donde estan las fotos del servidor
-  urlFotos = 'http://localhost/sinestesia/contenido/fotos/';
+   urlFotos = 'http://localhost/sinestesia/contenido/fotos/';
   //url donde estan las canciones del servidor
    urlCanciones = 'http://localhost/sinestesia/contenido/canciones/';
 
@@ -67,10 +70,16 @@ export class BarraLateralComponent {
 //pasar id de album
   pasarIdAlbum(datos:any){
    this.idAlbum = datos;
-   this.albumSelccionado = true;
    //esto lo hago para que entre directamente a la ruta
    this.opcion = "detalleAlbum";
   }
+
+//pasar id de playList
+pasarIdPlaylist(datos:any){
+  this.idPlaylist = datos;
+  //esto lo hago para que entre directamente a la ruta
+  this.opcion = "detallePlaylist";
+ }
 
   usuario = {
     id: "",
