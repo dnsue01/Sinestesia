@@ -5,6 +5,7 @@ import { UsuariosService } from '../usuarios.service';
 //imporar los json
 import listadeColores from 'src/assets/json/colores.json';
 import listadeTamanno from 'src/assets/json/tamannoLetra.json';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-busqueda',
@@ -66,6 +67,14 @@ export class BusquedaComponent implements OnInit {
   cancionesNuevas: any;
   artistasNuevos: any = [];
   paises: any;
+  playlists: any = [];
+  //id de cancion y playlist para mandar a la bd
+  idCancionYPlayList = {
+    idcancion: "",
+    idPlaylist: ""
+  }
+  //cancion seleccionada para añadir
+  seleccionado: boolean = false
 
   constructor(private usuariosServicio: UsuariosService) { }
 
@@ -95,6 +104,7 @@ export class BusquedaComponent implements OnInit {
       //recoger sin darle a buscar
       this.recuperarNuevasCanciones()
       this.recuperarNuevosArtistas()
+      this.recogerPlayListUsuario()
     });
   }
 
@@ -119,22 +129,105 @@ export class BusquedaComponent implements OnInit {
         //paso la foto y el id para para representar los dos
         const idArtista = datos[i][0];
         const fotoArtista = datos[i][1];
-        this.recogerArtista(idArtista,fotoArtista);
+        this.recogerArtista(idArtista, fotoArtista);
       }
+    })
+  }
+
+  //Añadir cancion a playlist 
+
+  //seleccionar el id de la cancion
+  AnnadirPlaylist(idCancion: any) {
+    this.idCancionYPlayList.idcancion = idCancion;
+    this.seleccionado = true
+  }
+  //seleccionar el id de la playlist
+  seleccionarPlaylist(e: any) {
+    this.idCancionYPlayList.idPlaylist = e.target.value
+  }
+
+  annadirCan() {
+    if(this.idCancionYPlayList.idPlaylist != ""){
+   
+    this.usuariosServicio.comprobarCanionPlaylist(this.idCancionYPlayList).subscribe((datos: any) => {
+      if (datos["mensaje"]) {
+
+        Swal.fire({
+
+          title: '¿Estas seguro?',
+          text: "Esta cancion ya esta en esta playlist!",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonText: 'Si, quiero añadirla!',
+          cancelButtonText: 'No, cancelar!',
+          reverseButtons: true
+        }).then((result) => {
+          if (result.isConfirmed) {
+
+            //metodo de insertar
+            this.insertarCancionPlaylist()
+            this.seleccionado=false;
+
+          } else if (
+            //si le da a cancelar
+            result.dismiss === Swal.DismissReason.cancel
+          ) {
+            this.seleccionado=false;
+            Swal.fire(
+              'Cancelado!',
+              'Tu cancion no se ha añadido',
+              'info'
+            )
+          }
+        })
+
+      } else {
+        this.insertarCancionPlaylist()
+        this.seleccionado=false;
+      }
+    })
+  }else{
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Debes de seleccionar una playlist ',
+    })
+  }
+}
+
+  insertarCancionPlaylist() {
+    this.usuariosServicio.insertarCanionPlaylist(this.idCancionYPlayList).subscribe((datos: any) => {
+      if (datos["resultado"] == "OK") {
+        Swal.fire({
+          icon: 'success',
+          title: 'Añadida correctamente',
+          showConfirmButton: false,
+          timer: 300
+        })
+      }
+    })
+  }
+
+
+
+  //recoger las playlist del usuario
+  recogerPlayListUsuario() {
+    this.usuariosServicio.recogerPlayListUsuario(this.usuario.id).subscribe((datos: any) => {
+      this.playlists = datos;
     })
   }
 
   //passar id de artista y recoger nombre
 
-  recogerArtista(idArtista:any,fotoArtista:any) {
-   
-      this.usuariosServicio.recogerArtista(idArtista).subscribe((datos: any) => {
-        datos.push(fotoArtista)
-        this.artistasNuevos.push(datos)
-        console.log(this.artistasNuevos);
-        
-      })
-    
+  recogerArtista(idArtista: any, fotoArtista: any) {
+
+    this.usuariosServicio.recogerArtista(idArtista).subscribe((datos: any) => {
+      datos.push(fotoArtista)
+      this.artistasNuevos.push(datos)
+      console.log(this.artistasNuevos);
+
+    })
+
   }
 
   //reproducir en la barra lateral

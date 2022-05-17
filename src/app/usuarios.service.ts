@@ -147,6 +147,12 @@ export class UsuariosService {
   recogerArtista(idUsuario: any) {
     return this.http.post(`${this.url}recogerArtista.php`, JSON.stringify(idUsuario));
   }
+  comprobarCanionPlaylist(idCancionYidAlbum: any) {
+    return this.http.post(`${this.url}comprobarCancionPlaylist.php`, JSON.stringify(idCancionYidAlbum));
+  }
+  insertarCanionPlaylist(idCancionYidAlbum: any) {
+    return this.http.post(`${this.url}insertarCancionPlaylist.php`, JSON.stringify(idCancionYidAlbum));
+  }
 }
 
 
