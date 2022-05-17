@@ -12,6 +12,7 @@ import { AlbumComponent } from './album/album.component';
 import { AnnadirCancionesAlbumComponent } from './annadir-canciones-album/annadir-canciones-album.component';
 import { PanelControlComponent } from './panel-control/panel-control.component';
 import { CrearPlayListComponent } from './crear-play-list/crear-play-list.component';
+import { ListaPlayListComponent } from './lista-play-list/lista-play-list.component';
 
 const routes: Routes = [
   { path: "",redirectTo:"inicio" ,pathMatch:"full"},  //ruta por defecto
@@ -30,7 +31,8 @@ const routes: Routes = [
     {path:"crearAlbum",component:CrearAlbumComponent},
     {path:"annadirCancionesAlbum",component:AnnadirCancionesAlbumComponent},
     {path:"album/:id",component:AlbumComponent},
-    {path:"crearPlayList",component:CrearPlayListComponent}
+    {path:"crearPlayList",component:CrearPlayListComponent},
+    {path:"listaPlayList",component:ListaPlayListComponent}
   ]},
   //administradores
   {path:"panelControl/:id",component:PanelControlComponent}

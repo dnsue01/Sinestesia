@@ -109,6 +109,9 @@ annadirCancionesAlbum(){
 crearPlayList(){
   this.opcion = "crearPlayList"
 }
+listaPlayList(){
+  this.opcion = "listaPlayList"
+}
 
   //recuperar el usuario de la bd
   recuperarUsuario() {

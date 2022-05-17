@@ -10,8 +10,6 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 
-
-
 //servicio
 import { UsuariosService } from '../usuarios.service';
 

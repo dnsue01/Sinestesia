@@ -21,11 +21,12 @@
             <a mat-list-item href="#" class="link">
               <h2>Buscar</h2>
             </a>
-            <a mat-list-item href="#" class="link">
+            <a  mat-list-item routerLink="listaPlayList" (click)="listaPlayList()">
               <h2>Lista de playlist</h2>
+             
             </a>
             <hr>
-            <a routerLink="crearPlayList" (click)="crearPlayList()">
+            <a  mat-list-item routerLink="crearPlayList" (click)="crearPlayList()">
               <h2>Crear una playlist</h2>
             </a>
 
@@ -115,6 +116,10 @@
 
         <div *ngSwitchCase="'crearPlayList'">
           <app-crear-play-list [nombre]="nombre"></app-crear-play-list>
+        </div>
+
+        <div *ngSwitchCase="'listaPlayList'">
+          <app-lista-play-list [nombre]="nombre"></app-lista-play-list>
         </div>
 
         <!--Opcion por defecto-->

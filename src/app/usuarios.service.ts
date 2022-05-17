@@ -132,6 +132,9 @@ export class UsuariosService {
   insertarPlaylist(playlist: any) {
     return this.http.post(`${this.url}insertarPlaylist.php`, JSON.stringify(playlist));
   }
+   recogerPlayListUsuario(idUsuario: any) {
+    return this.http.post(`${this.url}recogerPlayListUsuario.php`, JSON.stringify(idUsuario));
+  }
 }
 
 
