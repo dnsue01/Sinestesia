@@ -375,7 +375,6 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
       this.playList.Nombre = datos[1]
       this.playList.foto= datos[2]
       this.playList.Id_usuario = datos[3]
-      console.log(this.playList);
       
     })
   }
