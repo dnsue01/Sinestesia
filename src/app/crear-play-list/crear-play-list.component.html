@@ -1,0 +1,52 @@
+<!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+    rel="stylesheet" />
+
+<div class="card" style="background-color:{{colorFondo}}; color: {{colorLetra}};font-size: {{tamanno}} ">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-7 col-sm-7 col-md-7 col-xl-7">
+                <h1 class="titulo">Crear una playlist</h1>
+                <hr>
+                <h1>{{nombre}}</h1>
+            </div>
+        </div>
+
+        <hr>
+        <h1>Escribe el nombre de tu playlist</h1>
+
+        <input type="text" class="form-control" id="nombrePlayList" [(ngModel)]="playList.Nombre">
+
+        <br>
+        <form [formGroup]="myForm" (ngSubmit)="submit()">
+
+
+
+            <div class="form-group">
+                <h1>Ponle una foto a tu playlist</h1>
+                <br>
+                <input formControlName="file" id="file" type="file" class="form-control"
+                    (change)="onFileChange($event)">
+                <div *ngIf="f['file'].touched && f['file'].invalid" class="alert alert-danger">
+                    <div *ngIf="f['file'].errors && f['file'].errors['required']">Necesitas poner una imagen.</div>
+                </div>
+            </div>
+
+            <button class="btn btn-xxl rounded-pill mt-5"
+                style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};" [disabled]="myForm.invalid"
+                type="submit">subir foto</button>
+        </form>
+
+        <div *ngIf="playList.foto!=''; else noImg2">
+            
+            <div class="row">
+                <button style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};"
+                    class="btn btn-xxl rounded-pill mt-5" type="submit" (click)="subirPlaylist()">
+                    Subir playlist</button>
+    
+            </div>
+        </div>
+        <ng-template #noImg2></ng-template>
+    </div>
+</div>

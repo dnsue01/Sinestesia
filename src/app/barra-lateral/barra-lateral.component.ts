@@ -106,7 +106,9 @@ export class BarraLateralComponent {
 annadirCancionesAlbum(){
   this.opcion = "annadirCancionesAlbum"
 }
-
+crearPlayList(){
+  this.opcion = "crearPlayList"
+}
 
   //recuperar el usuario de la bd
   recuperarUsuario() {

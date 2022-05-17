@@ -1,26 +1,31 @@
 import { Component, Input, OnInit } from '@angular/core';
 
+//alertas
+import Swal from 'sweetalert2';
+
+//formulario
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+
+//para hacer la llamada de subir
+import { HttpClient } from '@angular/common/http';
+
+
+
+
 //servicio
 import { UsuariosService } from '../usuarios.service';
 
 //imporar los json
 import listadeColores from 'src/assets/json/colores.json';
 import listadeTamanno from 'src/assets/json/tamannoLetra.json';
-//formulario
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-
-import Swal from 'sweetalert2';
-
-//para hacer la llamada de subir
-import { HttpClient } from '@angular/common/http';
-
 
 @Component({
-  selector: 'app-crear-album',
-  templateUrl: './crear-album.component.html',
-  styleUrls: ['./crear-album.component.scss']
+  selector: 'app-crear-play-list',
+  templateUrl: './crear-play-list.component.html',
+  styleUrls: ['./crear-play-list.component.scss']
 })
-export class CrearAlbumComponent implements OnInit {
+export class CrearPlayListComponent implements OnInit {
+
 
   //recoger el nombre
   @Input() nombre = "";
@@ -35,13 +40,6 @@ export class CrearAlbumComponent implements OnInit {
     color_fondo: "",
     color_fuente: "",
   }
-
-  album = {
-    nombre: "",
-    foto_album: "",
-    Id_usuario: "",
-  }
-
 
   //colores de la bd
   colorLetra: string = this.usuario.color_fuente;
@@ -59,22 +57,36 @@ export class CrearAlbumComponent implements OnInit {
   tamanno: any = listadeTamanno;
   tamannoSeleccionable: any;
 
+  //alumbes
+  albumesArtista: any;
+  //canciones
+  CancionesArtista: any;
 
-  //archivo
-  nombreArchivo = '';
+  //playlisit
+  playList = {
+    Id_playlist: "",
+    Nombre: "",
+    foto: "",
+    Id_usuario: ""
+
+  }
+  //comprobar si el album esta subido
+  subido: boolean = false;
 
   //url donde estan las fotos del servidor
   urlFotos = 'http://localhost/sinestesia/contenido/fotos/';
 
-  //comprobar si el album esta subido
-  subido: boolean = false;
+  //archivo
+  nombreArchivo = '';
+
+  //comprobar si el palylist esta subida
+  subida: boolean = false;
 
   constructor(private usuariosServicio: UsuariosService, private http: HttpClient) { }
 
   ngOnInit(): void {
     this.recuperarUsuario();
   }
-
 
   //recuperar el usuario de la bd
   recuperarUsuario() {
@@ -95,7 +107,8 @@ export class CrearAlbumComponent implements OnInit {
       this.cambiarIdAColorFondo(datos[5]);
       this.cambiarIdAColorLetra(datos[6]);
 
-    });
+
+    })
   }
 
 
@@ -124,7 +137,6 @@ export class CrearAlbumComponent implements OnInit {
       upload$.subscribe();
     }
   }
-
   //falta el archivo
   get f() {
     return this.myForm.controls;
@@ -150,7 +162,7 @@ export class CrearAlbumComponent implements OnInit {
 
         if (datos['mensaje']) {
 
-          this.album.foto_album = datos['nombreCompleto']
+          this.playList.foto = datos['nombreCompleto']
 
         } else {
 
@@ -164,57 +176,44 @@ export class CrearAlbumComponent implements OnInit {
       })
   }
 
-  //subir Album
-
-  subirAlbum() {
+  //subir Playlist
+  subirPlaylist() {
     //comprobar si se han rellenado los campos
-    if (this.album.nombre != "") {
-     
-      this.comprobarNombreAlbum();
+    if (this.playList.Nombre != "") {
+
+      //agrego el id de usuario a la playlist
+      this.playList.Id_usuario = this.usuario.id
+
+      this.insertarPlaylist()
 
     } else {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'El nombre del album no debe de estar vacio',
+        text: 'El nombre de la playlist no debe de estar vacio',
       })
     }
 
 
   }
 
-  //comprobar Nombre Album
 
-  comprobarNombreAlbum() {
+  insertarPlaylist() {
 
-    this.usuariosServicio.comprobarNombreAlbum(this.album.nombre).subscribe((datos: any) => {
-      if (!datos["mensaje"]) {
-        this.album.Id_usuario = this.usuario.id
-        this.insertarAlbum();
-      } else {
+    this.usuariosServicio.insertarPlaylist(this.playList).subscribe((datos: any) => {
+      if (datos['resultado'] == 'OK') {
+        this.subido = true;
         Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Ya hay un album con este nombre',
+          icon: 'success',
+          title: 'Playlist subida correctamente',
+          showConfirmButton: false,
+          timer: 700
         })
       }
+
     })
   }
-//insertar Album base de datos
-  insertarAlbum(){
-     this.usuariosServicio.insertarAlbum(this.album).subscribe((datos: any) => {
-        if (datos['resultado']=='OK') {
-          this.subido = true;
-          Swal.fire({
-            icon: 'success',
-            title: 'Album subido correctamente',
-            showConfirmButton: false,
-            timer: 700
-          })
-        }
 
-  })
-}
 
 
   //personalizacion
@@ -223,7 +222,7 @@ export class CrearAlbumComponent implements OnInit {
     for (let i = 0; i < this.coloresSelecionables.length; i++) {
       if (this.coloresSelecionables[i].id == idColor) {
         this.colorFondo = this.coloresSelecionables[i].color
-        this.colorBotonLetra = this.colorFondo
+        this.colorBotonLetra = this.colorBotonFondo
       }
     }
   }
@@ -244,8 +243,5 @@ export class CrearAlbumComponent implements OnInit {
       }
     }
   }
-
-
-
 
 }
