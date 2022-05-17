@@ -24,42 +24,42 @@ export class ListaPlayListComponent implements OnInit {
   @Input() nombre = "";
 
   //usario
-usuario = {
-  id: "",
-  correo: "",
-  nombre: "",
-  contrasennaEncrip: "",
-  tamanno_letra: "",
-  color_fondo: "",
-  color_fuente: "",
-}
+  usuario = {
+    id: "",
+    correo: "",
+    nombre: "",
+    contrasennaEncrip: "",
+    tamanno_letra: "",
+    color_fondo: "",
+    color_fuente: "",
+  }
 
-//colores de la bd
-colorLetra: string = this.usuario.color_fuente;
-colorFondo: string = this.usuario.color_fondo;
-tamannoLetra: string = this.usuario.tamanno_letra;
-//colores defecto del boton
-colorBotonFondo: string = this.colorLetra;
-colorBotonLetra: string = this.colorFondo;
+  //colores de la bd
+  colorLetra: string = this.usuario.color_fuente;
+  colorFondo: string = this.usuario.color_fondo;
+  tamannoLetra: string = this.usuario.tamanno_letra;
+  //colores defecto del boton
+  colorBotonFondo: string = this.colorLetra;
+  colorBotonLetra: string = this.colorFondo;
 
-//Colores de json
-colores: any = listadeColores;
-coloresSelecionables: any;
+  //Colores de json
+  colores: any = listadeColores;
+  coloresSelecionables: any;
 
-//Tamanno de json
-tamanno: any = listadeTamanno;
-tamannoSeleccionable: any;
+  //Tamanno de json
+  tamanno: any = listadeTamanno;
+  tamannoSeleccionable: any;
 
 
-//playlisit
-playList = {
-  Id_playlist: "",
-  Nombre: "",
-  foto: "",
-  Id_usuario: ""
-}
-//todas las paylist del usuario
-playlists:any;
+  //playlisit
+  playList = {
+    Id_playlist: "",
+    Nombre: "",
+    foto: "",
+    Id_usuario: ""
+  }
+  //todas las paylist del usuario
+  playlists: any;
 
 
   //url donde estan las fotos del servidor
@@ -90,15 +90,26 @@ playlists:any;
       this.cambiarIdATamanno(datos[4]);
       this.cambiarIdAColorFondo(datos[5]);
       this.cambiarIdAColorLetra(datos[6]);
-
+      //playlists
+      this.recogerPlayListUsuario();
 
     })
   }
 
-  recogerPlayListUsuario(){
+  //detalle de la playlist
+
+  detallePlayList(idPlaylist:any){
+
+    console.log(idPlaylist);
     
   }
 
+  //recoger las playlist del usuario
+  recogerPlayListUsuario() {
+    this.usuariosServicio.recogerPlayListUsuario(this.usuario.id).subscribe((datos: any) => {
+      this.playlists = datos;
+    })
+  }
   //personalizacion
 
   cambiarIdAColorFondo(idColor: any) {

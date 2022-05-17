@@ -28,6 +28,7 @@ import { AnnadirCancionesAlbumComponent } from './annadir-canciones-album/annadi
 import { PanelControlComponent } from './panel-control/panel-control.component';
 import { CrearPlayListComponent } from './crear-play-list/crear-play-list.component';
 import { ListaPlayListComponent } from './lista-play-list/lista-play-list.component';
+import { PlayListComponent } from './play-list/play-list.component';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ListaPlayListComponent } from './lista-play-list/lista-play-list.compon
     AnnadirCancionesAlbumComponent,
     PanelControlComponent,
     CrearPlayListComponent,
-    ListaPlayListComponent
+    ListaPlayListComponent,
+    PlayListComponent
   ],
   imports: [
     BrowserModule,
