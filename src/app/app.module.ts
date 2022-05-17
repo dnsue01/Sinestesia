@@ -29,6 +29,7 @@ import { PanelControlComponent } from './panel-control/panel-control.component';
 import { CrearPlayListComponent } from './crear-play-list/crear-play-list.component';
 import { ListaPlayListComponent } from './lista-play-list/lista-play-list.component';
 import { PlayListComponent } from './play-list/play-list.component';
+import { BusquedaComponent } from './busqueda/busqueda.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { PlayListComponent } from './play-list/play-list.component';
     PanelControlComponent,
     CrearPlayListComponent,
     ListaPlayListComponent,
-    PlayListComponent
+    PlayListComponent,
+    BusquedaComponent
   ],
   imports: [
     BrowserModule,

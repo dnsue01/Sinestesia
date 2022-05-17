@@ -18,7 +18,7 @@
 
           <!--Si el usuario es  estandar-->
           <div *ngIf="estandar; else artsita">
-            <a mat-list-item href="#" class="link">
+            <a mat-list-item  mat-list-item routerLink="busqueda"  (click)="busqueda()">
               <h2>Buscar</h2>
             </a>
             <a  mat-list-item routerLink="listaPlayList" (click)="listaPlayList()">
@@ -95,6 +95,7 @@
             [nombre]="nombre">
           </app-pagina-principal-usuario>
         </div>
+
         <div *ngSwitchCase="'ajustes'">
           <app-ajustes [nombre]="nombre"></app-ajustes>
 
@@ -135,7 +136,10 @@
         <div *ngSwitchCase="'detallePlaylist'">
           <app-play-list  [idPlaylist]="idPlaylist"[nombre]="nombre"></app-play-list>
         </div>
-
+        
+        <div *ngSwitchCase="'busqueda'">
+          <app-busqueda [nombre]="nombre"></app-busqueda>
+        </div>
         <!--Opcion por defecto-->
         <div *ngSwitchDefault>
           <app-pagina-principal-usuario [nombre]="nombre"></app-pagina-principal-usuario>

@@ -121,7 +121,9 @@ crearPlayList(){
 listaPlayList(){
   this.opcion = "listaPlayList"
 }
-
+busqueda(){
+  this.opcion = "busqueda"
+}
   //recuperar el usuario de la bd
   recuperarUsuario() {
     this.usuariosServicio.recuperarUsuario(this.nombre).subscribe((datos: any) => {
