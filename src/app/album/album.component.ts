@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+
 
 
 //servicio
@@ -30,7 +30,7 @@ export class AlbumComponent implements OnInit {
   //pasar el titulo de la cancion la barra
  @Output() pasarTituloCancion:EventEmitter<any>= new EventEmitter()
 
-  constructor(private route: ActivatedRoute, private usuariosServicio: UsuariosService) { }
+  constructor( private usuariosServicio: UsuariosService) { }
 
   ngOnInit(): void {
     //recuperar usuario

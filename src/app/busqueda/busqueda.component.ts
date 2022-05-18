@@ -24,7 +24,7 @@ export class BusquedaComponent implements OnInit {
   @Output() pasarTituloCancion: EventEmitter<any> = new EventEmitter()
 
   //pasar el nombre del Artista  la barra
-   @Output() pasarNombreArtista: EventEmitter<any> = new EventEmitter()
+  @Output() pasarNombreArtista: EventEmitter<any> = new EventEmitter()
 
   //usario
   usuario = {
@@ -42,7 +42,7 @@ export class BusquedaComponent implements OnInit {
   //cancion a reproducir
   cancionRepro: any;
   //artista 
-  artista:any;
+  artista: any;
 
   //colores de la bd
   colorLetra: string = this.usuario.color_fuente;
@@ -67,6 +67,8 @@ export class BusquedaComponent implements OnInit {
 
   buscado: boolean = false;
 
+  //mayor de edad
+  mayor: boolean = true
   //arrays de objetos
   albumes: any;
   cancionesNuevas: any;
@@ -106,11 +108,22 @@ export class BusquedaComponent implements OnInit {
       this.cambiarIdATamanno(datos[4]);
       this.cambiarIdAColorFondo(datos[5]);
       this.cambiarIdAColorLetra(datos[6]);
+      //comprobarEdad
+      this.comprobarEdad()
       //recoger sin darle a buscar
       this.recuperarNuevasCanciones()
       this.recuperarNuevosArtistas()
       this.recogerPlayListUsuario()
+
     });
+  }
+  //compruebo en la bd si el usuario es mayor de edad
+  comprobarEdad() {
+    this.usuariosServicio.comprobarEdad(this.usuario.id).subscribe((datos: any) => {
+      if (datos["mensaje"]) {
+        this.mayor = false
+      }
+    })
   }
 
   //buscar
@@ -152,53 +165,53 @@ export class BusquedaComponent implements OnInit {
   }
 
   annadirCan() {
-    if(this.idCancionYPlayList.idPlaylist != ""){
-   
-    this.usuariosServicio.comprobarCanionPlaylist(this.idCancionYPlayList).subscribe((datos: any) => {
-      if (datos["mensaje"]) {
+    if (this.idCancionYPlayList.idPlaylist != "") {
 
-        Swal.fire({
+      this.usuariosServicio.comprobarCanionPlaylist(this.idCancionYPlayList).subscribe((datos: any) => {
+        if (datos["mensaje"]) {
 
-          title: '¿Estas seguro?',
-          text: "Esta cancion ya esta en esta playlist!",
-          icon: 'warning',
-          showCancelButton: true,
-          confirmButtonText: 'Si, quiero añadirla!',
-          cancelButtonText: 'No, cancelar!',
-          reverseButtons: true
-        }).then((result) => {
-          if (result.isConfirmed) {
+          Swal.fire({
 
-            //metodo de insertar
-            this.insertarCancionPlaylist()
-            this.seleccionado=false;
+            title: '¿Estas seguro?',
+            text: "Esta cancion ya esta en esta playlist!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Si, quiero añadirla!',
+            cancelButtonText: 'No, cancelar!',
+            reverseButtons: true
+          }).then((result) => {
+            if (result.isConfirmed) {
 
-          } else if (
-            //si le da a cancelar
-            result.dismiss === Swal.DismissReason.cancel
-          ) {
-            this.seleccionado=false;
-            Swal.fire(
-              'Cancelado!',
-              'Tu cancion no se ha añadido',
-              'info'
-            )
-          }
-        })
+              //metodo de insertar
+              this.insertarCancionPlaylist()
+              this.seleccionado = false;
 
-      } else {
-        this.insertarCancionPlaylist()
-        this.seleccionado=false;
-      }
-    })
-  }else{
-    Swal.fire({
-      icon: 'error',
-      title: 'Oops...',
-      text: 'Debes de seleccionar una playlist ',
-    })
+            } else if (
+              //si le da a cancelar
+              result.dismiss === Swal.DismissReason.cancel
+            ) {
+              this.seleccionado = false;
+              Swal.fire(
+                'Cancelado!',
+                'Tu cancion no se ha añadido',
+                'info'
+              )
+            }
+          })
+
+        } else {
+          this.insertarCancionPlaylist()
+          this.seleccionado = false;
+        }
+      })
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Debes de seleccionar una playlist ',
+      })
+    }
   }
-}
 
   insertarCancionPlaylist() {
     this.usuariosServicio.insertarCanionPlaylist(this.idCancionYPlayList).subscribe((datos: any) => {
@@ -255,9 +268,9 @@ export class BusquedaComponent implements OnInit {
     this.pasarCaratulaCancion.emit(this.cancionCaratula)
   }
 
-    //nobre del artista
+  //nobre del artista
   sacarNombreArtista(artista: any) {
-    this.artista = artista;  
+    this.artista = artista;
     //pasar nombre al padre
     this.pasarNombreArtista.emit(this.artista)
 

@@ -1,1 +1,67 @@
-<p>play-list works!</p>
+<!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+    rel="stylesheet" />
+
+    <!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+    rel="stylesheet" />
+
+
+<div class="card" style="background-color:{{colorFondo}}; color: {{colorLetra}};font-size: {{tamanno}} ">
+    <div class="card-body">
+        <div class="row fotoPrincipal">
+            <img class="fotoAlbum" src="{{urlFotos}}{{playList.foto}}">
+        </div>
+        <div class="row">
+            <h1 class="titulo">{{playList.Nombre}}-{{nombre}}</h1>
+        </div>
+        <hr>
+        <div class="row">
+            <h1>Canciones</h1>
+            <br>
+            <div class="table-responsive">
+                <table class="table table-hover" style="color: {{colorLetra}} ;">
+                    <thead>
+                        <tr>
+                            <th scope="col">Caratula</th>
+                            <th scope="col">nombre</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <div *ngIf="hayCanciones; else elseBlock"></div>
+                      
+                        <tr *ngFor="let cancion of cancionesPlaylist">
+                         
+                            <!--Metodos para pasar al padre-->
+                            <th scope="row"
+                            (click)="sacarCancion(cancion[2])" 
+                            (click)="pasarTitulo(cancion[1])"
+                            (click)="pasarCaratula(cancion[3])"
+                            >
+
+                                <img class="cancion" src="{{urlFotos}}{{cancion[3]}}">
+                            </th>
+
+                            <td>
+                                <h2>{{cancion[1]}}</h2>
+                            </td>
+                            <td>
+                                <button style="background-color:{{colorLetra}}; color: {{colorFondo}};"(click)="borrarCanPlay(cancion[0])">Borrar</button>
+                            </td>
+
+                       
+                        </tr>
+                        <ng-template #elseBlock>
+                            <br>
+                            <h1>No hay canciones en el la playlist</h1>
+                        </ng-template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+    </div>
+</div>

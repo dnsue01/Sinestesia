@@ -164,6 +164,13 @@ export class UsuariosService {
   borrarCancionPlaylist(idCancion: any) {
     return this.http.post(`${this.url}borrarCancionPlaylist.php`, JSON.stringify(idCancion));
   }
+
+  recuperarPlaylist(idPlaylist: any) {
+    return this.http.post(`${this.url}recuperarPlaylist.php`, JSON.stringify(idPlaylist));
+  }
+  comprobarEdad(idUsuario: any) {
+    return this.http.post(`${this.url}comprobarEdad.php`, JSON.stringify(idUsuario));
+  }
 }
 
 

@@ -50,10 +50,8 @@
                             <tr *ngFor="let cancion of cancionesNuevas">
 
                                 <!--Metodos para pasar al padre-->
-                                <th scope="row" 
-                                (click)="sacarCancion(cancion[2])" 
-                                (click)="pasarTitulo(cancion[1])"
-                                (click)="pasarCaratula(cancion[3])">
+                                <th scope="row" (click)="sacarCancion(cancion[2])" (click)="pasarTitulo(cancion[1])"
+                                    (click)="pasarCaratula(cancion[3])">
 
                                     <img class="cancion" src="{{urlFotos}}{{cancion[3]}}">
                                 </th>
@@ -61,8 +59,18 @@
                                 <td>
                                     <h2>{{cancion[1]}}</h2>
                                 </td>
+                                <div *ngIf="cancion[6] == '1' && mayor == false; else elseBlock">
+                                    
+                                      <td>  <h2>Esta cancion es explicita</h2></td>
+
+                                        
+                                </div>
+                                
+                    
+                                <ng-template #elseBlock></ng-template>
                                 <td>
-                                    <button (click)="AnnadirPlaylist(cancion[0])" style="background-color:{{colorLetra}}; color: {{colorFondo}};">Añadir a
+                                    <button (click)="AnnadirPlaylist(cancion[0])"
+                                        style="background-color:{{colorLetra}}; color: {{colorFondo}};">Añadir a
                                         playlist</button>
 
                                 </td>
@@ -70,14 +78,16 @@
                                     <td>
                                         <select (change)="seleccionarPlaylist($event)">
                                             <option value="">Escoge una de tus playList</option>
-                                            <option *ngFor="let playlist of playlists" value="{{playlist[0]}}">{{playlist[1]}}</option>
+                                            <option *ngFor="let playlist of playlists" value="{{playlist[0]}}">
+                                                {{playlist[1]}}</option>
                                         </select>
                                     </td>
                                     <td>
-                                        <button (click)="annadirCan()"style="background-color:{{colorLetra}}; color: {{colorFondo}};">Añadir</button>
+                                        <button (click)="annadirCan()"
+                                            style="background-color:{{colorLetra}}; color: {{colorFondo}};">Añadir</button>
                                     </td>
                                 </div>
-                                
+
                                 <ng-template #noSeleccionado></ng-template>
                             </tr>
                         </tbody>
@@ -91,18 +101,20 @@
                 <!--Nuevos artistas-->
                 <h1>Nuevos artistas</h1>
                 <div class="col-12 col-sm-12 col-md-3 col-xl-3" *ngFor="let artista of artistasNuevos">
-                    <div class="card artista"  (click)="sacarNombreArtista(artista[2])" style="background-color:{{colorLetra}}; color: {{colorFondo}};">
+                    <div class="card artista" (click)="sacarNombreArtista(artista[2])"
+                        style="background-color:{{colorLetra}}; color: {{colorFondo}};">
                         <div class="card-body centro">
 
-               
+
+
                             <div *ngIf="artista[7] == ''; else fotoBD">
 
                                 <img class="perfil" src="assets/ejemplo/sinestesia.png">
-                              </div>
-                              <ng-template #fotoBD>
+                            </div>
+                            <ng-template #fotoBD>
                                 <img class="perfil" src="{{urlFotos}}{{artista[7]}}">
-                              </ng-template>
-                       
+                            </ng-template>
+
 
                             <hr>
                             <h1 class="titulo">{{artista[2]}}</h1>
