@@ -15,6 +15,7 @@ import { CrearPlayListComponent } from './crear-play-list/crear-play-list.compon
 import { ListaPlayListComponent } from './lista-play-list/lista-play-list.component';
 import { PlayListComponent } from './play-list/play-list.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
+import { ArtistaComponent } from './artista/artista.component';
 
 const routes: Routes = [
   { path: "",redirectTo:"inicio" ,pathMatch:"full"},  //ruta por defecto
@@ -37,6 +38,7 @@ const routes: Routes = [
     {path:"listaPlayList",component:ListaPlayListComponent},
     {path:"PlayList/:id",component:PlayListComponent},
     {path:"busqueda",component:BusquedaComponent},
+    {path:"artista/:nombreArtista",component:ArtistaComponent}
   ]},
   //administradores
   {path:"panelControl/:id",component:PanelControlComponent}

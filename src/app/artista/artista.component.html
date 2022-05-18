@@ -1,0 +1,148 @@
+<!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+    rel="stylesheet" />
+
+<div class="card" style="background-color:{{colorFondo}}; color: {{colorLetra}};font-size: {{tamanno}}">
+    <div class="card-body">
+        <div class=" selector">
+
+            <div class="row">
+
+                <div class="col-9 col-sm-9 col-lg-9 col-md-9 col-xl-9">
+                    <h2>Artsista</h2>
+                    <h1>{{nombreArtista}}</h1>
+
+                </div>
+
+                <div class="col-4 col-sm-4 col-lg-3 col-md-3 col-xl-3">
+
+                    <div class="image-upload">
+                        <div *ngIf="idYFoto.extension == ''; else fotoBD">
+
+                            <img class="perfil" src="assets/ejemplo/sinestesia.png">
+                        </div>
+                        <ng-template #fotoBD>
+                            <img class="perfil" src="{{urlFotos}}{{idYFoto.extension}}">
+                        </ng-template>
+                    </div>
+
+                </div>
+            </div>
+
+            <hr>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-xl-12">
+                    <h1>Canciones</h1>
+                    <div class="col-12 col-sm-12 col-md-12 col-xl-12 ">
+                        <div class="table-responsive">
+
+                            <table class="table table-hover" style="color: {{colorLetra}} ;">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Caratula</th>
+                                        <th scope="col">nombre</th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <div *ngIf="hayCanciones; else noCanciones">
+                                    </div>
+
+                                    <tr *ngFor="let cancion of CancionesArtista">
+                                        <!--Metodos para pasar al padre-->
+                                        <th scope="row" (click)="sacarCancion(cancion[2])"
+                                            (click)="pasarTitulo(cancion[1])" (click)="pasarCaratula(cancion[3])">
+                                            <img class="cancion" src="{{urlFotos}}{{cancion[3]}}">
+                                        </th>
+
+                                        <td>
+                                            <h2>{{cancion[1]}}</h2>
+                                        </td>
+                                        <td>
+                                            <button (click)="AnnadirPlaylist(cancion[0])" style="background-color:{{colorLetra}}; color: {{colorFondo}};">Añadir a
+                                                playlist</button>
+        
+                                        </td>
+                                        <div *ngIf="seleccionado; else noSeleccionado">
+                                            <td>
+                                                <select (change)="seleccionarPlaylist($event)">
+                                                    <option value="">Escoge una de tus playList</option>
+                                                    <option *ngFor="let playlist of playlists" value="{{playlist[0]}}">{{playlist[1]}}</option>
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <button (click)="annadirCan()"style="background-color:{{colorLetra}}; color: {{colorFondo}};">Añadir</button>
+                                            </td>
+                                        </div>
+                                        
+                                        <ng-template #noSeleccionado></ng-template>
+
+
+
+
+                                    </tr>
+                                    <ng-template #noCanciones>
+                                        <h2>Este artista no tiene cancion todavia....</h2>
+
+                                    </ng-template>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-xl-12">
+                    <br>
+                    <h1>Albumes</h1>
+
+
+                    <div class="table-responsive">
+
+                        <table class="table table-hover" style="color: {{colorLetra}} ;">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Caratula</th>
+                                    <th scope="col">nombre</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <div *ngIf="hayAlbumes; else noAlbumes">
+
+                                </div>
+
+                                <tr *ngFor="let album of albumesArtista">
+                                    <th scope="row" (click)="detalleAlbum(album[0])">
+                                        <img class="cancion" src="{{urlFotos}}{{album[2]}}">
+                                    </th>
+
+                                    <td>
+                                        <h2>{{album[1]}}</h2>
+                                    </td>
+
+                                </tr>
+                                <ng-template #noAlbumes>
+
+                                    <h2>Este artista no tiene albumes todavia....</h2>
+
+                                </ng-template>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+
+
+                </div>
+
+
+
+            </div>
+        </div>
+
+    </div>
+</div>

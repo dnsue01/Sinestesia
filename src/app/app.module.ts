@@ -30,6 +30,7 @@ import { CrearPlayListComponent } from './crear-play-list/crear-play-list.compon
 import { ListaPlayListComponent } from './lista-play-list/lista-play-list.component';
 import { PlayListComponent } from './play-list/play-list.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
+import { ArtistaComponent } from './artista/artista.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
     CrearPlayListComponent,
     ListaPlayListComponent,
     PlayListComponent,
-    BusquedaComponent
+    BusquedaComponent,
+    ArtistaComponent
   ],
   imports: [
     BrowserModule,
