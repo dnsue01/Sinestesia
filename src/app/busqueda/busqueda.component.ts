@@ -1,12 +1,13 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 //servicio
 import { UsuariosService } from '../usuarios.service';
-
+import Swal from 'sweetalert2';
 //imporar los json
 import listadeColores from 'src/assets/json/colores.json';
 import listadeTamanno from 'src/assets/json/tamannoLetra.json';
-import Swal from 'sweetalert2';
 
+//lista de paises
+import listadePaises from 'src/assets/json/flags.json';
 @Component({
   selector: 'app-busqueda',
   templateUrl: './busqueda.component.html',
@@ -56,6 +57,10 @@ export class BusquedaComponent implements OnInit {
   colores: any = listadeColores;
   coloresSelecionables: any;
 
+  //paises array
+  paises: any = listadePaises;
+
+  paisesBd:any = []
   //Tamanno de json
   tamanno: any = listadeTamanno;
   tamannoSeleccionable: any;
@@ -73,7 +78,6 @@ export class BusquedaComponent implements OnInit {
   albumes: any;
   cancionesNuevas: any;
   artistasNuevos: any = [];
-  paises: any;
   playlists: any = [];
   //id de cancion y playlist para mandar a la bd
   idCancionYPlayList = {
@@ -82,6 +86,9 @@ export class BusquedaComponent implements OnInit {
   }
   //cancion seleccionada para añadir
   seleccionado: boolean = false
+
+  //lista paises
+
 
   constructor(private usuariosServicio: UsuariosService) { }
 
@@ -114,7 +121,7 @@ export class BusquedaComponent implements OnInit {
       this.recuperarNuevasCanciones()
       this.recuperarNuevosArtistas()
       this.recogerPlayListUsuario()
-
+      this.recogerPaises()
     });
   }
   //compruebo en la bd si el usuario es mayor de edad
@@ -125,6 +132,18 @@ export class BusquedaComponent implements OnInit {
       }
     })
   }
+
+    //compruebo en la bd si el usuario es mayor de edad
+    recogerPaises() {
+      this.usuariosServicio.recogerPaises().subscribe((datos: any) => {
+      for (let i = 0; i < datos.length; i++) {
+        const pais = datos[i][0];
+        this.paisesBd.push(pais)
+        
+      }
+      
+      })
+    }
 
   //buscar
 
@@ -242,7 +261,6 @@ export class BusquedaComponent implements OnInit {
     this.usuariosServicio.recogerArtista(idArtista).subscribe((datos: any) => {
       datos.push(fotoArtista)
       this.artistasNuevos.push(datos)
-      console.log(this.artistasNuevos);
 
     })
 

@@ -171,6 +171,9 @@ export class UsuariosService {
   comprobarEdad(idUsuario: any) {
     return this.http.post(`${this.url}comprobarEdad.php`, JSON.stringify(idUsuario));
   }
+  recogerPaises() {
+    return this.http.get(`${this.url}recogerPaises.php`);
+  }
 }
 
 

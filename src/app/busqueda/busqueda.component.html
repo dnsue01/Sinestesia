@@ -60,13 +60,15 @@
                                     <h2>{{cancion[1]}}</h2>
                                 </td>
                                 <div *ngIf="cancion[6] == '1' && mayor == false; else elseBlock">
-                                    
-                                      <td>  <h2>Esta cancion es explicita</h2></td>
 
-                                        
+                                    <td>
+                                        <h2>Esta cancion es explicita</h2>
+                                    </td>
+
+
                                 </div>
-                                
-                    
+
+
                                 <ng-template #elseBlock></ng-template>
                                 <td>
                                     <button (click)="AnnadirPlaylist(cancion[0])"
@@ -128,6 +130,20 @@
                 <hr>
                 <!--Paises-->
                 <h1>Paises</h1>
+
+                <div class="col-12 col-sm-12 col-md-3 col-xl-3" *ngFor="let pais of paisesBd">
+                    <div class="card artista" style="background-color:{{colorLetra}}; color: {{colorFondo}};">
+                        <div class="card-body centro">
+
+
+                            <img src="assets\banderas\{{pais}}.png" alt="" class="pais center rounded">
+
+                            <hr>
+                            <h1 class="titulo">{{pais}}</h1>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </ng-template>
