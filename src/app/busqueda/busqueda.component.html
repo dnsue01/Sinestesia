@@ -95,7 +95,13 @@
                         <div class="card-body centro">
 
                
+                            <div *ngIf="artista[7] == ''; else fotoBD">
+
+                                <img class="perfil" src="assets/ejemplo/sinestesia.png">
+                              </div>
+                              <ng-template #fotoBD>
                                 <img class="perfil" src="{{urlFotos}}{{artista[7]}}">
+                              </ng-template>
                        
 
                             <hr>
