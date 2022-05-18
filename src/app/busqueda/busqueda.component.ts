@@ -23,6 +23,9 @@ export class BusquedaComponent implements OnInit {
   //pasar el titulo de la cancion la barra
   @Output() pasarTituloCancion: EventEmitter<any> = new EventEmitter()
 
+  //pasar el nombre del Artista  la barra
+   @Output() pasarNombreArtista: EventEmitter<any> = new EventEmitter()
+
   //usario
   usuario = {
     id: "",
@@ -38,6 +41,8 @@ export class BusquedaComponent implements OnInit {
   cancionCaratula = "";
   //cancion a reproducir
   cancionRepro: any;
+  //artista 
+  artista:any;
 
   //colores de la bd
   colorLetra: string = this.usuario.color_fuente;
@@ -250,6 +255,14 @@ export class BusquedaComponent implements OnInit {
     this.pasarCaratulaCancion.emit(this.cancionCaratula)
   }
 
+    //nobre del artista
+  sacarNombreArtista(artista: any) {
+    this.artista = artista;  
+    //pasar nombre al padre
+    this.pasarNombreArtista.emit(this.artista)
+
+
+  }
 
 
   //personalizacion

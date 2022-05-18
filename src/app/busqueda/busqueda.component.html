@@ -50,8 +50,10 @@
                             <tr *ngFor="let cancion of cancionesNuevas">
 
                                 <!--Metodos para pasar al padre-->
-                                <th scope="row" (click)="sacarCancion(cancion[2])" (click)="pasarTitulo(cancion[1])"
-                                    (click)="pasarCaratula(cancion[3])">
+                                <th scope="row" 
+                                (click)="sacarCancion(cancion[2])" 
+                                (click)="pasarTitulo(cancion[1])"
+                                (click)="pasarCaratula(cancion[3])">
 
                                     <img class="cancion" src="{{urlFotos}}{{cancion[3]}}">
                                 </th>
@@ -89,7 +91,7 @@
                 <!--Nuevos artistas-->
                 <h1>Nuevos artistas</h1>
                 <div class="col-12 col-sm-12 col-md-3 col-xl-3" *ngFor="let artista of artistasNuevos">
-                    <div class="card artista" style="background-color:{{colorLetra}}; color: {{colorFondo}};">
+                    <div class="card artista"  (click)="sacarNombreArtista(artista[2])" style="background-color:{{colorLetra}}; color: {{colorFondo}};">
                         <div class="card-body centro">
 
                

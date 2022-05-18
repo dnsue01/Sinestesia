@@ -43,6 +43,9 @@ export class BarraLateralComponent {
 
   //playlist
   idPlaylist:string="";
+
+  //artista
+  nombreArtista:string="";
   
   //recivo si hay una cancion y un album
   crearBotonAnnadir(datos:any){
@@ -79,6 +82,13 @@ pasarIdPlaylist(datos:any){
   this.idPlaylist = datos;
   //esto lo hago para que entre directamente a la ruta
   this.opcion = "detallePlaylist";
+ }
+
+ //pasar nombre artista
+ pasarNombreArtista(datos:any){
+  this.nombreArtista = datos;
+  //esto lo hago para que entre directamente a la ruta
+  this.opcion = "artista";  
  }
 
   usuario = {
