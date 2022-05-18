@@ -84,6 +84,8 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   //cancion a reproducir
   cancionRepro: any;
 
+  //canciones que hay dentro de su playlist
+  cancionesPlaylist: any = [];
 
   //saber caratula cancion
   caratula: string = "";
@@ -99,7 +101,11 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
     nombre: "",
     extension: ""
   }
-
+  //id cancion y playlist
+  idCancionYPlayList = {
+    idcancion: "",
+    idPlaylist: ""
+  }
   //Colores de json
   colores: any = listadeColores;
   coloresSelecionables: any;
@@ -193,9 +199,9 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
     }
   }
 
-  ////////////////////////////////////////////////////////
+  /////////////////////////////////////////////////////////////////////////////////////////
 
-  //metodos artista
+  //metodos si es usuario artista
 
 
   recogerCancionesArtista() {
@@ -357,9 +363,9 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
     })
   }
 
-  /////////////////////////////////////////////////////
+  ///////////////////////////////////////////////////////////////////////////////////////
 
-  //metodos si es usuario
+  //metodos si es usuario estandar
 
   comprobarListaPersonal() {
 
@@ -373,10 +379,81 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
 
     this.usuariosServicio.recuperarPlaylistUnica(this.usuario.id).subscribe((datos: any) => {
       this.playList.Id_playlist = datos[0]
+      this.idCancionYPlayList.idPlaylist = this.playList.Id_playlist
       this.playList.Nombre = datos[1]
-      this.playList.foto= datos[2]
+      this.playList.foto = datos[2]
       this.playList.Id_usuario = datos[3]
-      
+      this.recuperarCanionesPlaylistUnica()
+    })
+  }
+
+  recuperarCanionesPlaylistUnica() {
+    this.usuariosServicio.recuperarCanionesPlaylist(this.playList.Id_playlist).subscribe((datos: any) => {
+      if(datos.length == 0){
+        this.hayCanciones = false
+      }else{
+        for (let i = 0; i < datos.length; i++) {
+          const cancion = datos[i][0];
+          this.recuperarCancionPlaylist(cancion)
+  
+        }
+      }
+    })
+  }
+
+
+  recuperarCancionPlaylist(idcancion: any) {
+    this.usuariosServicio.recuperarCancionPlaylist(idcancion).subscribe((datos: any) => {
+      this.cancionesPlaylist.push(datos)
+
+    })
+  }
+
+  borrarCanPlay(idCancion: any) {
+
+
+    Swal.fire({
+
+      title: '¿Estas seguro?',
+      text: "Se eliminara esta cancionde la playlist!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Si, quiero borrarla!',
+      cancelButtonText: 'No, cancelar!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.idCancionYPlayList.idcancion = idCancion
+        //metodo de borar
+        this.borrarCancionPlaylist(this.idCancionYPlayList);
+       this.cancionesPlaylist = []
+        
+        this.comprobarListaPersonal()
+
+      } else if (
+        //si le da a cancelar
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        Swal.fire(
+          'Cancelado!',
+          'Tu cancion esta a salvo',
+          'info'
+        )
+      }
+    })
+
+  }
+
+  borrarCancionPlaylist(idcancion: any) {
+    this.usuariosServicio.borrarCancionPlaylist(idcancion).subscribe((datos: any) => {
+      if (datos['resultado'] == 'OK') {
+        Swal.fire(
+          'Borrada!',
+          'Tu cancion ha sido borrado con exito!',
+          'success'
+        )
+      }
+
     })
   }
 }

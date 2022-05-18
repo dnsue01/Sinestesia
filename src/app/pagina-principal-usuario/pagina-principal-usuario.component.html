@@ -60,13 +60,26 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                  <td>
-                    <button>Eliminar</button>
-                  </td>
-                </tr>
+                <div *ngIf="hayCanciones; else noCanciones">
+                </div>
+
+                <tr *ngFor="let cancion of cancionesPlaylist">
+                  <th scope="row" (click)="sacarCancion(cancion[2])" (click)="pasarTitulo(cancion[1])"
+                  (click)="pasarCaratula(cancion[3])">
+                  <img class="cancion" src="{{urlFotos}}{{cancion[3]}}">
+                </th>
+
+                <td>
+                  <h2>{{cancion[1]}}</h2>
+                </td>
+                <td>
+                  <button style="background-color:{{colorLetra}}; color: {{colorFondo}};"(click)="borrarCanPlay(cancion[0])">Borrar</button>
+                </td>
+              </tr>
+              <ng-template #noCanciones>
+                <h2>No tienes ninguna cancion todavia....Prueba a buscar una desde el menu.</h2>
+
+              </ng-template>
 
               </tbody>
             </table>

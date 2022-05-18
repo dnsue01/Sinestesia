@@ -147,11 +147,22 @@ export class UsuariosService {
   recogerArtista(idUsuario: any) {
     return this.http.post(`${this.url}recogerArtista.php`, JSON.stringify(idUsuario));
   }
-  comprobarCanionPlaylist(idCancionYidAlbum: any) {
-    return this.http.post(`${this.url}comprobarCancionPlaylist.php`, JSON.stringify(idCancionYidAlbum));
+  comprobarCanionPlaylist(idCancionYidPlaylist: any) {
+    return this.http.post(`${this.url}comprobarCancionPlaylist.php`, JSON.stringify(idCancionYidPlaylist));
   }
-  insertarCanionPlaylist(idCancionYidAlbum: any) {
-    return this.http.post(`${this.url}insertarCancionPlaylist.php`, JSON.stringify(idCancionYidAlbum));
+  insertarCanionPlaylist(idCancionYidPlaylist: any) {
+    return this.http.post(`${this.url}insertarCancionPlaylist.php`, JSON.stringify(idCancionYidPlaylist));
+  }
+  recuperarCanionesPlaylist(idPlaylist: any) {
+    return this.http.post(`${this.url}recuperarCancionesPlaylist.php`, JSON.stringify(idPlaylist));
+  }
+
+  recuperarCancionPlaylist(idCancion: any) {
+    return this.http.post(`${this.url}recuperarCancionPlaylist.php`, JSON.stringify(idCancion));
+  }
+
+  borrarCancionPlaylist(idCancion: any) {
+    return this.http.post(`${this.url}borrarCancionPlaylist.php`, JSON.stringify(idCancion));
   }
 }
 
