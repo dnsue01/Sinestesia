@@ -177,6 +177,12 @@ export class UsuariosService {
   recogerArtistasPais(nombrePais: any) {
     return this.http.post(`${this.url}recogerArtistasPais.php`, JSON.stringify(nombrePais));
   }
+  CancionesBuscadas(palabra: any) {
+    return this.http.post(`${this.url}CancionesBuscadas.php`, JSON.stringify(palabra));
+  }
+  artistasBuscados(palabra: any) {
+    return this.http.post(`${this.url}artistasBuscados.php`, JSON.stringify(palabra));
+  }
 }
 
 

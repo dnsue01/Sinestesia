@@ -24,7 +24,96 @@
         <!--Apartado si le ha dado al boton de buscar-->
         <div *ngIf="buscado; else noBucado">
 
-            Content to render when condition is true.
+            <div class="row">
+                <!--Nuevas canciones-->
+                <h1>Canciones</h1>
+                <div class="table-responsive">
+                    <table class="table table-hover" style="color: {{colorLetra}} ;">
+                        <thead>
+                            <tr>
+                                <th scope="col">Caratula</th>
+                                <th scope="col">nombre</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <div *ngIf="hayCancionesBuscadas; else noHayCanciones"></div>
+                            <tr *ngFor="let cancion of cancionesBuscadas">
+
+                                <!--Metodos para pasar al padre-->
+                                <th scope="row" (click)="sacarCancion(cancion[2])" (click)="pasarTitulo(cancion[1])"
+                                    (click)="pasarCaratula(cancion[3])">
+
+                                    <img class="cancion" src="{{urlFotos}}{{cancion[3]}}">
+                                </th>
+                                <td>
+                                    <h2>{{cancion[1]}}</h2>
+                                </td>
+                                <div *ngIf="cancion[6] == '1' && mayor == false; else elseBlock">
+                                    <td>
+                                        <h2>Esta cancion es explicita</h2>
+                                    </td>
+                                </div>
+                                <ng-template #elseBlock></ng-template>
+                                <td>
+                                    <button (click)="AnnadirPlaylist(cancion[0])"
+                                        style="background-color:{{colorLetra}}; color: {{colorFondo}};">Añadir a
+                                        playlist</button>
+
+                                </td>
+                                <div *ngIf="seleccionado; else noSeleccionado">
+                                    <td>
+                                        <select (change)="seleccionarPlaylist($event)">
+                                            <option value="">Escoge una de tus playList</option>
+                                            <option *ngFor="let playlist of playlists" value="{{playlist[0]}}">
+                                                {{playlist[1]}}</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <button (click)="annadirCan()"
+                                            style="background-color:{{colorLetra}}; color: {{colorFondo}};">Añadir</button>
+                                    </td>
+                                </div>
+                                <ng-template #noSeleccionado></ng-template>
+                            </tr>
+                            <ng-template #noHayCanciones>
+                                <br>
+                                <h1>No hay canciones que empiecen así </h1>
+                            </ng-template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!--Artistas buscados-->
+            <div class="row">
+                <hr>
+                <!--Nuevos artistas-->
+                <h1>Nuevos artistas</h1>
+                <div class="col-12 col-sm-12 col-md-3 col-xl-3" *ngFor="let artista of artistasBuscados">
+                    <div class="card artista" (click)="sacarNombreArtista(artista[2])"
+                        style="background-color:{{colorLetra}}; color: {{colorFondo}};">
+                        <div class="card-body centro">
+
+                            <div *ngIf="artista[7] == ''; else fotoBD">
+
+                                <img class="perfil" src="assets/ejemplo/sinestesia.png">
+                            </div>
+                            <ng-template #fotoBD>
+                                <img class="perfil" src="{{urlFotos}}{{artista[7]}}">
+                            </ng-template>
+
+                            <hr>
+                            <h1 class="titulo">{{artista[2]}}</h1>
+                        </div>
+                    </div>
+                </div>
+                <br>
+
+            </div>
+
+
+
+
 
 
         </div>
@@ -65,9 +154,7 @@
                                         <h2>Esta cancion es explicita</h2>
                                     </td>
 
-
                                 </div>
-
 
                                 <ng-template #elseBlock></ng-template>
                                 <td>
@@ -95,8 +182,6 @@
                         </tbody>
                     </table>
                 </div>
-
-
             </div>
             <div class="row">
                 <hr>
@@ -107,8 +192,6 @@
                         style="background-color:{{colorLetra}}; color: {{colorFondo}};">
                         <div class="card-body centro">
 
-
-
                             <div *ngIf="artista[7] == ''; else fotoBD">
 
                                 <img class="perfil" src="assets/ejemplo/sinestesia.png">
@@ -116,7 +199,6 @@
                             <ng-template #fotoBD>
                                 <img class="perfil" src="{{urlFotos}}{{artista[7]}}">
                             </ng-template>
-
 
                             <hr>
                             <h1 class="titulo">{{artista[2]}}</h1>
@@ -128,7 +210,7 @@
             </div>
             <div class="row">
                 <hr>
-                <!--Paises-->
+                <!----------Paises------------->
                 <h1>Paises</h1>
 
                 <div class="col-12 col-sm-12 col-md-3 col-xl-3" *ngFor="let pais of paisesBd">

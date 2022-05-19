@@ -63,11 +63,11 @@ export class BusquedaComponent implements OnInit {
   //paises array
   paises: any = listadePaises;
 
-  paisesBd:any = []
+  paisesBd: any = []
 
 
   //nombre del pais
-  nombrePais:string="";
+  nombrePais: string = "";
 
   //Tamanno de json
   tamanno: any = listadeTamanno;
@@ -76,9 +76,15 @@ export class BusquedaComponent implements OnInit {
   //url donde estan las fotos del servidor
   urlFotos = 'http://localhost/sinestesia/contenido/fotos/';
 
+  //varibales una vez buscados
   busqueda: string = "";
-
   buscado: boolean = false;
+  hayCancionesBuscadas: boolean = true
+  cancionesBuscadas: any = [];
+  hayArtistasBuscados: boolean = true
+  artistasBuscados: any = [];
+  hayAlbumesBuscados: boolean = true
+  albumesBuscados: any = [];
 
   //mayor de edad
   mayor: boolean = true
@@ -95,7 +101,6 @@ export class BusquedaComponent implements OnInit {
   //cancion seleccionada para añadir
   seleccionado: boolean = false
 
-  //lista paises
 
 
   constructor(private usuariosServicio: UsuariosService) { }
@@ -141,23 +146,88 @@ export class BusquedaComponent implements OnInit {
     })
   }
 
-    //compruebo en la bd si el usuario es mayor de edad
-    recogerPaises() {
-      this.usuariosServicio.recogerPaises().subscribe((datos: any) => {
+  //compruebo en la bd si el usuario es mayor de edad
+  recogerPaises() {
+    this.usuariosServicio.recogerPaises().subscribe((datos: any) => {
       for (let i = 0; i < datos.length; i++) {
         const pais = datos[i][0];
         this.paisesBd.push(pais)
-        
+
       }
-      
-      })
-    }
+
+    })
+  }
 
   //buscar
 
   buscar() {
-    this.buscado = true
+    if (this.busqueda != '') {
+      //accder a la parte del ngif cuando lo has buscado
+      this.buscado = true
+      //reseteo el array para que no me salgan los nuevos
+      this.cancionesBuscadas = []
+      this.busquedaCanciones()
+      this.busquedaArtistas() 
+    }
+
+
   }
+
+  //buscar canciones en la bd
+  busquedaCanciones() {
+    this.usuariosServicio.CancionesBuscadas(this.busqueda).subscribe((datos: any) => {
+      //si no hay ninguna cancion con este nombre se muestra el mensaje
+      if (datos.length == 0) {
+        this.hayCancionesBuscadas = false
+      } else {
+        for (let i = 0; i < datos.length; i++) {
+          const cancion = datos[i];
+          this.cancionesBuscadas.push(cancion)
+          this.hayCancionesBuscadas = true
+        }
+
+      }
+    })
+  }
+
+
+  //buscar artistas en la bd
+  busquedaArtistas() {
+    this.usuariosServicio.artistasBuscados(this.busqueda).subscribe((datos: any) => {
+      //si no hay ninguna cancion con este nombre se muestra el mensaje
+      if (datos.length == 0) {
+        this.hayArtistasBuscados = false
+      } else {
+        for (let i = 0; i < datos.length; i++) {
+          const artista = datos[i];
+          this.artistasBuscados.push(artista)
+          console.log(this.artistasBuscados);
+          
+          this.hayArtistasBuscados = true
+        }
+
+      }
+    })
+  }
+
+  //buscar canciones en la bd
+  busquedaAlbumes() {
+    this.usuariosServicio.CancionesBuscadas(this.busqueda).subscribe((datos: any) => {
+      //si no hay ninguna cancion con este nombre se muestra el mensaje
+      if (datos.length == 0) {
+        this.hayAlbumesBuscados = false
+      } else {
+        for (let i = 0; i < datos.length; i++) {
+          const cancion = datos[i];
+          this.albumesBuscados.push(cancion)
+          this.hayAlbumesBuscados = true
+        }
+
+      }
+    })
+  }
+
+
 
   //recupererar las 4 primeras canciones
 
@@ -304,7 +374,7 @@ export class BusquedaComponent implements OnInit {
   }
 
   //sacar pais
-  sacarPais(pais:any){
+  sacarPais(pais: any) {
     //pasar pais al padre
     this.nombrePais = pais
     this.pasarNombrePais.emit(this.nombrePais)
