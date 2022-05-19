@@ -27,6 +27,9 @@ export class BusquedaComponent implements OnInit {
   //pasar el nombre del Artista  la barra
   @Output() pasarNombreArtista: EventEmitter<any> = new EventEmitter()
 
+  //pasar el pais la barra
+  @Output() pasarNombrePais: EventEmitter<any> = new EventEmitter()
+
   //usario
   usuario = {
     id: "",
@@ -61,6 +64,11 @@ export class BusquedaComponent implements OnInit {
   paises: any = listadePaises;
 
   paisesBd:any = []
+
+
+  //nombre del pais
+  nombrePais:string="";
+
   //Tamanno de json
   tamanno: any = listadeTamanno;
   tamannoSeleccionable: any;
@@ -292,6 +300,14 @@ export class BusquedaComponent implements OnInit {
     //pasar nombre al padre
     this.pasarNombreArtista.emit(this.artista)
 
+
+  }
+
+  //sacar pais
+  sacarPais(pais:any){
+    //pasar pais al padre
+    this.nombrePais = pais
+    this.pasarNombrePais.emit(this.nombrePais)
 
   }
 

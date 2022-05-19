@@ -1,0 +1,44 @@
+<!-- Google fonts-->
+<link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i"
+    rel="stylesheet" />
+
+
+<div class="card principal" style="background-color:{{colorFondo}}; color: {{colorLetra}};font-size: {{tamanno}} ">
+    <div class="card-body ">
+        <div class="row centro">
+            <img class="rounded centro fotoAlbum " src="assets\banderas\{{nombrePais}}.png" alt="" >
+        </div>
+        <div class="row">
+            <h1 class="titulo">{{nombrePais}}</h1>
+        </div>
+        <hr>
+        <div class="row">
+            <h1>Artistas</h1>
+            <div class="col-12 col-sm-12 col-md-4 col-xl-4" *ngFor="let artista of artistas">
+                <div class="card artista" (click)="sacarNombreArtista(artista[2])"
+                    style="background-color:{{colorLetra}}; color: {{colorFondo}};">
+                    <div class="card-body centro">
+
+
+
+                        <div *ngIf="artista[7] == ''; else fotoBD">
+
+                            <img class="perfil" src="assets/ejemplo/sinestesia.png">
+                        </div>
+                        <ng-template #fotoBD>
+                            <img class="perfil" src="{{urlFotos}}{{artista[7]}}">
+                        </ng-template>
+
+
+                        <hr>
+                        <h2 class="titulo">{{artista[2]}}</h2>
+                    </div>
+                </div>
+            </div>
+
+            
+          
+        </div>
+    </div>
+</div>

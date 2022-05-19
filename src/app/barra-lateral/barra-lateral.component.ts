@@ -46,6 +46,9 @@ export class BarraLateralComponent {
 
   //artista
   nombreArtista:string="";
+
+  //nombre del pais
+  nombrePais:string="";
   
   //recivo si hay una cancion y un album
   crearBotonAnnadir(datos:any){
@@ -89,7 +92,15 @@ pasarIdPlaylist(datos:any){
   this.nombreArtista = datos;
   //esto lo hago para que entre directamente a la ruta
   this.opcion = "artista";  
+  
  }
+
+  //pasar nombre artista
+  pasarNombrePais(datos:any){
+    this.nombrePais = datos;
+    //esto lo hago para que entre directamente a la ruta
+    this.opcion = "pais";  
+   }
 
   usuario = {
     id: "",
@@ -105,6 +116,7 @@ pasarIdPlaylist(datos:any){
   ngOnInit(): void {
 
     this.recuperarUsuario();
+    
 
   }
   //seleccionar opciones

@@ -174,6 +174,9 @@ export class UsuariosService {
   recogerPaises() {
     return this.http.get(`${this.url}recogerPaises.php`);
   }
+  recogerArtistasPais(nombrePais: any) {
+    return this.http.post(`${this.url}recogerArtistasPais.php`, JSON.stringify(nombrePais));
+  }
 }
 
 

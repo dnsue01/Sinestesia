@@ -31,6 +31,7 @@ import { ListaPlayListComponent } from './lista-play-list/lista-play-list.compon
 import { PlayListComponent } from './play-list/play-list.component';
 import { BusquedaComponent } from './busqueda/busqueda.component';
 import { ArtistaComponent } from './artista/artista.component';
+import { PaisComponent } from './pais/pais.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ArtistaComponent } from './artista/artista.component';
     ListaPlayListComponent,
     PlayListComponent,
     BusquedaComponent,
-    ArtistaComponent
+    ArtistaComponent,
+    PaisComponent
   ],
   imports: [
     BrowserModule,

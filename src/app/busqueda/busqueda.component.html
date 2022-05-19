@@ -133,8 +133,7 @@
 
                 <div class="col-12 col-sm-12 col-md-3 col-xl-3" *ngFor="let pais of paisesBd">
                     <div class="card artista" style="background-color:{{colorLetra}}; color: {{colorFondo}};">
-                        <div class="card-body centro">
-
+                        <div class="card-body centro" (click)="sacarPais(pais)">
 
                             <img src="assets\banderas\{{pais}}.png" alt="" class="pais center rounded">
 

@@ -102,7 +102,7 @@ export class PanelControlComponent implements OnInit {
       if (result.isConfirmed) {
         //autorizar
         this.AutorizarCancion();
-        this.recuperarCanciones();
+        this.RecuperartipoAdmin()
 
       } else if (
         //si le da a cancelar
@@ -136,6 +136,7 @@ export class PanelControlComponent implements OnInit {
 
         //metodo de borar
         this.borrarCancion(idCancion);
+        this.RecuperartipoAdmin()
 
       } else if (
         //si le da a cancelar

@@ -143,6 +143,7 @@
           (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
           (pasarTituloCancion)="pasarTituloCancion($event)"
           (pasarNombreArtista)="pasarNombreArtista($event)"
+          (pasarNombrePais)="pasarNombrePais($event)"
           [nombre]="nombre"></app-busqueda>
         </div>
         <div *ngSwitchCase="'artista'">
@@ -154,6 +155,13 @@
           [nombre]="nombre"
           (pasarIdAlbum)="pasarIdAlbum($event)"
           ></app-artista>
+        </div>
+
+
+        <div *ngSwitchCase="'pais'">
+          <app-pais 
+          (pasarNombreArtista)="pasarNombreArtista($event)"
+          [nombrePais]="nombrePais" [nombre]="nombre"></app-pais>
         </div>
 
         <!--Opcion por defecto-->
