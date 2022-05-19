@@ -247,8 +247,8 @@ export class AjustesComponent implements OnInit {
         this.colorBotonFondo=this.colorLetra
         this.colorBotonLetra=this.colorFondo
         if (this.iguales) {
-          this.colorFondo = ""
-          this.colorLetra = ""
+          this.colorFondo = "white"
+          this.colorLetra = "black"
           this.colorBotonFondo="#198754";
           this.colorBotonLetra="white";
           Swal.fire({
@@ -263,7 +263,8 @@ export class AjustesComponent implements OnInit {
         } if (this.colorFondo == "black" && this.colorLetra == "") {
           this.colorLetra = "white"
           this.colorBotonFondo="white";
-          this.colorBotonLetra="black";
+          this.colorBotonLetra="black"
+          ;
         }
         if (this.colorFondo == "blue" && this.colorLetra == "") {
           this.colorLetra = "white"
@@ -301,10 +302,25 @@ export class AjustesComponent implements OnInit {
           this.colorLetra = "black"
           this.colorBotonFondo="black"
           this.colorBotonLetra="white"
+ 
+
+          this.usuariosServicio.Personalizar(this.idYColores).subscribe((datos: any) => {
+    
+            if (datos['resultado']=='OK') {
+              Swal.fire({
+                icon: 'success',
+                title: 'Colores cambiados correctamente',
+                showConfirmButton: false,
+                timer: 700
+              })
+            }
+          
+          })
         }
         if (this.colorFondo == "blue" && this.colorLetra == "") {
           this.colorLetra = "white"
           this.colorBotonFondo="white"
+          
         }
         if(this.colorFondo == "red" && this.colorLetra == "" ){
           this.colorBotonFondo="black"
@@ -326,11 +342,23 @@ export class AjustesComponent implements OnInit {
       }
 
       if (this.iguales) {
-        this.colorFondo = ""
-        this.colorLetra = ""
+        this.colorFondo = "white"
+        this.colorLetra = "black"
         this.colorBotonFondo="#198754";
         this.colorBotonLetra="white";
 
+        this.usuariosServicio.Personalizar(this.idYColores).subscribe((datos: any) => {
+    
+          if (datos['resultado']=='OK') {
+            Swal.fire({
+              icon: 'success',
+              title: 'Colores cambiados correctamente',
+              showConfirmButton: false,
+              timer: 700
+            })
+          }
+        
+        })
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
