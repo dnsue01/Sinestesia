@@ -183,6 +183,9 @@ export class UsuariosService {
   artistasBuscados(palabra: any) {
     return this.http.post(`${this.url}artistasBuscados.php`, JSON.stringify(palabra));
   }
+  albumesBuscados(palabra: any) {
+    return this.http.post(`${this.url}buscarAlbumes.php`, JSON.stringify(palabra));
+  }
 }
 
 

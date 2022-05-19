@@ -30,6 +30,9 @@ export class BusquedaComponent implements OnInit {
   //pasar el pais la barra
   @Output() pasarNombrePais: EventEmitter<any> = new EventEmitter()
 
+  //pasar el id del album para acceder al otro componente
+  @Output() pasarIdAlbum: EventEmitter<any> = new EventEmitter()
+
   //usario
   usuario = {
     id: "",
@@ -88,11 +91,13 @@ export class BusquedaComponent implements OnInit {
 
   //mayor de edad
   mayor: boolean = true
+
   //arrays de objetos
   albumes: any;
   cancionesNuevas: any;
   artistasNuevos: any = [];
   playlists: any = [];
+
   //id de cancion y playlist para mandar a la bd
   idCancionYPlayList = {
     idcancion: "",
@@ -101,7 +106,8 @@ export class BusquedaComponent implements OnInit {
   //cancion seleccionada para añadir
   seleccionado: boolean = false
 
-
+//id del album que paso
+  idAlbum = "";
 
   constructor(private usuariosServicio: UsuariosService) { }
 
@@ -168,6 +174,7 @@ export class BusquedaComponent implements OnInit {
       this.cancionesBuscadas = []
       this.busquedaCanciones()
       this.busquedaArtistas() 
+      this.busquedaAlbumes()
     }
 
 
@@ -210,9 +217,9 @@ export class BusquedaComponent implements OnInit {
     })
   }
 
-  //buscar canciones en la bd
+  //buscar albumes en la bd
   busquedaAlbumes() {
-    this.usuariosServicio.CancionesBuscadas(this.busqueda).subscribe((datos: any) => {
+    this.usuariosServicio.albumesBuscados(this.busqueda).subscribe((datos: any) => {
       //si no hay ninguna cancion con este nombre se muestra el mensaje
       if (datos.length == 0) {
         this.hayAlbumesBuscados = false
@@ -221,6 +228,8 @@ export class BusquedaComponent implements OnInit {
           const cancion = datos[i];
           this.albumesBuscados.push(cancion)
           this.hayAlbumesBuscados = true
+          console.log(this.albumesBuscados);
+          
         }
 
       }
@@ -369,8 +378,6 @@ export class BusquedaComponent implements OnInit {
     this.artista = artista;
     //pasar nombre al padre
     this.pasarNombreArtista.emit(this.artista)
-
-
   }
 
   //sacar pais
@@ -378,9 +385,12 @@ export class BusquedaComponent implements OnInit {
     //pasar pais al padre
     this.nombrePais = pais
     this.pasarNombrePais.emit(this.nombrePais)
+  }
+  detalleAlbum(albumId: any) {
+    this.idAlbum = albumId;
+    this.pasarIdAlbum.emit(this.idAlbum)
 
   }
-
 
   //personalizacion
 
