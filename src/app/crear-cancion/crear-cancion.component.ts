@@ -306,6 +306,7 @@ export class CrearCancionComponent implements OnInit {
             icon: 'info',
             title: 'Cancion subida, a la espera de validación'
           })
+          
         }
       })
     }

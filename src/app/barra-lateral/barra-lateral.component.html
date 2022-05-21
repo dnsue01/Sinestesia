@@ -167,7 +167,16 @@
 
         <!--Opcion por defecto-->
         <div *ngSwitchDefault>
-          <app-pagina-principal-usuario [nombre]="nombre"></app-pagina-principal-usuario>
+          <app-pagina-principal-usuario 
+          
+          (crearBotonAnnadir)="crearBotonAnnadir($event)"
+          (pasarCancion)=" pasarCancion($event)" 
+          (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
+          (pasarTituloCancion)="pasarTituloCancion($event)" 
+          (pasarIdAlbum)="pasarIdAlbum($event)"
+          
+          
+          [nombre]="nombre"></app-pagina-principal-usuario>
 
         </div>
       </div>

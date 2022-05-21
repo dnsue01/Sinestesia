@@ -304,18 +304,6 @@ export class AjustesComponent implements OnInit {
           this.colorBotonLetra="white"
  
 
-          this.usuariosServicio.Personalizar(this.idYColores).subscribe((datos: any) => {
-    
-            if (datos['resultado']=='OK') {
-              Swal.fire({
-                icon: 'success',
-                title: 'Colores cambiados correctamente',
-                showConfirmButton: false,
-                timer: 700
-              })
-            }
-          
-          })
         }
         if (this.colorFondo == "blue" && this.colorLetra == "") {
           this.colorLetra = "white"
@@ -347,24 +335,14 @@ export class AjustesComponent implements OnInit {
         this.colorBotonFondo="#198754";
         this.colorBotonLetra="white";
 
-        this.usuariosServicio.Personalizar(this.idYColores).subscribe((datos: any) => {
-    
-          if (datos['resultado']=='OK') {
-            Swal.fire({
-              icon: 'success',
-              title: 'Colores cambiados correctamente',
-              showConfirmButton: false,
-              timer: 700
-            })
-          }
-        
-        })
+        this.iguales=false
+
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
           text: 'no puedes tener el mismo color para las dos cosas',
         })
-        this.iguales=false
+        
 
       }
     }
@@ -380,8 +358,17 @@ export class AjustesComponent implements OnInit {
   //mandar a la bd la personalizacion
   personalizar(){
     this.idYColores.id = this.usuario.id
-    this.idYColores.colorFondo = this.usuario.color_fondo
-    this.idYColores.colorletra = this.usuario.color_fuente
+    if(this.usuario.color_fondo == this.usuario.color_fuente){
+      this.idYColores.colorFondo = "2"
+      this.idYColores.colorletra ="1"
+      console.log(this.usuario.color_fondo);
+      console.log(this.usuario.color_fuente);
+    } else {
+      this.idYColores.colorFondo = this.usuario.color_fondo
+      this.idYColores.colorletra = this.usuario.color_fuente
+    }
+   
+
     this.idYColores.tamanno = this.usuario.tamanno_letra
 
     this.usuariosServicio.Personalizar(this.idYColores).subscribe((datos: any) => {
