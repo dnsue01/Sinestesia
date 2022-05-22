@@ -352,7 +352,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
         if (datos['resultado'] == 'OK') {
           Swal.fire(
             'Borrado!',
-            'Tu cancion ha sido borrada con exito!',
+            'Tu cancion ha sido borrada con éxito!',
             'success'
           )
           this.recogerCancionesArtista();
@@ -380,7 +380,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
       if (datos['resultado'] == 'OK') {
         Swal.fire(
           'Borrado!',
-          'Tu album ha sido borrado con exito!',
+          'Tu album ha sido borrado con éxito!',
           'success'
         )
         this.recogerAlbumesArtista();
@@ -476,7 +476,7 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
       if (datos['resultado'] == 'OK') {
         Swal.fire(
           'Borrada!',
-          'Tu cancion ha sido borrado con exito!',
+          'Tu cancion ha sido borrado con éxito!',
           'success'
         )
       }

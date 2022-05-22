@@ -10,7 +10,7 @@
     <hr>
     <div class="card">
         <div class="card-body">
-            <h2>Pagina de Registro</h2>
+            <h2>Página de Registro</h2>
             <br>
             <h4>¿Cuál es tu correo electrónico?</h4>
 
@@ -27,12 +27,12 @@
                 placeholder="Escribe tu nombre de usuario">
 
             <br>
-            <h4>¿Cuál es tu contresaña?</h4>
+            <h4>¿Cuál es tu contraseña?</h4>
 
             <input type="password" class="form-control" id="contrasenna" [(ngModel)]="usuario.contrasenna"
                 placeholder="Escribe tu contraseña">
                 <small id="passwordHelpInline" class="text-muted">
-                   La contraseña  por lo menos tiene que tener 5 caracteres ,una letra mayuscula , una minuscula y un signo especial. Un ejemplo: Sinestesia1!
+                   La contraseña  por lo menos tiene que tener 5 caracteres ,una letra mayúscula , una minúscula y un signo especial. Un ejemplo: Sinestesia1!
                   </small>
             <br>
             <h4>Repite tu contraseña</h4>
@@ -50,7 +50,7 @@
 
             <div class="radio-item">
                 <input type="radio" id="ritemb" name="tipoUsuario" value="2" (change)="radio($event)">
-                <label for="ritemb">Estandar</label>
+                <label for="ritemb">Estándar</label>
             </div>
             <!--Selecciona un tipo de usuario-->
             <div *ngIf="tipo!='' ; else sinSeleccionarTipo">
@@ -61,10 +61,10 @@
                     <div class="row">
                         <div class="col ">
                             <br>
-                            <h1>Selecciona tu pais</h1>
+                            <h1>Selecciona tu país</h1>
                             <select (change)="seleccionarPais($event)" class="form-select selector"
                                 aria-label="Default select example">
-                                <option value="">Elije tu país</option>
+                                <option value="">Elige tu país</option>
                                 <option *ngFor="let pais of paises" value="{{pais.id}}">{{pais.name}} </option>
                             </select>
                         </div>
@@ -91,7 +91,7 @@
                         <select (change)="mayor($event)" class="form-select selector"
                         aria-label="Default select example">
                         <option value="">Selecciona una opcion</option>
-                        <option value="1">Si ,soy mayor edad</option>
+                        <option value="1">Sí ,soy mayor edad</option>
                         <option value="0">Soy menor de edad</option>
                     </select>
                        
@@ -105,7 +105,7 @@
             </ng-template>
 
             <button (click)="Registrarse()" class="btn btn-xxl rounded-pill mt-5">
-                <h1>Registrate</h1>
+                <h1>Regístrate</h1>
             </button>
             <br>
             <br>

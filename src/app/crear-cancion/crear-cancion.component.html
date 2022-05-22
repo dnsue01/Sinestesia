@@ -9,16 +9,16 @@
 
         <div class="row">
             <div class="col-sm-7">
-                <h1 class="titulo">Subir Cancion</h1>
+                <h1 class="titulo">Subir Canción</h1>
                 <hr>
                 <h1>{{nombre}}</h1>
             </div>
         </div>
         <hr>
-        <h1>Escribe el de la cancion</h1>
+        <h1>Escribe el nombre de la canción</h1>
 
         <input type="text" class="form-control" id="nombreCancion" [(ngModel)]="cancion.Nombre"
-            placeholder="Escribe el nombre de la cancion">
+            placeholder="Escribe el nombre de la canción">
 
         <br>
 
@@ -51,7 +51,7 @@
 
                 <div class="form-group">
                     <br>
-                    <h1>Sube la caratula</h1>
+                    <h1>Sube la cáratula</h1>
                     <br>
                     <input formControlName="file" id="file" type="file" class="form-control"
                         (change)="onFileChange1($event)">
@@ -62,7 +62,7 @@
 
                 <button style=" background-color:{{colorLetra}}; color: {{colorFondo}};"
                     class="btn btn-xxl rounded-pill mt-5" [disabled]="myForm.invalid" type="submit">
-                    Subir Caratula</button>
+                    Subir Cáratula</button>
             </form>
 
             <!--Si la caratula es correcta-->
@@ -72,18 +72,18 @@
                 <select (change)="cancionExplicita($event)" class="form-select selector"
                     aria-label="Default select example">
                     <option value="">Selecciona una opcion</option>
-                    <option value="1">Explicita</option>
-                    <option value="0">No explicita</option>
+                    <option value="1">Explícita</option>
+                    <option value="0">No explícita</option>
                 </select>
 
-                <small>Las canciones explicita son las que contienen palabras relacionadas con contenido sexual o
+                <small>Las canciones explícita son las que contienen palabras relacionadas con contenido sexual o
                     violencia ,los contenidos explícitos son inadecuados para niños y personas impresionables.</small>
                 <br>
                 <div class="row">
 
                 <button (click)="subirCancion()" class="btn btn-xxl rounded-pill mt-5"
                 style=" background-color:{{colorLetra}}; color: {{colorFondo}};">
-                    <h1>Subir Cancion</h1>
+                    <h1>Subir Canción</h1>
                 </button>
             </div>
             </div>

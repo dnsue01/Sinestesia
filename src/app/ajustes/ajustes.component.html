@@ -83,10 +83,10 @@
             <input type="password" class="form-control" id="contrasenna2" [(ngModel)]="usuario.contrasennaConfirmacion1"
                 placeholder="Escribe tu nueva contraseña">
             <br>
-            <small id="passwordHelpInline" class="text-muted">
-                La contraseña por lo menos tiene que tener 5 caracteres ,una letra mayuscula , una minuscula y un signo
+            <p id="passwordHelpInline" >
+                La contraseña por lo menos tiene que tener 5 caracteres ,una letra mayúscula , una minúscula y un signo
                 especial. Un ejemplo: Sinestesia1!
-            </small>
+            </p>
             <br>
             <br>
             <h1>Repite tu nueva contraseña</h1>
@@ -104,21 +104,21 @@
             <hr>
             <h1>Personalización</h1>
 
-            <h1>Elije color de fondo</h1>
+            <h1>Elige color de fondo</h1>
 
             <select (change)="seleccionarFondo($event)" class="form-select selector"
                 aria-label="Default select example">
-                <option value="">Elije tu color</option>
+                <option value="">Elige tu color</option>
                 <option *ngFor="let color of coloresSelecionables" value="{{color.id}}">{{color.colorE}} </option>
             </select>
 
             <br>
 
-            <h1>Elije color de letra</h1>
+            <h1>Elige color de letra</h1>
 
             <select (change)="seleccionarLetra($event)" class="form-select selector"
                 aria-label="Default select example">
-                <option value="">Elije tu color</option>
+                <option value="">Elige tu color</option>
                 <option *ngFor="let color of coloresSelecionables" value="{{color.id}}">{{color.colorE}} </option>
             </select>
 
@@ -126,11 +126,11 @@
 
             <br>
 
-            <h1>Elije tamaño de letra</h1>
+            <h1>Elige tamaño de letra</h1>
 
             <select (change)="seleccionarTamanno($event)" class="form-select selector"
                 aria-label="Default select example">
-                <option value="">Elije tu tamaño de letra</option>
+                <option value="">Elige tu tamaño de letra</option>
                 <option *ngFor="let tamanno of tamannoSeleccionable" value="{{tamanno.id}}">{{tamanno.tamannoE}}
                 </option>
             </select>

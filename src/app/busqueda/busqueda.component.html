@@ -9,11 +9,11 @@
 
         <div class="row">
             <div class="col-12 col-sm-12 col-md-2 col-xl-2">
-                <h2>Busqueda:</h2>
+                <h2>Búsqueda:</h2>
             </div>
             <div class="col-12 col-sm-12 col-md-8 col-xl-8 centro">
                 <input type="text" class="form-control" id="nombreAlbum" [(ngModel)]="busqueda"
-                    placeholder="busca tu canción,artista o album favorito">
+                    placeholder="busca tu canción,artista o álbum favorito">
             </div>
             <div class="col-12 col-sm-12 col-md-2 col-xl-2">
                 <button (click)="buscar()" style="background-color:{{colorLetra}}; color: {{colorFondo}}"
@@ -32,8 +32,8 @@
                     <table class="table table-hover" style="color: {{colorLetra}} ;">
                         <thead>
                             <tr>
-                                <th scope="col">Caratula</th>
-                                <th scope="col">nombre</th>
+                                <th scope="col">Carátula</th>
+                                <th scope="col">Nombre</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -78,7 +78,7 @@
                             </tr>
                             <ng-template #noHayCanciones>
                                 <br>
-                                <h1>No hay canciones que tengan o empiecen  así....</h1>
+                                <h1>No hay canciones que se llamen o empiecen  así....</h1>
                             </ng-template>
                         </tbody>
                     </table>
@@ -116,7 +116,7 @@
             </div>
             <ng-template #noHayArtistas>
                 <br>
-                <h1>No hay artistas que tengan o empiecen  así....</h1>
+                <h1>No hay artistas que se llamen o empiecen  así....</h1>
             </ng-template>
                 <br>
             </div>
@@ -124,7 +124,7 @@
        <div class="row">
         <div class="col-12 col-sm-12 col-md-12 col-xl-12">
             <br>
-            <h1>Albumes</h1>
+            <h1>Álbumes</h1>
 
 
             <div class="table-responsive">
@@ -132,7 +132,7 @@
                 <table class="table table-hover" style="color: {{colorLetra}} ;">
                     <thead>
                         <tr>
-                            <th scope="col">Caratula</th>
+                            <th scope="col">Carátula</th>
                             <th scope="col">nombre</th>
 
                         </tr>
@@ -154,7 +154,7 @@
                         </tr>
                         <ng-template #noAlbumes>
 
-                            <h2>No hay albumes que tengan o empiecen  así....</h2>
+                            <h2>No hay álbumes que se llamen o empiecen  así....</h2>
 
                         </ng-template>
                     </tbody>
@@ -181,8 +181,8 @@
                     <table class="table table-hover" style="color: {{colorLetra}} ;">
                         <thead>
                             <tr>
-                                <th scope="col">Caratula</th>
-                                <th scope="col">nombre</th>
+                                <th scope="col">Carátula</th>
+                                <th scope="col">Nombre</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -202,7 +202,7 @@
                                 <div *ngIf="cancion[6] == '1' && mayor == false; else elseBlock">
 
                                     <td>
-                                        <h2>Esta cancion es explicita</h2>
+                                        <h2>Esta cancion es explícita</h2>
                                     </td>
 
                                 </div>
@@ -262,7 +262,7 @@
             <div class="row">
                 <hr>
                 <!----------Paises------------->
-                <h1>Paises</h1>
+                <h1>Países</h1>
 
                 <div class="col-12 col-sm-12 col-md-3 col-xl-3" *ngFor="let pais of paisesBd">
                     <div class="card artista" style="background-color:{{colorLetra}}; color: {{colorFondo}};">

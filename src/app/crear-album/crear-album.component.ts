@@ -176,7 +176,7 @@ export class CrearAlbumComponent implements OnInit {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: 'El nombre del album no debe de estar vacio',
+        text: 'El nombre del álbum no debe de estar vacio',
       })
     }
 
@@ -195,7 +195,7 @@ export class CrearAlbumComponent implements OnInit {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Ya hay un album con este nombre',
+          text: 'Ya hay un álbum con este nombre',
         })
       }
     })
@@ -207,7 +207,7 @@ export class CrearAlbumComponent implements OnInit {
           this.subido = true;
           Swal.fire({
             icon: 'success',
-            title: 'Album subido correctamente',
+            title: 'Álbum subido correctamente',
             showConfirmButton: false,
             timer: 700
           })

@@ -22,7 +22,7 @@
           
             <select (change)="seleccionarAlbum($event)" class="form-select selector"
                 aria-label="Default select example">
-                <option value="">Elije uno de tus albums</option>
+                <option value="">Elige uno de tus albumes</option>
                 <option *ngFor="let album of albumesArtista" value="{{album[0]}}">{{album[1]}}
                 </option>
             </select>
@@ -34,7 +34,7 @@
         
             <select (change)="seleccionarCancion($event)" class="form-select selector"
             aria-label="Default select example">
-            <option value="">Elije una de tus canciones</option>
+            <option value="">Elige una de tus canciones</option>
             <option *ngFor="let cancion of CancionesArtista" value="{{cancion[0]}}">{{cancion[1]}}
             </option>
         </select>
@@ -46,7 +46,7 @@
     <div class="row">
         <button (click)="annadirCancionAlbum()"class="btn btn-xxl rounded-pill mt-5"
         style=" background-color:{{colorLetra}}; color: {{colorFondo}};">
-        <h1>Añadir cancion a album</h1>
+        <h1>Añadir canción a álbum</h1>
     </button>
     </div>
     </div>
