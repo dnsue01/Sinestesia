@@ -22,7 +22,6 @@ export class AlbumComponent implements OnInit {
 
   //recoger el nombre
   @Input() nombre = "";
-
  //pasar el audio de la cancion la barra
  @Output() pasarCancion:EventEmitter<any>= new EventEmitter()
  //pasar la caratula de la cancion la barra
@@ -62,6 +61,7 @@ export class AlbumComponent implements OnInit {
     idCancion:""
   }
 
+  estandar:boolean = false;
   //cancion
   cancion = {
     Id_cancion: "",
@@ -122,10 +122,16 @@ export class AlbumComponent implements OnInit {
       this.cambiarIdATamanno(datos[4])
       this.cambiarIdAColorFondo(datos[5])
       this.cambiarIdAColorLetra(datos[6])
+      this.recuperarTipoUsuario();
     })
   }
 
-
+  //comprobar que tipo de usuario es
+  recuperarTipoUsuario() {
+    this.usuariosServicio.RecuperarTipoUsuario(this.usuario.id).subscribe((datos: any) => {
+      this.estandar = datos["mensaje"]
+    });
+  }
 
 
 

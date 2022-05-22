@@ -24,7 +24,6 @@ export class ArtistaComponent implements OnInit {
   @Output() pasarCaratulaCancion: EventEmitter<any> = new EventEmitter()
   //pasar el titulo de la cancion la barra
   @Output() pasarTituloCancion: EventEmitter<any> = new EventEmitter()
-
   //pasar el id del album para acceder al otro componente
   @Output() pasarIdAlbum: EventEmitter<any> = new EventEmitter()
 

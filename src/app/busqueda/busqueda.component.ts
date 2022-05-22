@@ -208,7 +208,7 @@ export class BusquedaComponent implements OnInit {
         for (let i = 0; i < datos.length; i++) {
           const artista = datos[i];
           this.artistasBuscados.push(artista)
-          console.log(this.artistasBuscados);
+
           
           this.hayArtistasBuscados = true
         }
@@ -228,7 +228,6 @@ export class BusquedaComponent implements OnInit {
           const cancion = datos[i];
           this.albumesBuscados.push(cancion)
           this.hayAlbumesBuscados = true
-          console.log(this.albumesBuscados);
           
         }
 
@@ -387,9 +386,8 @@ export class BusquedaComponent implements OnInit {
     this.pasarNombrePais.emit(this.nombrePais)
   }
   detalleAlbum(albumId: any) {
-    this.idAlbum = albumId;
+    this.idAlbum = albumId;    
     this.pasarIdAlbum.emit(this.idAlbum)
-
   }
 
   //personalizacion

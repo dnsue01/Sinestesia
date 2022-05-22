@@ -119,7 +119,8 @@
           (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
           (pasarTituloCancion)="pasarTituloCancion($event)"
           [nombre]="nombre" 
-          [idAlbum]="idAlbum"></app-album>
+          [idAlbum]="idAlbum"
+          ></app-album>
         </div>
 
         <!--Estandar-->
@@ -134,7 +135,14 @@
        
 
         <div *ngSwitchCase="'detallePlaylist'">
-          <app-play-list  [idPlaylist]="idPlaylist"[nombre]="nombre"></app-play-list>
+          <app-play-list 
+           [idPlaylist]="idPlaylist"[nombre]="nombre"
+           (pasarCancion)=" pasarCancion($event)" 
+          (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
+          (pasarTituloCancion)="pasarTituloCancion($event)"
+           >
+
+          </app-play-list>
         </div>
         
         <div *ngSwitchCase="'busqueda'">
@@ -147,6 +155,9 @@
           (pasarIdAlbum)="pasarIdAlbum($event)"
           [nombre]="nombre"></app-busqueda>
         </div>
+  
+   
+
         <div *ngSwitchCase="'artista'">
           <app-artista  
           (pasarCancion)=" pasarCancion($event)" 
@@ -174,8 +185,6 @@
           (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
           (pasarTituloCancion)="pasarTituloCancion($event)" 
           (pasarIdAlbum)="pasarIdAlbum($event)"
-          
-          
           [nombre]="nombre"></app-pagina-principal-usuario>
 
         </div>

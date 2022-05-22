@@ -80,6 +80,7 @@ export class BarraLateralComponent {
    this.opcion = "detalleAlbum";
   }
 
+
 //pasar id de playList
 pasarIdPlaylist(datos:any){
   this.idPlaylist = datos;

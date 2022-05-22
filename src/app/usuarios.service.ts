@@ -186,6 +186,15 @@ export class UsuariosService {
   albumesBuscados(palabra: any) {
     return this.http.post(`${this.url}buscarAlbumes.php`, JSON.stringify(palabra));
   }
+  recogerCancionUrl(idCancion: any) {
+    return this.http.post(`${this.url}recogerCancionUrl.php`, JSON.stringify(idCancion));
+  }
+  borrarArchivoCancion(nombreArchivo: any) {
+    return this.http.post(`${this.url}borrarArchivoCancion.php`, JSON.stringify(nombreArchivo));
+  }
+  borrarArchivoImg(nombreArchivo: any) {
+    return this.http.post(`${this.url}borrarArchivoImg.php`, JSON.stringify(nombreArchivo));
+  }
 }
 
 

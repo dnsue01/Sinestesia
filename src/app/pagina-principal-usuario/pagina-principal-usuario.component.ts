@@ -335,19 +335,46 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
   }
 
 
-  borrarCancion(idCancion: any) {
-    this.usuariosServicio.borrarCancion(idCancion).subscribe((datos: any) => {
-      if (datos['resultado'] == 'OK') {
-        Swal.fire(
-          'Borrado!',
-          'Tu cancion ha sido borrada con exito!',
-          'success'
-        )
-        this.recogerCancionesArtista();
-      }
+  borrarCancion(idCancion: any) { 
+    this.recogerCancionUrl(idCancion);
 
+  }
+
+  recogerCancionUrl(idCancion: any) {
+    this.usuariosServicio.recogerCancionUrl(idCancion).subscribe((datos: any) => {
+
+
+      this.borrarArchivoCancion(datos[0]);
+      this.borrarArchivoImg(datos[1]);
+
+      this.usuariosServicio.borrarCancion(idCancion).subscribe((datos: any) => {
+     
+        if (datos['resultado'] == 'OK') {
+          Swal.fire(
+            'Borrado!',
+            'Tu cancion ha sido borrada con exito!',
+            'success'
+          )
+          this.recogerCancionesArtista();
+        }
+  
+      })
+      
     })
   }
+
+  borrarArchivoCancion(archivo:any){
+    this.usuariosServicio.borrarArchivoCancion(archivo).subscribe((datos:any)=>{
+     
+    })
+  }
+  borrarArchivoImg(archivo:any){
+    this.usuariosServicio.borrarArchivoImg(archivo).subscribe((datos:any)=>{
+     
+    })
+  }
+
+
   borrarAlbum(idAlbum: any) {
     this.usuariosServicio.borrarAlbum(idAlbum).subscribe((datos: any) => {
       if (datos['resultado'] == 'OK') {
@@ -389,13 +416,13 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
 
   recuperarCanionesPlaylistUnica() {
     this.usuariosServicio.recuperarCanionesPlaylist(this.playList.Id_playlist).subscribe((datos: any) => {
-      if(datos.length == 0){
+      if (datos.length == 0) {
         this.hayCanciones = false
-      }else{
+      } else {
         for (let i = 0; i < datos.length; i++) {
           const cancion = datos[i][0];
           this.recuperarCancionPlaylist(cancion)
-  
+
         }
       }
     })
@@ -426,8 +453,8 @@ export class PaginaPrincipalUsuarioComponent implements OnInit {
         this.idCancionYPlayList.idcancion = idCancion
         //metodo de borar
         this.borrarCancionPlaylist(this.idCancionYPlayList);
-       this.cancionesPlaylist = []
-        
+        this.cancionesPlaylist = []
+
         this.comprobarListaPersonal()
 
       } else if (

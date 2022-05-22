@@ -94,11 +94,13 @@
             <input type="password" class="form-control" id="contrasenna3" [(ngModel)]="usuario.contrasennaConfirmacion"
                 placeholder="Escribe tu nueva contraseña">
 
+            <div class="row">
+                <button (click)="cambiarContrasenna()" class="btn btn-xxl rounded-pill mt-5"
+                    style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};">
+                    <h1>Cambiar contraseña</h1>
+                </button>
+            </div>
 
-            <button (click)="cambiarContrasenna()" class="btn btn-xxl rounded-pill mt-5"
-                style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};">
-                <h1>Cambiar contraseña</h1>
-            </button>
             <hr>
             <h1>Personalización</h1>
 
@@ -137,12 +139,11 @@
 
             <div class="row">
 
-
                 <button (click)="personalizar()" class="btn btn-xxl rounded-pill mt-5"
                     style=" background-color:{{colorBotonFondo}}; color: {{colorBotonLetra}};">
                     <h1>Guardar Personalización</h1>
                 </button>
-            
+
+            </div>
         </div>
     </div>
-</div>

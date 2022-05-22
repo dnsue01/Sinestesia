@@ -33,6 +33,7 @@ import { BusquedaComponent } from './busqueda/busqueda.component';
 import { ArtistaComponent } from './artista/artista.component';
 import { PaisComponent } from './pais/pais.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,

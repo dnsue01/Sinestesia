@@ -26,15 +26,12 @@
                     </thead>
                     <tbody>
                         <div *ngIf="hayCanciones; else elseBlock"></div>
-                      
+
                         <tr *ngFor="let cancion of CancionesAlbum">
-                         
+
                             <!--Metodos para pasar al padre-->
-                            <th scope="row"
-                            (click)="sacarCancion(cancion[2])" 
-                            (click)="pasarTitulo(cancion[1])"
-                            (click)="pasarCaratula(cancion[3])"
-                            >
+                            <th scope="row" (click)="sacarCancion(cancion[2])" (click)="pasarTitulo(cancion[1])"
+                                (click)="pasarCaratula(cancion[3])">
 
                                 <img class="cancion" src="{{urlFotos}}{{cancion[3]}}">
                             </th>
@@ -42,11 +39,18 @@
                             <td>
                                 <h2>{{cancion[1]}}</h2>
                             </td>
-                            <td>
-                                <button style="background-color:{{colorLetra}}; color: {{colorFondo}};"(click)="borrarCan(cancion[0])">Borrar</button>
-                            </td>
+                            <div *ngIf="estandar; else artista">
 
-                       
+                            </div>
+                            <ng-template #artista>
+                                <td>
+                                    <button style="background-color:{{colorLetra}}; color: {{colorFondo}};"
+                                        (click)="borrarCan(cancion[0])">Borrar</button>
+                                </td>
+                            </ng-template>
+                          
+
+
                         </tr>
                         <ng-template #elseBlock>
                             <br>
