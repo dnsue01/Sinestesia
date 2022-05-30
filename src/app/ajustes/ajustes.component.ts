@@ -360,9 +360,7 @@ export class AjustesComponent implements OnInit {
     this.idYColores.id = this.usuario.id
     if(this.usuario.color_fondo == this.usuario.color_fuente){
       this.idYColores.colorFondo = "2"
-      this.idYColores.colorletra ="1"
-      console.log(this.usuario.color_fondo);
-      console.log(this.usuario.color_fuente);
+      this.idYColores.colorletra = "1"
     } else {
       this.idYColores.colorFondo = this.usuario.color_fondo
       this.idYColores.colorletra = this.usuario.color_fuente

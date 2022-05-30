@@ -18,90 +18,90 @@ export class BarraLateralComponent {
       shareReplay()
     );
 
-  constructor(private breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private usuariosServicio: UsuariosService,private router:Router) { }
+  constructor(private breakpointObserver: BreakpointObserver, private route: ActivatedRoute, private usuariosServicio: UsuariosService, private router: Router) { }
   //parametros que paso a los hijos
   nombre = this.route.snapshot.params["nombre"];
   //hago un string opcion para comprobar que opcion elige
   opcion: string = "";
   //el usuario es estandar
   estandar: boolean = true;
-  
+
   //cancion y album
-  albumYCancion:boolean = false;
+  albumYCancion: boolean = false;
 
   //ha seleccionado un album
-  albumSelccionado:boolean = false;
+  albumSelccionado: boolean = false;
 
   //cancion
-  cancionRepro:any;
-  carutlaCancion:any;
-  tituloCancion:string = "";
-  hayCancion:boolean = false;
+  cancionRepro: any;
+  carutlaCancion: any;
+  tituloCancion: string = "";
+  hayCancion: boolean = false;
 
   //album
-  idAlbum:string="";
+  idAlbum: string = "";
 
   //playlist
-  idPlaylist:string="";
+  idPlaylist: string = "";
 
   //artista
-  nombreArtista:string="";
+  nombreArtista: string = "";
 
   //nombre del pais
-  nombrePais:string="";
-  
+  nombrePais: string = "";
+
   //recivo si hay una cancion y un album
-  crearBotonAnnadir(datos:any){
+  crearBotonAnnadir(datos: any) {
     this.albumYCancion = datos
-    
+
   }
   //url donde estan las fotos del servidor
-   urlFotos = 'http://localhost/sinestesia/contenido/fotos/';
+  urlFotos = 'http://localhost/sinestesia/contenido/fotos/';
   //url donde estan las canciones del servidor
-   urlCanciones = 'http://localhost/sinestesia/contenido/canciones/';
+  urlCanciones = 'http://localhost/sinestesia/contenido/canciones/';
 
   //pasar Audio
-  pasarCancion(datos:any){
+  pasarCancion(datos: any) {
     this.cancionRepro = datos
     this.hayCancion = true;
   }
-//pasar imagen
-  pasarCaratulaCancion(datos:any){
+  //pasar imagen
+  pasarCaratulaCancion(datos: any) {
     this.carutlaCancion = datos
   }
-//pasar nombre
-  pasarTituloCancion(datos:any){
+  //pasar nombre
+  pasarTituloCancion(datos: any) {
     this.tituloCancion = datos
   }
-//pasar id de album
-  pasarIdAlbum(datos:any){
-   this.idAlbum = datos;
-   //esto lo hago para que entre directamente a la ruta
-   this.opcion = "detalleAlbum";
+  //pasar id de album
+  pasarIdAlbum(datos: any) {
+    this.idAlbum = datos;
+    //esto lo hago para que entre directamente a la ruta
+    this.opcion = "detalleAlbum";
   }
 
 
-//pasar id de playList
-pasarIdPlaylist(datos:any){
-  this.idPlaylist = datos;
-  //esto lo hago para que entre directamente a la ruta
-  this.opcion = "detallePlaylist";
- }
-
- //pasar nombre artista
- pasarNombreArtista(datos:any){
-  this.nombreArtista = datos;
-  //esto lo hago para que entre directamente a la ruta
-  this.opcion = "artista";  
-  
- }
+  //pasar id de playList
+  pasarIdPlaylist(datos: any) {
+    this.idPlaylist = datos;
+    //esto lo hago para que entre directamente a la ruta
+    this.opcion = "detallePlaylist";
+  }
 
   //pasar nombre artista
-  pasarNombrePais(datos:any){
+  pasarNombreArtista(datos: any) {
+    this.nombreArtista = datos;
+    //esto lo hago para que entre directamente a la ruta
+    this.opcion = "artista";
+
+  }
+
+  //pasar nombre artista
+  pasarNombrePais(datos: any) {
     this.nombrePais = datos;
     //esto lo hago para que entre directamente a la ruta
-    this.opcion = "pais";  
-   }
+    this.opcion = "pais";
+  }
 
   usuario = {
     id: "",
@@ -117,7 +117,7 @@ pasarIdPlaylist(datos:any){
   ngOnInit(): void {
 
     this.recuperarUsuario();
-    
+
 
   }
   //seleccionar opciones
@@ -131,22 +131,22 @@ pasarIdPlaylist(datos:any){
   SubirCancion() {
     this.opcion = "subirCancion"
   }
-  CrearAlbum(){
+  CrearAlbum() {
     this.opcion = "CrearAlbum"
-}
+  }
 
-annadirCancionesAlbum(){
-  this.opcion = "annadirCancionesAlbum"
-}
-crearPlayList(){
-  this.opcion = "crearPlayList"
-}
-listaPlayList(){
-  this.opcion = "listaPlayList"
-}
-busqueda(){
-  this.opcion = "busqueda"
-}
+  annadirCancionesAlbum() {
+    this.opcion = "annadirCancionesAlbum"
+  }
+  crearPlayList() {
+    this.opcion = "crearPlayList"
+  }
+  listaPlayList() {
+    this.opcion = "listaPlayList"
+  }
+  busqueda() {
+    this.opcion = "busqueda"
+  }
   //recuperar el usuario de la bd
   recuperarUsuario() {
     this.usuariosServicio.recuperarUsuario(this.nombre).subscribe((datos: any) => {
@@ -168,5 +168,6 @@ busqueda(){
 
     });
   }
+
 
 }

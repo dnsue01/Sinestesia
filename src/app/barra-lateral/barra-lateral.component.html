@@ -18,15 +18,15 @@
 
           <!--Si el usuario es  estandar-->
           <div *ngIf="estandar; else artsita">
-            <a mat-list-item  mat-list-item routerLink="busqueda"  (click)="busqueda()">
+            <a mat-list-item mat-list-item routerLink="busqueda" (click)="busqueda()">
               <h2>Buscar</h2>
             </a>
-            <a  mat-list-item routerLink="listaPlayList" (click)="listaPlayList()">
+            <a mat-list-item routerLink="listaPlayList" (click)="listaPlayList()">
               <h2>Lista de playlist</h2>
-             
+
             </a>
             <hr>
-            <a  mat-list-item routerLink="crearPlayList" (click)="crearPlayList()">
+            <a mat-list-item routerLink="crearPlayList" (click)="crearPlayList()">
               <h2>Crear una playlist</h2>
             </a>
 
@@ -65,18 +65,30 @@
           </a>
         </mat-nav-list>
         <footer class="page-footer font-small blue">
-
+     <!--Si ha seleccionado una cancion desde cualquiera de las paginas-->
           <div class="footer-copyright text-center py-3">
             <div *ngIf="hayCancion == true; else noCancion">
-              <h1>{{tituloCancion}}</h1>
-              <hr>
-              <img class="cancion" src="{{urlFotos}}{{carutlaCancion}}">
-              <audio autoplay src="{{urlCanciones}}{{cancionRepro}}" controls></audio>
-
+              <div class="card">
+                <div class="row">
+                  <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6 centro">
+                    <h1 class="titulo-cancion">{{tituloCancion}}</h1>
+                  </div>
+                  <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6">
+                    <img class="cancion" src="{{urlFotos}}{{carutlaCancion}}">
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                    <audio autoplay src="{{urlCanciones}}{{cancionRepro}}" controls></audio>
+                  </div>
+                </div>
+              </div>
             </div>
             <ng-template #noCancion></ng-template>
           </div>
         </footer>
+
+
 
       </div>
     </div>
@@ -88,10 +100,10 @@
           <!--Comunicacion entre padre e hijo con los distintos metodos-->
           <app-pagina-principal-usuario 
             (crearBotonAnnadir)="crearBotonAnnadir($event)"
-            (pasarCancion)=" pasarCancion($event)" 
+            (pasarCancion)=" pasarCancion($event)"
             (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
-            (pasarTituloCancion)="pasarTituloCancion($event)" 
-            (pasarIdAlbum)="pasarIdAlbum($event)"
+            (pasarTituloCancion)="pasarTituloCancion($event)"
+            (pasarIdAlbum)="pasarIdAlbum($event)" 
             [nombre]="nombre">
           </app-pagina-principal-usuario>
         </div>
@@ -114,13 +126,8 @@
         <!--Paso los parametros para que se pueda reproducir en la barra latral y el id del album-->
 
         <div *ngSwitchCase="'detalleAlbum'">
-          <app-album 
-          (pasarCancion)=" pasarCancion($event)" 
-          (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
-          (pasarTituloCancion)="pasarTituloCancion($event)"
-          [nombre]="nombre" 
-          [idAlbum]="idAlbum"
-          ></app-album>
+          <app-album (pasarCancion)=" pasarCancion($event)" (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
+            (pasarTituloCancion)="pasarTituloCancion($event)" [nombre]="nombre" [idAlbum]="idAlbum"></app-album>
         </div>
 
         <!--Estandar-->
@@ -132,60 +139,41 @@
         <div *ngSwitchCase="'listaPlayList'">
           <app-lista-play-list (pasarIdPlaylist)="pasarIdPlaylist($event)" [nombre]="nombre"></app-lista-play-list>
         </div>
-       
+
 
         <div *ngSwitchCase="'detallePlaylist'">
-          <app-play-list 
-           [idPlaylist]="idPlaylist"[nombre]="nombre"
-           (pasarCancion)=" pasarCancion($event)" 
-          (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
-          (pasarTituloCancion)="pasarTituloCancion($event)"
-           >
+          <app-play-list [idPlaylist]="idPlaylist" [nombre]="nombre" (pasarCancion)=" pasarCancion($event)"
+            (pasarCaratulaCancion)=" pasarCaratulaCancion($event)" (pasarTituloCancion)="pasarTituloCancion($event)">
 
           </app-play-list>
         </div>
-        
+
         <div *ngSwitchCase="'busqueda'">
-          <app-busqueda 
-          (pasarCancion)=" pasarCancion($event)" 
-          (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
-          (pasarTituloCancion)="pasarTituloCancion($event)"
-          (pasarNombreArtista)="pasarNombreArtista($event)"
-          (pasarNombrePais)="pasarNombrePais($event)"
-          (pasarIdAlbum)="pasarIdAlbum($event)"
-          [nombre]="nombre"></app-busqueda>
+          <app-busqueda (pasarCancion)=" pasarCancion($event)" (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
+            (pasarTituloCancion)="pasarTituloCancion($event)" (pasarNombreArtista)="pasarNombreArtista($event)"
+            (pasarNombrePais)="pasarNombrePais($event)" (pasarIdAlbum)="pasarIdAlbum($event)" [nombre]="nombre">
+          </app-busqueda>
         </div>
-  
-   
+
 
         <div *ngSwitchCase="'artista'">
-          <app-artista  
-          (pasarCancion)=" pasarCancion($event)" 
-          (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
-          (pasarTituloCancion)="pasarTituloCancion($event)"
-          [nombreArtista]="nombreArtista"
-          [nombre]="nombre"
-          (pasarIdAlbum)="pasarIdAlbum($event)"
-          ></app-artista>
+          <app-artista (pasarCancion)=" pasarCancion($event)" (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
+            (pasarTituloCancion)="pasarTituloCancion($event)" [nombreArtista]="nombreArtista" [nombre]="nombre"
+            (pasarIdAlbum)="pasarIdAlbum($event)"></app-artista>
         </div>
 
 
         <div *ngSwitchCase="'pais'">
-          <app-pais 
-          (pasarNombreArtista)="pasarNombreArtista($event)"
-          [nombrePais]="nombrePais" [nombre]="nombre"></app-pais>
+          <app-pais (pasarNombreArtista)="pasarNombreArtista($event)" [nombrePais]="nombrePais" [nombre]="nombre">
+          </app-pais>
         </div>
 
         <!--Opcion por defecto-->
         <div *ngSwitchDefault>
-          <app-pagina-principal-usuario 
-          
-          (crearBotonAnnadir)="crearBotonAnnadir($event)"
-          (pasarCancion)=" pasarCancion($event)" 
-          (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
-          (pasarTituloCancion)="pasarTituloCancion($event)" 
-          (pasarIdAlbum)="pasarIdAlbum($event)"
-          [nombre]="nombre"></app-pagina-principal-usuario>
+          <app-pagina-principal-usuario (crearBotonAnnadir)="crearBotonAnnadir($event)"
+            (pasarCancion)=" pasarCancion($event)" (pasarCaratulaCancion)=" pasarCaratulaCancion($event)"
+            (pasarTituloCancion)="pasarTituloCancion($event)" (pasarIdAlbum)="pasarIdAlbum($event)" [nombre]="nombre">
+          </app-pagina-principal-usuario>
 
         </div>
       </div>

@@ -51,7 +51,7 @@
                                 </td>
                                 <div *ngIf="cancion[6] == '1' && mayor == false; else elseBlock">
                                     <td>
-                                        <h2>Esta cancion es explicita</h2>
+                                        <h2>Explicita</h2>
                                     </td>
                                 </div>
                                 <ng-template #elseBlock></ng-template>
@@ -63,7 +63,7 @@
                                 </td>
                                 <div *ngIf="seleccionado; else noSeleccionado">
                                     <td>
-                                        <select (change)="seleccionarPlaylist($event)">
+                                        <select class="form-select form-select-sm" (change)="seleccionarPlaylist($event)">
                                             <option value="">Escoge una de tus playList</option>
                                             <option *ngFor="let playlist of playlists" value="{{playlist[0]}}">
                                                 {{playlist[1]}}</option>
@@ -89,10 +89,11 @@
             <div class="row">
                 <hr>
                 <!--Nuevos artistas-->
-                <h1>Nuevos artistas</h1>
+                <h1>Artistas</h1>
                 <hr>
                 <div *ngIf="hayArtistasBuscados; else noHayArtistas">
-
+                </div>
+                
                 
                 <div class="col-12 col-sm-12 col-md-3 col-xl-3" *ngFor="let artista of artistasBuscados">
                     <div class="card artista" (click)="sacarNombreArtista(artista[2])"
@@ -113,7 +114,7 @@
                     </div>
                 </div>
 
-            </div>
+            
             <ng-template #noHayArtistas>
                 <br>
                 <h1>No hay artistas que se llamen o empiecen  así....</h1>
@@ -192,7 +193,7 @@
                                 <!--Metodos para pasar al padre-->
                                 <th scope="row" (click)="sacarCancion(cancion[2])" (click)="pasarTitulo(cancion[1])"
                                     (click)="pasarCaratula(cancion[3])">
-
+                                    
                                     <img class="cancion" src="{{urlFotos}}{{cancion[3]}}">
                                 </th>
 
@@ -202,7 +203,7 @@
                                 <div *ngIf="cancion[6] == '1' && mayor == false; else elseBlock">
 
                                     <td>
-                                        <h2>Esta cancion es explícita</h2>
+                                        <h2>Explícita</h2>
                                     </td>
 
                                 </div>

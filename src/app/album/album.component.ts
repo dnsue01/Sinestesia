@@ -221,7 +221,9 @@ export class AlbumComponent implements OnInit {
         this.albumYcancion.idalbum = this.idAlbum
         //metodo de borar
         this.borrarCancion(this.albumYcancion)
-        this.recuperarAlbum();
+        this.CancionesAlbum = []
+        this.hayCanciones = false;
+        this.recuperarAlbum()
         
 
       } else if (

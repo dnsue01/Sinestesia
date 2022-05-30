@@ -9,7 +9,14 @@
 .sidenav .mat-toolbar {
   background: inherit;
 }
-
+.card{
+  background-color: white;
+}
+.titulo-cancion{
+  margin-top: 25%;
+  text-align: center;
+  color: black;
+}
 .mat-toolbar.mat-primary {
   position: sticky;
   top: 0;
@@ -28,7 +35,10 @@
   display: none;
 }
 
-
+audio{
+  width: 20vw;
+  margin-right: 2%;
+}
 .link{ color: white;}
 
 h1,h2{
@@ -44,6 +54,11 @@ h1{
  text-align: center;
  font-size: 3vh;
  
+}
+  
+.centro{
+  display: flex;
+  justify-content: center;
 }
 a{
   color: white;
@@ -64,7 +79,7 @@ background: linear-gradient(to bottom, #859398, #283048); /* W3C, IE 10+/ Edge, 
   height: 90px;
 }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (max-width: 780px) {
   audio{
     width: 20vh;
   }
@@ -80,6 +95,28 @@ background: linear-gradient(to bottom, #859398, #283048); /* W3C, IE 10+/ Edge, 
   h1{
    text-align: center;
    font-size: 3vh;
+   
+  }
+
+}
+
+
+@media only screen and (max-width: 320px) {
+  audio{
+    width: 14vw;
+  }
+  h1,h2{
+    color: white;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-family: "Catamaran", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    font-weight: 700;
+    line-height: 1.2;
+  
+  }
+  h1{
+   text-align: center;
+   font-size: 1vh;
    
   }
 
