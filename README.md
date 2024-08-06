@@ -37,13 +37,13 @@ npm install
 
 🌟 Acknowledgements
 
-🌐**[Angular](https://angular.io)**
-🌐**[Java (Android)](https://developer.android.com/java)**
+🌐 **[Angular](https://angular.io)**
+🌐 **[Java (Android)](https://developer.android.com/java)**
 🌐 **[SQL](https://www.mysql.com)**
-🌐**[PHP](https://www.php.net)**
+🌐 **[PHP](https://www.php.net)**
 🌐 **[Bootstrap](https://getbootstrap.com)**
 🌐 **[Capacitor](https://capacitorjs.com)**
 🌐 **[SweetAlert](https://sweetalert.js.org)**
 🌐 **[Chart.js](https://www.chartjs.org)**
-🌐**[YouTube API](https://developers.google.com/youtube/v3)**
-🌐**[Angular Material](https://material.angular.io)**
+🌐 **[YouTube API](https://developers.google.com/youtube/v3)**
+🌐 **[Angular Material](https://material.angular.io)**
