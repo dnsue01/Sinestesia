@@ -1,28 +1,28 @@
-# Sinestesia
+# 💚 Sinestesia
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.2.5.
+-Sinestesia is an Spotify clone
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## 📚 Technologies Used
 
-## Code scaffolding
+🔗**Angular** 
+🔗**SQL**
+🔗**PHP**
+🔗**Bootstrap**
+🔗**SweetAlert**
+🔗**Angular Material**
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-## Build
+## 📦 Installation
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### 💻 Angular
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/dnsue01/Sinestesia.git
+   cd Sinestesia
+   ng serve Sinestesia
+   ```
 
-## Running unit tests
+## 💾 Database
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
-# Sinestesia_proyecto
+**SQL Database**: The application uses an SQL database to store user information, training sessions, performance metrics, and uploaded images.
