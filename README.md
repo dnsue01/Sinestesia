@@ -3,7 +3,7 @@
 -Sinestesia is an Spotify clone
 
 
-## 📚 Technologies Used
+## 😎Technologies Used
 
 🔗**Angular** 
 🔗**SQL**
