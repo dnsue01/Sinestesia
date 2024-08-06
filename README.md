@@ -25,4 +25,4 @@
 
 ## 💾 Database
 
-**SQL Database**: The application uses an SQL database to store user information, training sessions, performance metrics, and uploaded images.
+**SQL Database**: The application uses an SQL database to store user information, training sessions, performance metrics, and uploaded images and songs.
