@@ -35,7 +35,7 @@ npm install
 -ng serve
 -Open your browser and navigate to http://localhost:4200 to see the application in action.
 
-🌟 Acknowledgements
+## 🌟 Acknowledgements
 
 🌐 **[Angular](https://angular.io)**
 🌐 **[Java (Android)](https://developer.android.com/java)**
@@ -47,3 +47,9 @@ npm install
 🌐 **[Chart.js](https://www.chartjs.org)**
 🌐 **[YouTube API](https://developers.google.com/youtube/v3)**
 🌐 **[Angular Material](https://material.angular.io)**
+
+
+## 📚 Docu (Spanish)
+
+🌐 **[Documenation](/sinestesia.pdf)**
+
