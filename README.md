@@ -1,4 +1,8 @@
-# 🎵 Sinestesia: Angular Spotify Clone
+# Sinestesia
+
+Aplicación musical hecha con Angular. Permite personalizar la paleta y guardar canciones y fotos favoritas. El repositorio reúne el código y la documentación del proyecto.
+
+[Visitar la web](https://dnsue01.github.io/Sinestesia/)
 
 Welcome to Sinestesia! This application is an Angular-based Spotify clone that adds a unique feature of changing the application's colors. Users can save their favorite photos and songs to the database. Below you will find details about the project, including the technologies used and how to get started.
 
@@ -52,4 +56,3 @@ npm install
 ## 📚 Docu (Spanish)
 
 🌐 **[Documenation](/sinestesia.pdf)**
-
